@@ -1,0 +1,31 @@
+@use "sass:meta";
+@use "breakpoints";
+@use "colors";
+@use "variables";
+
+@forward "breakpoints";
+@forward "colors";
+@forward "prefixer";
+@forward "variables";
+
+$-bp: null;
+
+@mixin system() {
+  @content;
+
+  @if meta.global-variable-exists("sizes", $module: variables)
+    and meta.type-of(variables.$sizes) == map {
+
+    @each $name, $value in variables.$sizes {
+      $-bp: $name + "\\:" !global;
+
+      @include breakpoints.media-up-to($name) { @content }
+    }
+  } @else {
+    @error "Expected `$sizes` to exist as a map";
+  }
+}
+
+@include system {
+  @include colors.content($-bp);
+}
