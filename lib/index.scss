@@ -13,16 +13,16 @@ $-bp: null;
 @mixin system() {
   @content;
 
-  @if meta.global-variable-exists("sizes", $module: variables)
-    and meta.type-of(variables.$sizes) == map {
+  @if meta.global-variable-exists("screens", $module: variables)
+    and meta.type-of(variables.$screens) == map {
 
-    @each $name, $value in variables.$sizes {
+    @each $name, $value in variables.$screens {
       $-bp: $name + "\\:" !global;
 
       @include breakpoints.media-up-to($name) { @content }
     }
   } @else {
-    @error "Expected `$sizes` to exist as a map";
+    @error "Expected `$screens` to exist as a map";
   }
 }
 

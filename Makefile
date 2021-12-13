@@ -8,4 +8,4 @@ dev: #: watch the source files and rebuild when they change
 	@sass index.scss:index.css --embed-source-map --watch
 
 build: #: build the final output file
-	@sass inex.scss:inex.min.css --style=compressed
+	@sass index.scss:index.min.css --style=compressed

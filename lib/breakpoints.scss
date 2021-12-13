@@ -2,11 +2,11 @@
 @use "sass:map";
 @use "variables";
 
-@mixin media-up-to($size) {
-  $value: map.get(variables.$sizes, $size);
+@mixin media-up-to($name) {
+  $value: map.get(variables.$screens, $name);
 
   @if $value == null {
-    @error "`#{$value}` is not a valid size";
+    @error "`#{$name}` is not a valid screen size";
   }
 
   @media (min-width: $value) {
@@ -14,11 +14,11 @@
   }
 }
 
-@mixin media-down-to($size) {
-  $value: map.get(variables.$sizes, $size);
+@mixin media-down-to($name) {
+  $value: map.get(variables.$screens, $name);
 
   @if $value == null {
-    @error "`#{$value}` is not a valid size";
+    @error "`#{$name}` is not a valid screen size";
   }
 
   @media (max-width: $value - 1) {
@@ -26,30 +26,30 @@
   }
 }
 
-@mixin media-only($size) {
-  $value: map.get(variables.$sizes, $size);
+@mixin media-only($name) {
+  $value: map.get(variables.$screens, $name);
 
   @if $value == null {
-    @error "`#{$size}` is not a valid size";
+    @error "`#{$name}` is not a valid screen size";
   }
 
-  $index: list.index(variables.$sizes, $size $value);
-  $value-up: list.nth(map.values(variables.$sizes), $index + 1);
+  $index: list.index(variables.$screens, $name $value);
+  $value-up: list.nth(map.values(variables.$screens), $index + 1);
 
   @media (min-width: $value) and (max-width: $value-up - 1) {
     @content;
   }
 }
 
-@mixin media-between($size1, $size2) {
-  $value1: map.get(variables.$sizes, $size1);
-  $value2: map.get(variables.$sizes, $size2);
+@mixin media-between($name1, $name2) {
+  $value1: map.get(variables.$screens, $name1);
+  $value2: map.get(variables.$screens, $name2);
 
   @if $value1 == null {
-    @error "`#{$size1}` is not a valid size";
+    @error "`#{$name1}` is not a valid screen size";
   }
   @if $value2 == null {
-    @error "`#{$size2}` is not a valid size";
+    @error "`#{$name2}` is not a valid screen size";
   }
 
   @media (min-width: $value1) and (max-width: $value2 - 1) {
