@@ -1,17 +1,15 @@
 @use "sass:list" as list;
 @use "sass:map" as map;
-
 @use "media" as media;
 @use "normalize" as normalize;
-@use "variables" as vars;
-
 @use "generators/alignment" as alignment;
 @use "generators/color" as color;
 @use "generators/tester" as tester;
 @use "generators/typography" as typography;
 @use "generators/width" as width;
+@use "variables" as var;
 
-@if vars.$normalize {
+@if var.$normalize {
   @include normalize.modern();
   @include normalize.custom();
 }
@@ -61,7 +59,7 @@ $-pseudo-selectors: (
   $prefix: "";
 
   @each $value in $values {
-    $prefix: $prefix + $value + vars.$separator;
+    $prefix: $prefix + $value + var.$separator;
   }
 
   @return $prefix;
@@ -77,7 +75,7 @@ $-pseudo-selectors: (
   }
 
   // special generator used only for unit tests
-  @if list.index($generators, "tester") and vars.$tester {
+  @if list.index($generators, "tester") and var.$tester {
     @include tester.generate($prepend, $append);
   }
 
@@ -91,13 +89,13 @@ $-pseudo-selectors: (
 }
 
 @mixin -with-dark-mode {
-  @if vars.$dark-mode == "media" {
+  @if var.$dark-mode == "media" {
     @include media.media-dark {
       @content;
     }
   }
 
-  @if vars.$dark-mode == "class" {
+  @if var.$dark-mode == "class" {
     .dark {
       @content;
     }
@@ -105,7 +103,7 @@ $-pseudo-selectors: (
 }
 
 @mixin -with-pseudo($prefix...) {
-  @each $selector, $generators in vars.$selectors {
+  @each $selector, $generators in var.$selectors {
     @if map.get($-pseudo-selectors, $selector) {
       $pseudo: map.get($-pseudo-selectors, $selector);
       @include -generate($generators, -prefix(list.join($prefix, ($selector))), $pseudo);
@@ -113,13 +111,11 @@ $-pseudo-selectors: (
   }
 }
 
-@each $selector, $generators in vars.$selectors {
-  // base styles
+@each $selector, $generators in var.$selectors {
   @if $selector == "base" {
     @include -generate($generators);
   }
 
-  // dark styles
   @if $selector == "dark" {
     @include -with-dark-mode {
       @include -generate($generators, -prefix("dark"));
@@ -127,14 +123,12 @@ $-pseudo-selectors: (
     }
   }
 
-  // responsive styles
   @else if $selector == "responsive" {
-    @each $name, $value in vars.$screens {
+    @each $name, $value in var.$screens {
       @include media.media-up-to($name) {
         @include -generate($generators, -prefix($name));
         @include -with-pseudo($name);
 
-        // responsive dark styles
         @include -with-dark-mode {
           @include -generate($generators, -prefix(($name, "dark")));
           @include -with-pseudo($name, "dark");
@@ -143,7 +137,6 @@ $-pseudo-selectors: (
     }
   }
 
-  // pseudo styles
   @else if map.get($-pseudo-selectors, $selector) {
     $pseudo: map.get($-pseudo-selectors, $selector);
     @include -generate($generators, -prefix($selector), $pseudo);

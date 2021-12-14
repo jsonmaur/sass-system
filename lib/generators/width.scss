@@ -25,7 +25,7 @@
   //   }
   // }
 
-  // @each $key, $value in variables.$measures {
+  // @each $key, $value in var.$measures {
   //   .#{$pre}measure-#{$key}#{$app} { max-width: $value; }
   // }
 }

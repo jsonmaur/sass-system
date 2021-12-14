@@ -1,4 +1,6 @@
-# Sass Style System (SSS)
+# Sass Style System
+
+SSS is a highly customizable style system generator and utility-first CSS framework for quickly building user interfaces. Similar to frameworks such as Tailwind or Tachyons, but with zero dependencies other than Sass itself. Node and NPM are not required.
 
 ## Usage
 
