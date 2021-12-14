@@ -1,2 +1,13 @@
+# macOS and system files
+.DS_Store
+
+# The directory Sass uses for caching
+/.sass-cache/
+
+# Only ignore css files in root, as that's where test files are outputted
 /*.css
-/*.css.map
+
+# Ignore all generated map files
+*.css.map
+*.sass.map
+*.scss.map

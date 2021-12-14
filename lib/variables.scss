@@ -1,6 +1,12 @@
 @use "sass:map" as map;
 @use "sass:meta" as meta;
 
+$dark-mode: "media";
+
+@if meta.type-of($dark-mode) != string {
+  @error "Expected `$dark-mode` to be a string";
+}
+
 /**
  * Screens
  */

@@ -17,6 +17,19 @@ $-prefix: null;
 
     @include breakpoints.media-up-to($name) { @content }
   }
+
+  $-prefix: "dark\\:" !global;
+
+  @if variables.$dark-mode == "media" {
+    @media (prefers-color-scheme: dark) {
+      @content;
+    }
+  }
+  @if variables.$dark-mode == "class" {
+    .dark {
+      @content;
+    }
+  }
 }
 
 @include -prefixes {
