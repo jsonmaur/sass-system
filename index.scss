@@ -1,3 +1,6 @@
 @use "vendor/normalize";
 
-@forward "lib";
+@forward "lib/variables"; // MUST COME FIRST
+@forward "lib/index";
+@forward "lib/breakpoints";
+@forward "lib/prefixer";

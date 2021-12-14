@@ -1,0 +1,12 @@
+@use "../variables" as variables;
+
+@mixin generate($bp) {
+  .#{$bp}regular { font-weight: normal; }
+  .#{$bp}bold { font-weight: bold; }
+  .#{$bp}bolder { font-weight: bolder; }
+  .#{$bp}lighter { font-weight: lighter; }
+
+  @each $key, $value in variables.$font-weights {
+    .#{$bp}#{$key} { font-weight: $value; }
+  }
+}

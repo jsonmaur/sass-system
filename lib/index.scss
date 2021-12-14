@@ -1,31 +1,29 @@
-@use "sass:meta";
-@use "breakpoints";
-@use "colors";
-@use "variables";
-
-@forward "breakpoints";
-@forward "colors";
-@forward "prefixer";
-@forward "variables";
+@use "breakpoints" as breakpoints;
+@use "variables" as variables;
+@use "generators/color" as color;
+@use "generators/font-family" as family;
+@use "generators/font-weight" as weight;
 
 $-bp: null;
 
-@mixin system() {
+/**
+ * Puts all responsive classes into one media query for each screen size rather than endlessly
+ * repeating media queries for every module.
+ */
+@mixin -responsive() {
   @content;
 
-  @if meta.global-variable-exists("screens", $module: variables)
-    and meta.type-of(variables.$screens) == map {
+  @each $name, $value in variables.$screens {
+    $-bp: $name + "\\:" !global;
 
-    @each $name, $value in variables.$screens {
-      $-bp: $name + "\\:" !global;
-
-      @include breakpoints.media-up-to($name) { @content }
-    }
-  } @else {
-    @error "Expected `$screens` to exist as a map";
+    @include breakpoints.media-up-to($name) { @content }
   }
 }
 
-@include system {
-  @include colors.content($-bp);
+// non-reponsive generators go here
+
+@include -responsive {
+  @include color.generate($-bp);
+  @include family.generate($-bp);
+  @include weight.generate($-bp);
 }

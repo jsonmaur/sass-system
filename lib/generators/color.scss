@@ -23,7 +23,7 @@ $-default-colors: (
   "violet", "wheat", "whitesmoke", "yellowgreen", "rebeccapurple", "transparent"
 );
 
-@mixin content($bp) {
+@mixin generate($bp) {
   .#{$bp}current { color: currentColor; }
   .#{$bp}bg-current { background-color: currentColor; }
 

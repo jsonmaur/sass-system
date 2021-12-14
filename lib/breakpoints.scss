@@ -1,6 +1,6 @@
-@use "sass:list";
-@use "sass:map";
-@use "variables";
+@use "sass:list" as list;
+@use "sass:map" as map;
+@use "variables" as variables;
 
 @mixin media-up-to($name) {
   $value: map.get(variables.$screens, $name);
