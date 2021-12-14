@@ -1,0 +1,15 @@
+@use "../index" with (
+  $tester: true,
+  $normalize: false,
+  $dark-mode: "media",
+  $screens: (
+    sm: 500px,
+  ),
+  $selectors: (
+    base: ("tester"),
+    hover: ("tester"),
+    first: ("tester"),
+    dark: ("tester"),
+    responsive: ("tester"),
+  ),
+);

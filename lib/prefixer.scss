@@ -1,6 +1,6 @@
-/**
- * A type of autoprefixer using mixins. Necessary prefixes pulled from http://shouldiprefix.com
- */
+//
+// A type of autoprefixer using mixins. Necessary prefixes pulled from http://shouldiprefix.com
+//
 
 @mixin transform($value) {
 	-webkit-transform: $value;

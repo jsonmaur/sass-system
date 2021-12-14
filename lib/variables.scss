@@ -1,9 +1,21 @@
 @use "sass:map" as map;
 @use "sass:meta" as meta;
 
-/**
- * Normalize
- */
+//
+// Whether or not to import the tester generator class, which is used in the unit tests.
+// Can be set to `true` or `false`.
+//
+
+$tester: false !default;
+
+@if meta.type-of($tester) != bool {
+  @error "Expected `$tester` to be a bool";
+}
+
+//
+// Whether or not to import the opinionated normalize rules.
+// Can be set to `true` or `false`.
+//
 
 $normalize: true !default;
 
@@ -11,9 +23,9 @@ $normalize: true !default;
   @error "Expected `$normalize` to be a bool";
 }
 
-/**
- * Class Prefix
- */
+//
+// String that gets prefixed to every generated class name.
+//
 
 $class-prefix: "" !default;
 
@@ -21,9 +33,9 @@ $class-prefix: "" !default;
   @error "Expected `$class-prefix` to be a string";
 }
 
-/**
- * Separator
- */
+//
+// String that gets used to separate base classes from advanced/responsive selectors.
+//
 
 $separator: "\\:" !default;
 
@@ -31,9 +43,10 @@ $separator: "\\:" !default;
   @error "Expected `$separator` to be a string";
 }
 
-/**
- * Dark Mode
- */
+//
+// Whether to enable dark mode using a media query or a body class.
+// Can be set to `media` or `class`.
+//
 
 $dark-mode: "media" !default;
 
@@ -41,19 +54,77 @@ $dark-mode: "media" !default;
   @error "Expected `$dark-mode` to be a string";
 }
 
-/**
- * Extend
- */
+//
+// Used to append custom values to variable maps rather than replace them.
+//
 
-$extend: map.remove((x: x), x) !default; // weird way to make an empty map
+$extend: map.remove((x: x), x) !default; // weird way to make an empty map (ಠ_ಠ)
 
 @if meta.type-of($extend) != map {
   @error "Expected `$extend` to be a map";
 }
 
-/**
- * Screens
- */
+//
+// A list of generaters to include for each selector type. This helps cut down on file size
+// significantly since every class name in the generators will get a class for each of the 5
+// responsive classes (depending on how many values are in `$screens`). That could be up to 240
+// classes per generator class.
+//
+
+$selectors: map.merge(
+  (
+    base: ("alignment", "color", "typography", "width"),
+    hover: (),
+    focus: (),
+    focus-within: (),
+    focus-visible: (),
+    active: (),
+    visited: (),
+    target: (),
+    first: (),
+    last: (),
+    only: (),
+    odd: (),
+    even: (),
+    first-of-type: (),
+    last-of-type: (),
+    only-of-type: (),
+    empty: (),
+    disabled: (),
+    checked: (),
+    indeterminate: (),
+    default: (),
+    required: (),
+    valid: (),
+    invalid: (),
+    in-range: (),
+    out-of-range: (),
+    placeholder-shown: (),
+    autofill: (),
+    read-only: (),
+    rtl: (),
+    ltr: (),
+    before: (),
+    after: (),
+    first-letter: (),
+    first-line: (),
+    marker: (),
+    selection: (),
+    file: (),
+    placeholder: (),
+    dark: (),
+    responsive: (),
+  ),
+  map.get($extend, "selectors") or ()
+) !default;
+
+@if meta.type-of($selectors) != map {
+  @error "Expected `$selectors` to be a map";
+}
+
+//
+// Different screen sizes used to generate responsive breakpoint mixins.
+//
 
 $screens: map.merge(
   (
@@ -70,13 +141,10 @@ $screens: map.merge(
   @error "Expected `$screens` to be a map";
 }
 
-@function screen($name) {
-  @return map.get($screens, $name);
-}
-
-/**
- * Primary Fonts
- */
+//
+// Allows you to specify a primary font for each type of font stack,
+// without having to redefine the entire font stack from scratch.
+//
 
 $primary-fonts: (
   serif: null,
@@ -88,9 +156,9 @@ $primary-fonts: (
   @error "Expected `$primary-fonts` to be a map";
 }
 
-/**
- * Font Stacks
- */
+//
+// Font stacks
+//
 
 $font-stacks: map.merge(
   (
@@ -147,13 +215,9 @@ $font-stacks: map.merge(
   @error "Expected `$font-stacks` to be a map";
 }
 
-@function font_stack($name) {
-  @return map.get($font-stacks, $name);
-}
-
-/**
- * Font Weights
- */
+//
+// Font weights
+//
 
 $font-weights: map.merge(
   (
@@ -174,6 +238,85 @@ $font-weights: map.merge(
   @error "Expected `$font-weights` to be a map";
 }
 
-@function font_weight($name) {
-  @return map.get($font-weights, $name);
+//
+// Font sizes
+//
+
+$font-sizes: map.merge(
+  (
+    xxs: .75rem,
+    xs: .875rem,
+    sm: 1rem,
+    md: 1.25rem,
+    lg: 1.5rem,
+    xl: 2.25rem,
+    xxl: 3rem,
+    jumbo: 6rem,
+  ),
+  map.get($extend, "font-sizes") or ()
+) !default;
+
+@if meta.type-of($font-sizes) != map {
+  @error "Expected `$font-sizes` to be a map";
+}
+
+//
+// Font leading (line spacing)
+//
+
+$font-leading: map.merge(
+  (
+    base: 1em,
+    title: 1.25em,
+    copy: 1.5em,
+  ),
+  map.get($extend, "font-leading") or ()
+) !default;
+
+@if meta.type-of($font-leading) != map {
+  @error "Expected `$font-leading` to be a map";
+}
+
+//
+// Font tracking (letter spacing)
+//
+
+$font-tracking: map.merge(
+  (
+    tight: -.05em,
+    open: .1em,
+    mega: .25em,
+  ),
+  map.get($extend, "font-tracking") or ()
+) !default;
+
+@if meta.type-of($font-tracking) != map {
+  @error "Expected `$font-tracking` to be a map";
+}
+
+//
+// Text indent
+//
+
+$text-indent: 1em !default;
+
+@if meta.type-of($text-indent) != number {
+  @error "Expected `$text-indent` to be a number";
+}
+
+//
+// Measures
+//
+
+$measures: map.merge(
+  (
+    narrow: 20em, // ~45 characters
+    regular: 30em, // ~66 characters
+    wide: 34em, // ~80 characters
+  ),
+  map.get($extend, "measures") or ()
+) !default;
+
+@if meta.type-of($measures) != map {
+  @error "Expected `$measures` to be a map";
 }

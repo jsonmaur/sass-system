@@ -1,0 +1,31 @@
+@mixin generate($pre, $app) {
+  .#{$pre}w-0#{$app} { width: 0px; }
+  .#{$pre}w-px#{$app} { width: 1px; }
+  .#{$pre}w-full#{$app} { width: 100%; }
+  .#{$pre}w-screen#{$app} { width: 100vw; }
+  .#{$pre}w-min#{$app} { width: min-content; }
+  .#{$pre}w-max#{$app} { width: max-content; }
+  .#{$pre}w-fit#{$app} { width: fit-content; }
+
+  .#{$pre}mw-0#{$app} { max-width: none; }
+  .#{$pre}mw-full#{$app} { max-width: 100%; }
+  .#{$pre}mw-min#{$app} { max-width: min-content; }
+  .#{$pre}mw-max#{$app} { max-width: max-content; }
+  .#{$pre}mw-fit#{$app} { max-width: fit-content; }
+
+  // .#{$pre}h-full#{$app} { height: 100%; }
+  // .#{$pre}mh-full#{$app} { max-height: 100%; }
+
+  // @if variable-exists("sizes") and type-of($sizes) == list {
+  //   @each $v in $sizes {
+  //     $i: index($sizes, $v);
+
+  //     .#{$pre}w-#{$i}#{$app} { width: $v; }
+  //     .#{$pre}mw-#{$i}#{$app} { max-width: $v; }
+  //   }
+  // }
+
+  // @each $key, $value in variables.$measures {
+  //   .#{$pre}measure-#{$key}#{$app} { max-width: $value; }
+  // }
+}

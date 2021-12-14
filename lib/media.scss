@@ -1,9 +1,10 @@
 @use "sass:list" as list;
 @use "sass:map" as map;
-@use "variables" as variables;
+
+@use "variables" as vars;
 
 @mixin media-up-to($name) {
-  $value: map.get(variables.$screens, $name);
+  $value: map.get(vars.$screens, $name);
 
   @if $value == null {
     @error "`#{$name}` is not a valid screen size";
@@ -15,7 +16,7 @@
 }
 
 @mixin media-down-to($name) {
-  $value: map.get(variables.$screens, $name);
+  $value: map.get(vars.$screens, $name);
 
   @if $value == null {
     @error "`#{$name}` is not a valid screen size";
@@ -27,14 +28,14 @@
 }
 
 @mixin media-only($name) {
-  $value: map.get(variables.$screens, $name);
+  $value: map.get(vars.$screens, $name);
 
   @if $value == null {
     @error "`#{$name}` is not a valid screen size";
   }
 
-  $index: list.index(variables.$screens, $name $value);
-  $value-up: list.nth(map.values(variables.$screens), $index + 1);
+  $index: list.index(vars.$screens, $name $value);
+  $value-up: list.nth(map.values(vars.$screens), $index + 1);
 
   @media (min-width: $value) and (max-width: $value-up - 1) {
     @content;
@@ -42,8 +43,8 @@
 }
 
 @mixin media-between($name1, $name2) {
-  $value1: map.get(variables.$screens, $name1);
-  $value2: map.get(variables.$screens, $name2);
+  $value1: map.get(vars.$screens, $name1);
+  $value2: map.get(vars.$screens, $name2);
 
   @if $value1 == null {
     @error "`#{$name1}` is not a valid screen size";
@@ -53,6 +54,36 @@
   }
 
   @media (min-width: $value1) and (max-width: $value2 - 1) {
+    @content;
+  }
+}
+
+@mixin media-portrait {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin media-landscape {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin media-motion-safe {
+  @media (prefers-reduced-motion: no-preference) {
+    @content;
+  }
+}
+
+@mixin media-motion-reduce {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin media-dark {
+  @media (prefers-color-scheme: dark) {
     @content;
   }
 }

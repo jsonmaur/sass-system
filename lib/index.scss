@@ -1,46 +1,151 @@
-@use "breakpoints" as breakpoints;
-@use "variables" as variables;
-@use "normalize" as normalize;
-@use "generators/color" as color;
-@use "generators/font-family" as family;
-@use "generators/font-weight" as weight;
+@use "sass:list" as list;
+@use "sass:map" as map;
 
-@if variables.$normalize {
+@use "media" as media;
+@use "normalize" as normalize;
+@use "variables" as vars;
+
+@use "generators/alignment" as alignment;
+@use "generators/color" as color;
+@use "generators/tester" as tester;
+@use "generators/typography" as typography;
+@use "generators/width" as width;
+
+@if vars.$normalize {
   @include normalize.modern();
   @include normalize.custom();
 }
 
-$-prefix: variables.$class-prefix;
+$-pseudo-selectors: (
+  hover: ":hover",
+  focus: ":focus",
+  focus-within: ":focus-within",
+  focus-visible: ":focus-visible",
+  active: ":active",
+  visited: ":visited",
+  target: ":target",
+  first: ":first-child",
+  last: ":last-child",
+  only: ":only-child",
+  odd: ":nth-child(odd)",
+  even: ":nth-child(even)",
+  first-of-type: ":first-of-type",
+  last-of-type: ":last-of-type",
+  only-of-type: ":only-of-type",
+  empty: ":empty",
+  disabled: ":disabled",
+  checked: ":checked",
+  indeterminate: ":indeterminate",
+  default: ":default",
+  required: ":required",
+  valid: ":valid",
+  invalid: ":invalid",
+  in-range: ":in-range",
+  out-of-range: ":out-of-range",
+  placeholder-shown: ":placeholder-shown",
+  autofill: ":autofill",
+  read-only: ":read-only",
+  rtl: ":dir(rtl)",
+  ltr: ":dir(ltr)",
+  before: "::before",
+  after: "::after",
+  first-letter: "::first-letter",
+  first-line: "::first-line",
+  marker: "::marker",
+  selection: "::selection",
+  file: "::file-selector-button",
+  placeholder: "::placeholder",
+);
 
-/**
- * Puts all prefixed classes into one media query rather than repeating for every generator.
- */
-@mixin -prefixes() {
-  @content;
+@function -prefix($values) {
+  $prefix: "";
 
-  @each $name, $value in variables.$screens {
-    $-prefix: variables.$class-prefix + $name + variables.$separator !global;
-
-    @include breakpoints.media-up-to($name) { @content }
+  @each $value in $values {
+    $prefix: $prefix + $value + vars.$separator;
   }
 
-  $-prefix: variables.$class-prefix + "dark" + variables.$separator !global;
+  @return $prefix;
+}
 
-  @if variables.$dark-mode == "media" {
-    @media (prefers-color-scheme: dark) {
+@mixin -generate($generators, $prepend: null, $append: null) {
+  @if list.index($generators, "alignment") {
+    @include alignment.generate($prepend, $append);
+  }
+
+  @if list.index($generators, "color") {
+    @include color.generate($prepend, $append);
+  }
+
+  // special generator used only for unit tests
+  @if list.index($generators, "tester") and vars.$tester {
+    @include tester.generate($prepend, $append);
+  }
+
+  @if list.index($generators, "typography") {
+    @include typography.generate($prepend, $append);
+  }
+
+  @if list.index($generators, "width") {
+    @include width.generate($prepend, $append);
+  }
+}
+
+@mixin -with-dark-mode {
+  @if vars.$dark-mode == "media" {
+    @include media.media-dark {
       @content;
     }
   }
 
-  @if variables.$dark-mode == "class" {
+  @if vars.$dark-mode == "class" {
     .dark {
       @content;
     }
   }
 }
 
-@include -prefixes {
-  @include color.generate($-prefix);
-  @include family.generate($-prefix);
-  @include weight.generate($-prefix);
+@mixin -with-pseudo($prefix...) {
+  @each $selector, $generators in vars.$selectors {
+    @if map.get($-pseudo-selectors, $selector) {
+      $pseudo: map.get($-pseudo-selectors, $selector);
+      @include -generate($generators, -prefix(list.join($prefix, ($selector))), $pseudo);
+    }
+  }
+}
+
+@each $selector, $generators in vars.$selectors {
+  // base styles
+  @if $selector == "base" {
+    @include -generate($generators);
+  }
+
+  // dark styles
+  @if $selector == "dark" {
+    @include -with-dark-mode {
+      @include -generate($generators, -prefix("dark"));
+      @include -with-pseudo("dark");
+    }
+  }
+
+  // responsive styles
+  @else if $selector == "responsive" {
+    @each $name, $value in vars.$screens {
+      @include media.media-up-to($name) {
+        @include -generate($generators, -prefix($name));
+        @include -with-pseudo($name);
+
+        // responsive dark styles
+        @include -with-dark-mode {
+          @include -generate($generators, -prefix(($name, "dark")));
+          @include -with-pseudo($name, "dark");
+        }
+      }
+    }
+  }
+
+  // pseudo styles
+  @else if map.get($-pseudo-selectors, $selector) {
+    $pseudo: map.get($-pseudo-selectors, $selector);
+    @include -generate($generators, -prefix($selector), $pseudo);
+  }
 }
