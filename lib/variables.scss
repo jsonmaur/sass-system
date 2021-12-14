@@ -1,7 +1,41 @@
 @use "sass:map" as map;
 @use "sass:meta" as meta;
 
-$dark-mode: "media";
+/**
+ * Normalize
+ */
+
+$normalize: true !default;
+
+@if meta.type-of($normalize) != bool {
+  @error "Expected `$normalize` to be a bool";
+}
+
+/**
+ * Class Prefix
+ */
+
+$class-prefix: "" !default;
+
+@if meta.type-of($class-prefix) != string {
+  @error "Expected `$class-prefix` to be a string";
+}
+
+/**
+ * Separator
+ */
+
+$separator: "\\:" !default;
+
+@if meta.type-of($separator) != string {
+  @error "Expected `$separator` to be a string";
+}
+
+/**
+ * Dark Mode
+ */
+
+$dark-mode: "media" !default;
 
 @if meta.type-of($dark-mode) != string {
   @error "Expected `$dark-mode` to be a string";
@@ -93,7 +127,7 @@ $font-stacks: (
   @error "Expected `$font-stacks` to be a map";
 }
 
-@function font($name) {
+@function font_family($name) {
   @return map.get($font-stacks, $name);
 }
 
@@ -117,6 +151,6 @@ $font-weights: (
   @error "Expected `$font-weights` to be a map";
 }
 
-@function weight($name) {
+@function font_weight($name) {
   @return map.get($font-weights, $name);
 }

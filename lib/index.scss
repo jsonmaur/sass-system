@@ -3,8 +3,13 @@
 @use "generators/color" as color;
 @use "generators/font-family" as family;
 @use "generators/font-weight" as weight;
+@use "../vendor/normalize" as normalize;
 
-$-prefix: null;
+@if variables.$normalize {
+  @include normalize.normalize();
+}
+
+$-prefix: variables.$class-prefix;
 
 /**
  * Puts all prefixed classes into one media query rather than repeating for every generator.
@@ -13,12 +18,12 @@ $-prefix: null;
   @content;
 
   @each $name, $value in variables.$screens {
-    $-prefix: $name + "\\:" !global;
+    $-prefix: variables.$class-prefix + $name + variables.$separator !global;
 
     @include breakpoints.media-up-to($name) { @content }
   }
 
-  $-prefix: "dark\\:" !global;
+  $-prefix: variables.$class-prefix + "dark" + variables.$separator !global;
 
   @if variables.$dark-mode == "media" {
     @media (prefers-color-scheme: dark) {
