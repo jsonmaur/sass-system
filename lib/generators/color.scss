@@ -23,12 +23,12 @@ $-default-colors: (
   "violet", "wheat", "whitesmoke", "yellowgreen", "rebeccapurple", "transparent"
 );
 
-@mixin generate($bp) {
-  .#{$bp}current { color: currentColor; }
-  .#{$bp}bg-current { background-color: currentColor; }
+@mixin generate($prefix) {
+  .#{$prefix}current { color: currentColor; }
+  .#{$prefix}bg-current { background-color: currentColor; }
 
   @each $value in $-default-colors {
-    .#{$bp}#{$value} { color: unquote($value); }
-    .#{$bp}bg-#{$value} { background-color: unquote($value); }
+    .#{$prefix}#{$value} { color: unquote($value); }
+    .#{$prefix}bg-#{$value} { background-color: unquote($value); }
   }
 }

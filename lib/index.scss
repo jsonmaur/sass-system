@@ -4,26 +4,23 @@
 @use "generators/font-family" as family;
 @use "generators/font-weight" as weight;
 
-$-bp: null;
+$-prefix: null;
 
 /**
- * Puts all responsive classes into one media query for each screen size rather than endlessly
- * repeating media queries for every module.
+ * Puts all prefixed classes into one media query rather than repeating for every generator.
  */
-@mixin -responsive() {
+@mixin -prefixes() {
   @content;
 
   @each $name, $value in variables.$screens {
-    $-bp: $name + "\\:" !global;
+    $-prefix: $name + "\\:" !global;
 
     @include breakpoints.media-up-to($name) { @content }
   }
 }
 
-// non-reponsive generators go here
-
-@include -responsive {
-  @include color.generate($-bp);
-  @include family.generate($-bp);
-  @include weight.generate($-bp);
+@include -prefixes {
+  @include color.generate($-prefix);
+  @include family.generate($-prefix);
+  @include weight.generate($-prefix);
 }

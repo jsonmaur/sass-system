@@ -1,7 +1,7 @@
 @use "../variables" as variables;
 
-@mixin generate($bp) {
+@mixin generate($prefix) {
   @each $key, $value in variables.$font-stacks {
-    .#{$bp}#{$key} { font-family: $value; }
+    .#{$prefix}#{$key} { font-family: $value; }
   }
 }
