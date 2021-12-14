@@ -30,6 +30,7 @@ $-prefix: variables.$class-prefix;
       @content;
     }
   }
+
   @if variables.$dark-mode == "class" {
     .dark {
       @content;

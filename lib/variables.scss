@@ -42,15 +42,28 @@ $dark-mode: "media" !default;
 }
 
 /**
+ * Extend
+ */
+
+$extend: map.remove((x: x), x) !default; // weird way to make an empty map
+
+@if meta.type-of($extend) != map {
+  @error "Expected `$extend` to be a map";
+}
+
+/**
  * Screens
  */
 
-$screens: (
-  sm: 640px,
-  md: 768px,
-  lg: 1024px,
-  xl: 1280px,
-  xxl: 1792px,
+$screens: map.merge(
+  (
+    sm: 640px,
+    md: 768px,
+    lg: 1024px,
+    xl: 1280px,
+    xxl: 1792px,
+  ),
+  map.get($extend, "screens") or ()
 ) !default;
 
 @if meta.type-of($screens) != map {
@@ -62,7 +75,7 @@ $screens: (
 }
 
 /**
- * Font Stacks
+ * Primary Fonts
  */
 
 $primary-fonts: (
@@ -71,63 +84,70 @@ $primary-fonts: (
   monospace: null,
 ) !default;
 
-$font-stacks: (
-  serif: (
-    map.get($primary-fonts, serif),
-    ui-serif,
-    Georgia,
-    Cambria,
-    "Times New Roman",
-    Times,
-    serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji",
-  ),
-  sans-serif: (
-    map.get($primary-fonts, sans-serif),
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    "Noto Sans",
-    sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji",
-  ),
-  monospace: (
-    map.get($primary-fonts, monospace),
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji",
-  ),
-) !default;
-
 @if meta.type-of($primary-fonts) != map {
   @error "Expected `$primary-fonts` to be a map";
 }
+
+/**
+ * Font Stacks
+ */
+
+$font-stacks: map.merge(
+  (
+    serif: (
+      map.get($primary-fonts, serif),
+      ui-serif,
+      Georgia,
+      Cambria,
+      "Times New Roman",
+      Times,
+      serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji",
+    ),
+    sans-serif: (
+      map.get($primary-fonts, sans-serif),
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      "Noto Sans",
+      sans-serif,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji",
+    ),
+    monospace: (
+      map.get($primary-fonts, monospace),
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      "Liberation Mono",
+      "Courier New",
+      monospace,
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji",
+    ),
+  ),
+  map.get($extend, "font-stacks") or ()
+) !default;
 
 @if meta.type-of($font-stacks) != map {
   @error "Expected `$font-stacks` to be a map";
 }
 
-@function font_family($name) {
+@function font_stack($name) {
   @return map.get($font-stacks, $name);
 }
 
@@ -135,16 +155,19 @@ $font-stacks: (
  * Font Weights
  */
 
-$font-weights: (
-  thin: 100,
-  extra-light: 200,
-  light: 300,
-  regular: 400,
-  medium: 500,
-  semi-bold: 600,
-  bold: 700,
-  extra-bold: 800,
-  heavy: 900,
+$font-weights: map.merge(
+  (
+    thin: 100,
+    extra-light: 200,
+    light: 300,
+    regular: 400,
+    medium: 500,
+    semi-bold: 600,
+    bold: 700,
+    extra-bold: 800,
+    heavy: 900,
+  ),
+  map.get($extend, "font-weights") or ()
 ) !default;
 
 @if meta.type-of($font-weights) != map {
