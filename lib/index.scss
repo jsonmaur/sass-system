@@ -1,12 +1,13 @@
 @use "breakpoints" as breakpoints;
 @use "variables" as variables;
+@use "normalize" as normalize;
 @use "generators/color" as color;
 @use "generators/font-family" as family;
 @use "generators/font-weight" as weight;
-@use "../vendor/normalize" as normalize;
 
 @if variables.$normalize {
-  @include normalize.normalize();
+  @include normalize.modern();
+  @include normalize.custom();
 }
 
 $-prefix: variables.$class-prefix;
