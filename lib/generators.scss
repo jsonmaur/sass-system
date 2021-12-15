@@ -1,8 +1,8 @@
 @use "sass:list" as list;
 @use "variables" as var;
+@use "generators/tester" as tester;
 @use "generators/alignment" as alignment;
 @use "generators/color" as color;
-@use "generators/tester" as tester;
 @use "generators/typography" as typography;
 @use "generators/width" as width;
 
@@ -11,17 +11,17 @@
 // rendered. This mixin gets called for base classes, dark classes, and responsive classes.
 //
 @mixin render($generators, $prepend: null, $append: null) {
+  // special generator used only for unit tests
+  @if list.index($generators, "tester") and var.$tester {
+    @include tester.render($prepend, $append);
+  }
+
   @if list.index($generators, "alignment") {
     @include alignment.render($prepend, $append);
   }
 
   @if list.index($generators, "color") {
     @include color.render($prepend, $append);
-  }
-
-  // special generator used only for unit tests
-  @if list.index($generators, "tester") and var.$tester {
-    @include tester.render($prepend, $append);
   }
 
   @if list.index($generators, "typography") {

@@ -3,13 +3,21 @@
   $normalize: false,
   $dark-mode: class,
   $screens: (
-    sm: 500px,
+    sm: 400px,
+    md: 800px,
   ),
   $generators: (
-    base: ("tester"),
-    hover: ("tester"),
-    first: ("tester"),
-    dark: ("tester"),
-    responsive: ("tester"),
+    base: [tester],
+    hover: [tester],
+    active: [tester],
+    dark: (
+      base: [tester],
+      first: [tester],
+      last: [tester],
+    ),
+    responsive: (
+      base: [tester],
+      disabled: [tester],
+    ),
   ),
 );

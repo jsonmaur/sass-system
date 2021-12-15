@@ -53,7 +53,7 @@ $pseudo-selectors: (
 // Takes in any number of values and returns them each joined with the configured separator.
 // Return value will always have a trailing separator so it can be prefixed to other class names.
 //
-@function prefix($values...) {
+@function prefix($values) {
   $prefix: "";
 
   @each $value in $values {
@@ -83,17 +83,21 @@ $pseudo-selectors: (
 }
 
 //
-// Loops through each pseudo selector and renders classes for the current generator if it's
-// included in the configured selectors. Can be used with any number of class prefixes.
+// Loops through each generator list and renders classes for the each generator. Can be used with
+// any number of class prefixes.
 //
-// For example, calling `@include pseudo-selector-content("foo", "bar")` will result in class
-// names such as `.foo\:bar\:classname:selector {}`.
+// For example, calling `@include generator-content("foo", "bar")` will result in class names
+// such as `.foo\:bar\:classname:selector {}`.
 //
-@mixin pseudo-selector-content($prefixes...) {
-  @each $selector, $enabled in var.$generators {
-    @if map.get($pseudo-selectors, $selector) {
-      $prepend: prefix(list.append($prefixes, $selector)...);
-      $append: map.get($pseudo-selectors, $selector);
+@mixin generator-content($generators, $prefixes...) {
+  @each $type, $enabled in $generators {
+    @if $type == "base" {
+      @include generators.render($enabled, prefix($prefixes));
+    }
+
+    @else if map.get($pseudo-selectors, $type) {
+      $prepend: prefix(list.append($prefixes, $type));
+      $append: map.get($pseudo-selectors, $type);
 
       @include generators.render($enabled, $prepend, $append);
     }
@@ -109,36 +113,23 @@ $pseudo-selectors: (
     @include normalize.custom();
   }
 
-  @each $selectors, $enabled in var.$generators {
-    @if $selectors == "base" {
-      @include generators.render($enabled);
-    }
+  @include generator-content(var.$generators);
 
-    @else if $selectors == "dark" {
+  @include dark-mode-content {
+    @include generator-content(map.get(var.$generators, dark), dark);
+  }
+
+  @each $name, $value in var.$screens {
+    @include media.media-up-to($name) {
+      @include generator-content(map.get(var.$generators, responsive), $name);
+
       @include dark-mode-content {
-        @include generators.render($enabled, prefix("dark"));
-        @include pseudo-selector-content("dark");
-      }
-    }
-
-    @else if $selectors == "responsive" {
-      @each $name, $value in var.$screens {
-        @include media.media-up-to($name) {
-          @include generators.render($enabled, prefix($name));
-          @include pseudo-selector-content($name);
-
-          @include dark-mode-content {
-            @include generators.render($enabled, prefix($name, "dark"));
-            @include pseudo-selector-content($name, "dark");
-          }
+        @if map.has-key(var.$generators, responsive, dark) {
+          @include generator-content(map.get(var.$generators, responsive, dark), $name, dark);
+        } @else {
+          @include generator-content(map.get(var.$generators, dark), $name, dark);
         }
       }
-    }
-
-    @else if map.get($pseudo-selectors, $selectors) {
-      $pseudo: map.get($pseudo-selectors, $selectors);
-
-      @include generators.render($enabled, prefix($selectors), $pseudo);
     }
   }
 }

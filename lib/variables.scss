@@ -1,5 +1,6 @@
 @use "sass:map" as map;
 @use "sass:meta" as meta;
+@use "helpers" as helpers;
 
 //
 // Whether or not to import the tester generator class, which is used in the unit tests.
@@ -67,53 +68,26 @@ $extend: map.remove((x: x), x) !default; // weird way to make an empty map (ಠ_
 //
 // A list of generaters to include for each class type. This helps cut down on file size
 // significantly since every class name in the generators will get a class for each of the 5
-// responsive classes (depending on how many values are in `$screens`). That could be up to 240
-// classes per generator class.
+// responsive classes (depending on how many values are in `$screens`), plus dark classes for all
+// of them. It adds up quickly.
+//
+// Each generator can be enabled for base classes, pseudo classes, dark media queries, responsive
+// media queries, and responsive dark media queries for deep customization. If there is no list
+// specified for `responsive.dark`, then `dark` is used instead.
 //
 
-$generators: map.merge(
+$generators: helpers.map-list-merge(
   (
-    base: ("alignment", "color", "typography", "width"),
-    hover: ("color", "typography"),
-    focus: (),
-    focus-within: (),
-    focus-visible: (),
-    active: (),
-    visited: (),
-    target: (),
-    first: (),
-    last: (),
-    only: (),
-    odd: (),
-    even: (),
-    first-of-type: (),
-    last-of-type: (),
-    only-of-type: (),
-    empty: (),
-    disabled: (),
-    checked: (),
-    indeterminate: (),
-    default: (),
-    required: (),
-    valid: (),
-    invalid: (),
-    in-range: (),
-    out-of-range: (),
-    placeholder-shown: (),
-    autofill: (),
-    read-only: (),
-    rtl: (),
-    ltr: (),
-    before: (),
-    after: (),
-    first-letter: (),
-    first-line: (),
-    marker: (),
-    selection: (),
-    file: (),
-    placeholder: (),
-    dark: ("color", "typography"),
-    responsive: ("alignment", "color", "width"),
+    base: [],
+    dark: (
+      base: [],
+    ),
+    responsive: (
+      base: [],
+      dark: (
+        base: [],
+      ),
+    ),
   ),
   map.get($extend, "generators") or ()
 ) !default;

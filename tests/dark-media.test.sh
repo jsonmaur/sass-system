@@ -12,7 +12,7 @@ testDarkModeMedia() {
   color: red;
 }
 
-.first\:tester:first-child {
+.active\:tester:active {
   color: red;
 }
 
@@ -21,37 +21,43 @@ testDarkModeMedia() {
     color: red;
   }
 
-  .dark\:hover\:tester:hover {
-    color: red;
-  }
-
   .dark\:first\:tester:first-child {
     color: red;
   }
 }
-@media (min-width: 500px) {
+@media (min-width: 400px) {
   .sm\:tester {
     color: red;
   }
 
-  .sm\:hover\:tester:hover {
-    color: red;
-  }
-
-  .sm\:first\:tester:first-child {
+  .sm\:disabled\:tester:disabled {
     color: red;
   }
 }
-@media (min-width: 500px) and (prefers-color-scheme: dark) {
+@media (min-width: 400px) and (prefers-color-scheme: dark) {
   .sm\:dark\:tester {
     color: red;
   }
 
-  .sm\:dark\:hover\:tester:hover {
+  .sm\:dark\:last\:tester:last-child {
+    color: red;
+  }
+}
+@media (min-width: 800px) {
+  .md\:tester {
     color: red;
   }
 
-  .sm\:dark\:first\:tester:first-child {
+  .md\:disabled\:tester:disabled {
+    color: red;
+  }
+}
+@media (min-width: 800px) and (prefers-color-scheme: dark) {
+  .md\:dark\:tester {
+    color: red;
+  }
+
+  .md\:dark\:last\:tester:last-child {
     color: red;
   }
 }

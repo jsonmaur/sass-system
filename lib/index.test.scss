@@ -13,7 +13,7 @@
   ];
 
   @each $case in $cases {
-    $result: index.prefix(map.get($case, input)...);
+    $result: index.prefix(map.get($case, input));
 
     @if $result != map.get($case, output) {
       @warn "Expected `#{map.get($case, output)}` but got `#{$result}`";
