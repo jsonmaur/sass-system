@@ -1,5 +1,5 @@
 @use "sass:map" as map;
-@use "../variables" as var;
+@use "../config" as config;
 
 @mixin render($pre, $app) {
   .#{$pre}regular#{$app} { font-weight: normal; }
@@ -30,7 +30,7 @@
   .#{$pre}no-wrap#{$app} { white-space: nowrap; }
 
   .#{$pre}indent#{$app} {
-    text-indent: var.$text-indent;
+    text-indent: config.$text-indent;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -41,23 +41,23 @@
     text-overflow: ellipsis;
   }
 
-  @each $key, $value in var.$font-stacks {
+  @each $key, $value in config.$font-stacks {
     .#{$pre}#{$key}#{$app} { font-family: $value; }
   }
 
-  @each $key, $value in var.$font-weights {
+  @each $key, $value in config.$font-weights {
     .#{$pre}#{$key}#{$app} { font-weight: $value; }
   }
 
-  @each $key, $value in var.$font-sizes {
+  @each $key, $value in config.$font-sizes {
     .#{$pre}text-#{$key}#{$app} { font-size: $value; }
   }
 
-  @each $key, $value in var.$font-leading {
+  @each $key, $value in config.$font-leading {
     .#{$pre}lead-#{$key}#{$app} { line-height: $value; }
   }
 
-  @each $key, $value in var.$font-tracking {
+  @each $key, $value in config.$font-tracking {
     .#{$pre}track-#{$key}#{$app} { letter-spacing: $value; }
   }
 }

@@ -1,5 +1,5 @@
 @use "sass:list" as list;
-@use "variables" as var;
+@use "config" as config;
 @use "generators/tester" as tester;
 @use "generators/alignment" as alignment;
 @use "generators/color" as color;
@@ -12,7 +12,7 @@
 //
 @mixin render($generators, $prepend: null, $append: null) {
   // special generator used only for unit tests
-  @if list.index($generators, "tester") and var.$tester {
+  @if list.index($generators, "tester") and config.$tester {
     @include tester.render($prepend, $append);
   }
 
