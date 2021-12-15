@@ -65,16 +65,16 @@ $extend: map.remove((x: x), x) !default; // weird way to make an empty map (ಠ_
 }
 
 //
-// A list of generaters to include for each selector type. This helps cut down on file size
+// A list of generaters to include for each class type. This helps cut down on file size
 // significantly since every class name in the generators will get a class for each of the 5
 // responsive classes (depending on how many values are in `$screens`). That could be up to 240
 // classes per generator class.
 //
 
-$selectors: map.merge(
+$generators: map.merge(
   (
     base: ("alignment", "color", "typography", "width"),
-    hover: (),
+    hover: ("color", "typography"),
     focus: (),
     focus-within: (),
     focus-visible: (),
@@ -112,14 +112,14 @@ $selectors: map.merge(
     selection: (),
     file: (),
     placeholder: (),
-    dark: (),
-    responsive: (),
+    dark: ("color", "typography"),
+    responsive: ("alignment", "color", "width"),
   ),
-  map.get($extend, "selectors") or ()
+  map.get($extend, "generators") or ()
 ) !default;
 
-@if meta.type-of($selectors) != map {
-  @error "Expected `$selectors` to be a map";
+@if meta.type-of($generators) != map {
+  @error "Expected `$generators` to be a map";
 }
 
 //

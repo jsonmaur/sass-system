@@ -10,5 +10,6 @@ dev: #: watch the source files and rebuild when they change
 build: #: build the final output file
 	@sass index.scss:index.min.css --style=compressed
 
-test: #: run the test suite
+test: #: run the unit and integration tests
+	@sass tests/tests.scss
 	@cd tests && sh ./tests.sh

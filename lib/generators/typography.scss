@@ -1,7 +1,7 @@
 @use "sass:map" as map;
 @use "../variables" as var;
 
-@mixin generate($pre, $app) {
+@mixin render($pre, $app) {
   .#{$pre}regular#{$app} { font-weight: normal; }
   .#{$pre}bold#{$app} { font-weight: bold; }
   .#{$pre}bolder#{$app} { font-weight: bolder; }

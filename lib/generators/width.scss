@@ -1,4 +1,4 @@
-@mixin generate($pre, $app) {
+@mixin render($pre, $app) {
   .#{$pre}w-0#{$app} { width: 0px; }
   .#{$pre}w-px#{$app} { width: 1px; }
   .#{$pre}w-full#{$app} { width: 100%; }

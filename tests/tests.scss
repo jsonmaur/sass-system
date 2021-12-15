@@ -1,0 +1,43 @@
+@use "sass:list" as list;
+@use "sass:meta" as meta;
+@use "sass:string" as string;
+@use "../lib/index.test" as index;
+
+$tests: (
+  index: "lib/index.test",
+);
+
+@debug "Running tests from #{list.length($tests)} files";
+@debug "";
+
+$passed: 0;
+$failed: 0;
+
+$pad: "  ";
+$line: "----------------------------------------------------------------------------------------";
+
+@each $test, $title in $tests {
+  @each $name, $func in meta.module-functions($test) {
+    @debug $pad + $title;
+    @debug $pad + string.slice($line, 0, string.length($title));
+
+    @if meta.call($func) {
+      $passed: $passed + 1;
+      @debug $pad + $name + " ==> passed";
+    } @else {
+      $failed: $failed + 1;
+      @debug $pad + $name + " ==> failed";
+    }
+  }
+}
+
+@debug "";
+@debug "Finished running test suite";
+
+$total: $passed + $failed;
+
+@if $total > 1 {
+  @debug "Ran " + $total + " tests, #{$failed} failed";
+} @else {
+  @debug "Ran " + $total + " test, #{$failed} failed";
+}

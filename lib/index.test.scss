@@ -1,0 +1,20 @@
+@use "sass:map" as map;
+@use "./index" as index;
+
+@function test-prefix() {
+  $cases: (
+    (input: ("foo"), output: "foo\\:"),
+    (input: ("foo", "bar"), output: "foo\\:bar\\:")
+  );
+
+  @each $case in $cases {
+    $result: index.prefix(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @warn "Expected `#{map.get($case, output)}` but got `#{$result}`";
+      @return false;
+    }
+  }
+
+  @return true;
+}
