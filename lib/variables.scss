@@ -48,7 +48,7 @@ $separator: "\\:" !default;
 // Can be set to `media` or `class`.
 //
 
-$dark-mode: "media" !default;
+$dark-mode: media !default;
 
 @if meta.type-of($dark-mode) != string {
   @error "Expected `$dark-mode` to be a string";
@@ -162,51 +162,51 @@ $primary-fonts: (
 
 $font-stacks: map.merge(
   (
-    serif: (
-      map.get($primary-fonts, serif),
-      ui-serif,
-      Georgia,
-      Cambria,
-      "Times New Roman",
-      Times,
-      serif,
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol",
-      "Noto Color Emoji",
-    ),
-    sans-serif: (
-      map.get($primary-fonts, sans-serif),
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      Roboto,
-      "Helvetica Neue",
-      Arial,
-      "Noto Sans",
-      sans-serif,
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol",
-      "Noto Color Emoji",
-    ),
-    monospace: (
-      map.get($primary-fonts, monospace),
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      Monaco,
-      Consolas,
-      "Liberation Mono",
-      "Courier New",
-      monospace,
-      "Apple Color Emoji",
-      "Segoe UI Emoji",
-      "Segoe UI Symbol",
-      "Noto Color Emoji",
-    ),
+    serif: [
+      map.get($primary-fonts, serif)
+      ui-serif
+      Georgia
+      Cambria
+      "Times New Roman"
+      Times
+      serif
+      "Apple Color Emoji"
+      "Segoe UI Emoji"
+      "Segoe UI Symbol"
+      "Noto Color Emoji"
+    ],
+    sans-serif: [
+      map.get($primary-fonts, sans-serif)
+      ui-sans-serif
+      system-ui
+      -apple-system
+      BlinkMacSystemFont
+      "Segoe UI"
+      Roboto
+      "Helvetica Neue"
+      Arial
+      "Noto Sans"
+      sans-serif
+      "Apple Color Emoji"
+      "Segoe UI Emoji"
+      "Segoe UI Symbol"
+      "Noto Color Emoji"
+    ],
+    monospace: [
+      map.get($primary-fonts, monospace)
+      ui-monospace
+      SFMono-Regular
+      Menlo
+      Monaco
+      Consolas
+      "Liberation Mono"
+      "Courier New"
+      monospace
+      "Apple Color Emoji"
+      "Segoe UI Emoji"
+      "Segoe UI Symbol"
+      "Noto Color Emoji"
+    ],
   ),
   map.get($extend, "font-stacks") or ()
 ) !default;

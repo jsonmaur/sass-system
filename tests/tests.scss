@@ -30,10 +30,10 @@ $line: "------------------------------------------------------------------------
   @each $name, $func in meta.module-functions($test) {
     @if meta.call($func) {
       $passed: $passed + 1;
-      @debug $pad + $name + " ==> passed";
+      @debug $pad + "#{$name} ==> passed";
     } @else {
       $failed: $failed + 1;
-      @debug $pad + $name + " ==> failed";
+      @debug $pad + "#{$name} ==> failed";
     }
   }
 }
@@ -44,7 +44,7 @@ $line: "------------------------------------------------------------------------
 $total: $passed + $failed;
 
 @if $total > 1 {
-  @debug "Ran " + $total + " tests, #{$failed} failed";
+  @debug "Ran #{$total} tests, #{$failed} failed";
 } @else {
-  @debug "Ran " + $total + " test, #{$failed} failed";
+  @debug "Ran #{$total} test, #{$failed} failed";
 }

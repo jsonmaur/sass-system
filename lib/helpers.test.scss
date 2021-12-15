@@ -3,9 +3,9 @@
 @use "./helpers" as helpers;
 
 @function test-list-merge() {
-  $cases: (
-    (input: ((1, 2, 3), (4, 5, 6)), output: (1, 2, 3, 4, 5, 6)),
-  );
+  $cases: [
+    (input: ([1 2 3], [4 5 6]), output: [1 2 3 4 5 6])
+  ];
 
   @each $case in $cases {
     $result: helpers.list-merge(map.get($case, input)...);
@@ -21,37 +21,37 @@
 
 @function test-map-list-merge() {
   $map1: (
-    foo: "foo",
+    foo: foo,
     bar: (
-      qux: "qux",
-      baz: (1, 2, 3),
+      qux: qux,
+      baz: [1 2 3],
       quux: (
-        quuz: "quuz",
-        corge: ("one", "two"),
+        quuz: quuz,
+        corge: [one two],
       )
     ),
   );
   $map2: (
-    qux: "qux",
+    qux: qux,
     bar: (
-      foo: "foo",
-      baz: (4, 5, 6),
+      foo: foo,
+      baz: [4 5 6],
       quux: (
-        quuz: "quux",
-        corge: ["three"],
+        quuz: quux,
+        corge: [three],
       ),
     ),
   );
   $expected: (
-    foo: "foo",
-    qux: "qux",
+    foo: foo,
+    qux: qux,
     bar: (
-      foo: "foo",
-      qux: "qux",
-      baz: (1, 2, 3, 4, 5, 6),
+      foo: foo,
+      qux: qux,
+      baz: [1 2 3 4 5 6],
       quux: (
-        quuz: "quux",
-        corge: ("one", "two", "three"),
+        quuz: quux,
+        corge: [one two three],
       ),
     ),
   );

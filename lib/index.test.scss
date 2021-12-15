@@ -2,13 +2,15 @@
 @use "./index" as index;
 
 @function test-prefix() {
-  $cases: (
-    (input: null, output: ""),
-    (input: (), output: ""),
-    (input: (""), output: ""),
-    (input: ("foo"), output: "foo\\:"),
-    (input: ("foo", "bar"), output: "foo\\:bar\\:")
-  );
+  $cases: [
+    (input: null, output: "")
+    (input: "", output: "")
+    (input: [], output: "")
+    (input: [null], output: "")
+    (input: [""], output: "")
+    (input: [foo], output: "foo\\:")
+    (input: [foo bar], output: "foo\\:bar\\:")
+  ];
 
   @each $case in $cases {
     $result: index.prefix(map.get($case, input)...);

@@ -1,7 +1,7 @@
 @use "../index" with (
   $tester: true,
   $normalize: false,
-  $dark-mode: "class",
+  $dark-mode: class,
   $screens: (
     sm: 500px,
   ),
