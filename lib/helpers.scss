@@ -1,0 +1,50 @@
+@use "sass:list" as list;
+@use "sass:map" as map;
+@use "sass:meta" as meta;
+
+//
+// A helper function to merge two lists into one list. Does not remove duplicate values.
+//
+@function list-merge($list1, $list2) {
+  $result: $list1;
+
+  @if meta.type-of($list1) != list {
+    @error "list-merge expected a list, got #{meta.type-of($list1)}";
+  }
+  @if meta.type-of($list2) != list {
+    @error "list-merge expected a list, got #{meta.type-of($list2)}";
+  }
+
+  @each $value in $list2 {
+    $result: list.append($result, $value);
+  }
+
+  @return $result;
+}
+
+//
+// A helper function similar to `map.deep-merge`, but will also merge any nested lists. Items in
+// the second argument list will take priority in the event of a key conflict.
+//
+@function map-list-merge($map1, $map2) {
+  $result: $map1;
+
+  @each $key, $value2 in $map2 {
+    $value1: map.get($result, $key);
+
+    @if meta.type-of($value1) != meta.type-of($value2) or
+      not map.has-key($result, $key) or
+      not (meta.type-of($value1) == map and meta.type-of($value2) == map) {
+
+      @if meta.type-of($value1) == list and meta.type-of($value2) == list {
+        $result: map.merge($result, ($key: list-merge($value1, $value2)));
+      } @else {
+        $result: map.merge($result, ($key: $value2));
+      }
+    } @else {
+      $result: map.merge($result, ($key: map-list-merge($value1, $value2)));
+    }
+  }
+
+  @return $result;
+}

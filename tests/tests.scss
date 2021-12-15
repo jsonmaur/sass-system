@@ -7,13 +7,14 @@
 @use "sass:meta" as meta;
 @use "sass:string" as string;
 @use "../lib/index.test" as index;
+@use "../lib/helpers.test" as helpers;
 
 $tests: (
   index: "lib/index.test",
+  helpers: "lib/helpers.test",
 );
 
 @debug "Running tests from #{list.length($tests)} files";
-@debug "";
 
 $passed: 0;
 $failed: 0;
@@ -22,10 +23,11 @@ $pad: "  ";
 $line: "----------------------------------------------------------------------------------------";
 
 @each $test, $title in $tests {
-  @each $name, $func in meta.module-functions($test) {
-    @debug $pad + $title;
-    @debug $pad + string.slice($line, 0, string.length($title));
+  @debug "";
+  @debug $pad + $title;
+  @debug $pad + string.slice($line, 0, string.length($title));
 
+  @each $name, $func in meta.module-functions($test) {
     @if meta.call($func) {
       $passed: $passed + 1;
       @debug $pad + $name + " ==> passed";

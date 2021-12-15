@@ -3,8 +3,8 @@
 @forward "lib/variables";
 
 // Other helper files with mixins, functions, and variables exposed to the end user.
+@forward "lib/autoprefixer";
 @forward "lib/media";
-@forward "lib/prefixer";
 
 @use "lib/index" as index;
 

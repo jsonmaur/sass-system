@@ -3,6 +3,9 @@
 
 @function test-prefix() {
   $cases: (
+    (input: null, output: ""),
+    (input: (), output: ""),
+    (input: (""), output: ""),
     (input: ("foo"), output: "foo\\:"),
     (input: ("foo", "bar"), output: "foo\\:bar\\:")
   );

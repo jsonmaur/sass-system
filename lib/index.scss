@@ -57,7 +57,9 @@ $pseudo-selectors: (
   $prefix: "";
 
   @each $value in $values {
-    $prefix: $prefix + $value + var.$separator;
+    @if $value != null and $value != "" {
+      $prefix: $prefix + $value + var.$separator;
+    }
   }
 
   @return $prefix;

@@ -1,0 +1,67 @@
+@use "sass:map" as map;
+@use "sass:meta" as meta;
+@use "./helpers" as helpers;
+
+@function test-list-merge() {
+  $cases: (
+    (input: ((1, 2, 3), (4, 5, 6)), output: (1, 2, 3, 4, 5, 6)),
+  );
+
+  @each $case in $cases {
+    $result: helpers.list-merge(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @warn "Expected `#{map.get($case, output)}` but got `#{$result}`";
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-map-list-merge() {
+  $map1: (
+    foo: "foo",
+    bar: (
+      qux: "qux",
+      baz: (1, 2, 3),
+      quux: (
+        quuz: "quuz",
+        corge: ("one", "two"),
+      )
+    ),
+  );
+  $map2: (
+    qux: "qux",
+    bar: (
+      foo: "foo",
+      baz: (4, 5, 6),
+      quux: (
+        quuz: "quux",
+        corge: ["three"],
+      ),
+    ),
+  );
+  $expected: (
+    foo: "foo",
+    qux: "qux",
+    bar: (
+      foo: "foo",
+      qux: "qux",
+      baz: (1, 2, 3, 4, 5, 6),
+      quux: (
+        quuz: "quux",
+        corge: ("one", "two", "three"),
+      ),
+    ),
+  );
+
+  $result: helpers.map-list-merge($map1, $map2);
+
+  @if $result != $expected {
+    @warn "Expected `#{meta.inspect($expected)}` but got `#{meta.inspect($result)}`";
+    @return false;
+  }
+
+  @return true;
+}
