@@ -1,0 +1,13 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  .#{$pre}mw-0#{$app} { max-width: none; }
+  .#{$pre}mw-full#{$app} { max-width: 100%; }
+  .#{$pre}mw-min#{$app} { max-width: min-content; }
+  .#{$pre}mw-max#{$app} { max-width: max-content; }
+  .#{$pre}mw-fit#{$app} { max-width: fit-content; }
+
+  @each $key, $value in config.$measures {
+    .#{$pre}measure-#{$key}#{$app} { max-width: $value; }
+  }
+}

@@ -1,0 +1,5 @@
+@mixin render($pre, $app) {
+  .#{$pre}strike#{$app} { text-decoration: line-through; }
+  .#{$pre}underline#{$app} { text-decoration: underline; }
+  .#{$pre}no-underline#{$app} { text-decoration: none; }
+}

@@ -1,0 +1,4 @@
+@mixin render($pre, $app) {
+  .#{$pre}italic#{$app} { font-style: italic; }
+  .#{$pre}no-italic#{$app} { font-style: normal; }
+}

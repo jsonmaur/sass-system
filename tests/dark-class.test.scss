@@ -1,5 +1,4 @@
 @use "../index" with (
-  $tester: true,
   $normalize: false,
   $dark-mode: class,
   $screens: (
@@ -7,17 +6,17 @@
     md: 800px,
   ),
   $generators: (
-    base: [tester],
-    hover: [tester],
-    active: [tester],
+    base: [color-tester],
+    hover: [color-tester],
+    active: [color-tester],
     dark: (
-      base: [tester],
-      first: [tester],
-      last: [tester],
+      base: [color-tester],
+      first: [color-tester],
+      last: [color-tester],
     ),
     responsive: (
-      base: [tester],
-      disabled: [tester],
+      base: [color-tester],
+      disabled: [color-tester],
     ),
   ),
 );

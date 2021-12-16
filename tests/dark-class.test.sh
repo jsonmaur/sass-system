@@ -35,13 +35,13 @@ testDarkModeClass() {
     color: red;
   }
 
-  .dark .sm\:dark\:tester {
+  .dark .dark\:sm\:tester {
     color: red;
   }
-  .dark .sm\:dark\:first\:tester:first-child {
+  .dark .dark\:sm\:first\:tester:first-child {
     color: red;
   }
-  .dark .sm\:dark\:last\:tester:last-child {
+  .dark .dark\:sm\:last\:tester:last-child {
     color: red;
   }
 }
@@ -54,13 +54,13 @@ testDarkModeClass() {
     color: red;
   }
 
-  .dark .md\:dark\:tester {
+  .dark .dark\:md\:tester {
     color: red;
   }
-  .dark .md\:dark\:first\:tester:first-child {
+  .dark .dark\:md\:first\:tester:first-child {
     color: red;
   }
-  .dark .md\:dark\:last\:tester:last-child {
+  .dark .dark\:md\:last\:tester:last-child {
     color: red;
   }
 }

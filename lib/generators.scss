@@ -1,34 +1,58 @@
 @use "sass:list" as list;
 @use "config" as config;
-@use "generators/tester" as tester;
-@use "generators/alignment" as alignment;
+
+@use "generators/background-color" as background-color;
+@use "generators/color-tester" as color-tester;
 @use "generators/color" as color;
-@use "generators/typography" as typography;
+@use "generators/font-family" as font-family;
+@use "generators/font-size" as font-size;
+@use "generators/font-style" as font-style;
+@use "generators/font-variant" as font-variant;
+@use "generators/font-weight" as font-weight;
+@use "generators/letter-spacing" as letter-spacing;
+@use "generators/line-height" as line-height;
+@use "generators/max-width" as max-width;
+@use "generators/text-align" as text-align;
+@use "generators/text-decoration" as text-decoration;
+@use "generators/text-indent" as text-indent;
+@use "generators/text-overflow" as text-overflow;
+@use "generators/text-transform" as text-transform;
+@use "generators/vertical-align" as vertical-align;
+@use "generators/white-space" as white-space;
 @use "generators/width" as width;
+
+$-generators: [];
+
+@mixin with($name) {
+  @if list.index($-generators, $name) {
+    @content;
+  }
+}
 
 //
 // Manually include each generator and make sure it's enabled for the current generator being
 // rendered. This mixin gets called for base classes, dark classes, and responsive classes.
 //
-@mixin render($generators, $prepend: null, $append: null) {
-  // special generator used only for unit tests
-  @if list.index($generators, "tester") and config.$tester {
-    @include tester.render($prepend, $append);
-  }
+@mixin render($generators, $pre: null, $app: null) {
+  $-generators: $generators !global;
 
-  @if list.index($generators, "alignment") {
-    @include alignment.render($prepend, $append);
-  }
-
-  @if list.index($generators, "color") {
-    @include color.render($prepend, $append);
-  }
-
-  @if list.index($generators, "typography") {
-    @include typography.render($prepend, $append);
-  }
-
-  @if list.index($generators, "width") {
-    @include width.render($prepend, $append);
-  }
+  @include with("background-color") { @include background-color.render($pre, $app); }
+  @include with("color-tester") { @include color-tester.render($pre, $app); }
+  @include with("color") { @include color.render($pre, $app); }
+  @include with("font-family") { @include font-family.render($pre, $app); }
+  @include with("font-size") { @include font-size.render($pre, $app); }
+  @include with("font-style") { @include font-style.render($pre, $app); }
+  @include with("font-variant") { @include font-variant.render($pre, $app); }
+  @include with("font-weight") { @include font-weight.render($pre, $app); }
+  @include with("letter-spacing") { @include letter-spacing.render($pre, $app); }
+  @include with("line-height") { @include line-height.render($pre, $app); }
+  @include with("max-width") { @include max-width.render($pre, $app); }
+  @include with("text-align") { @include text-align.render($pre, $app); }
+  @include with("text-decoration") { @include text-decoration.render($pre, $app); }
+  @include with("text-indent") { @include text-indent.render($pre, $app); }
+  @include with("text-overflow") { @include text-overflow.render($pre, $app); }
+  @include with("text-transform") { @include text-transform.render($pre, $app); }
+  @include with("vertical-align") { @include vertical-align.render($pre, $app); }
+  @include with("white-space") { @include white-space.render($pre, $app); }
+  @include with("width") { @include width.render($pre, $app); }
 }

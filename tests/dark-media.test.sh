@@ -35,11 +35,11 @@ testDarkModeMedia() {
   }
 }
 @media (min-width: 400px) and (prefers-color-scheme: dark) {
-  .sm\:dark\:tester {
+  .dark\:sm\:tester {
     color: red;
   }
 
-  .sm\:dark\:last\:tester:last-child {
+  .dark\:sm\:last\:tester:last-child {
     color: red;
   }
 }
@@ -53,11 +53,11 @@ testDarkModeMedia() {
   }
 }
 @media (min-width: 800px) and (prefers-color-scheme: dark) {
-  .md\:dark\:tester {
+  .dark\:md\:tester {
     color: red;
   }
 
-  .md\:dark\:last\:tester:last-child {
+  .dark\:md\:last\:tester:last-child {
     color: red;
   }
 }

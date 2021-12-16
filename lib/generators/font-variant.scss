@@ -1,0 +1,3 @@
+@mixin render($pre, $app) {
+  .#{$pre}small-caps#{$app} { font-variant: small-caps; }
+}

@@ -1,0 +1,7 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  @each $key, $value in config.$font-tracking {
+    .#{$pre}track-#{$key}#{$app} { letter-spacing: $value; }
+  }
+}

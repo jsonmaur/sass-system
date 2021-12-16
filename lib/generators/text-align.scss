@@ -1,0 +1,6 @@
+@mixin render($pre, $app) {
+  .#{$pre}text-left#{$app} { text-align: left; }
+  .#{$pre}text-right#{$app} { text-align: right; }
+  .#{$pre}text-center#{$app} { text-align: center; }
+  .#{$pre}text-justify#{$app} { text-align: justify; }
+}

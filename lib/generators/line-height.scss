@@ -1,0 +1,7 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  @each $key, $value in config.$font-leading {
+    .#{$pre}lead-#{$key}#{$app} { line-height: $value; }
+  }
+}

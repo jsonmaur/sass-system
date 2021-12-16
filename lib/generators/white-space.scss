@@ -1,0 +1,5 @@
+@mixin render($pre, $app) {
+  .#{$pre}pre#{$app} { white-space: pre; }
+  .#{$pre}wrap#{$app} { white-space: normal; }
+  .#{$pre}no-wrap#{$app} { white-space: nowrap; }
+}

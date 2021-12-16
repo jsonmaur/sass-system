@@ -6,9 +6,10 @@
 @use "normalize" as normalize;
 
 //
-// All the available selectors. Keep up to date with $generators in `variables.scss`.
+// All the selectors available to be enabled for a generator.
 //
-$pseudo-selectors: (
+$selectors: (
+  // pseudo classes
   hover: ":hover",
   focus: ":focus",
   focus-within: ":focus-within",
@@ -39,6 +40,7 @@ $pseudo-selectors: (
   read-only: ":read-only",
   rtl: ":dir(rtl)",
   ltr: ":dir(ltr)",
+  // pseudo elements
   before: "::before",
   after: "::after",
   first-letter: "::first-letter",
@@ -47,6 +49,10 @@ $pseudo-selectors: (
   selection: "::selection",
   file: "::file-selector-button",
   placeholder: "::placeholder",
+  // attribute selectors
+  open: "[open]",
+  rtl-attr: "[dir="rtl"]",
+  ltr-attr: "[dir="ltr"]",
 );
 
 //
@@ -95,9 +101,9 @@ $pseudo-selectors: (
       @include generators.render($enabled, prefix($prefixes));
     }
 
-    @else if map.get($pseudo-selectors, $type) {
+    @else if map.get($selectors, $type) {
       $prepend: prefix(list.append($prefixes, $type));
-      $append: map.get($pseudo-selectors, $type);
+      $append: map.get($selectors, $type);
 
       @include generators.render($enabled, $prepend, $append);
     }
@@ -125,9 +131,9 @@ $pseudo-selectors: (
 
       @include dark-mode-content {
         @if map.has-key(config.$generators, responsive, dark) {
-          @include generator-content(map.get(config.$generators, responsive, dark), $name, dark);
+          @include generator-content(map.get(config.$generators, responsive, dark), dark, $name);
         } @else {
-          @include generator-content(map.get(config.$generators, dark), $name, dark);
+          @include generator-content(map.get(config.$generators, dark), dark, $name);
         }
       }
     }

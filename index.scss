@@ -2,7 +2,7 @@
 // config too. If it's not first in line, then SSS can't be configured using `with ()`.
 @forward "lib/config";
 
-// Other helper files with mixins, functions, and variables exposed to the end user.
+// Other helper files with mixins, functions, and variables exposed to user.
 @forward "lib/autoprefixer";
 @forward "lib/media";
 

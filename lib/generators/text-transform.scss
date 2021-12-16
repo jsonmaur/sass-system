@@ -1,0 +1,6 @@
+@mixin render($pre, $app) {
+  .#{$pre}capitalize#{$app} { text-transform: capitalize; }
+  .#{$pre}lowercase#{$app} { text-transform: lowercase; }
+  .#{$pre}uppercase#{$app} { text-transform: uppercase; }
+  .#{$pre}no-case#{$app} { text-transform: none; }
+}

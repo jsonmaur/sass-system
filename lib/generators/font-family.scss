@@ -1,0 +1,10 @@
+@use "sass:list";
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  @each $key, $value in config.$font-stacks {
+    .#{$pre}#{$key}#{$app} {
+      font-family: list.join($value, (), $separator: comma, $bracketed: false);
+    }
+  }
+}

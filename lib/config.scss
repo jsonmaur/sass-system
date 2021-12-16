@@ -1,17 +1,7 @@
+@use "sass:list" as list;
 @use "sass:map" as map;
 @use "sass:meta" as meta;
 @use "helpers" as helpers;
-
-//
-// Whether or not to import the tester generator class, which is used in the unit tests.
-// Can be set to `true` or `false`.
-//
-
-$tester: false !default;
-
-@if meta.type-of($tester) != bool {
-  @error "Expected `$tester` to be a bool";
-}
 
 //
 // Whether or not to import the opinionated normalize rules.
@@ -66,37 +56,6 @@ $extend: map.remove((x: x), x) !default; // weird way to make an empty map (ಠ_
 }
 
 //
-// A list of generaters to include for each class type. This helps cut down on file size
-// significantly since every class name in the generators will get a class for each of the 5
-// responsive classes (depending on how many values are in `$screens`), plus dark classes for all
-// of them. It adds up quickly.
-//
-// Each generator can be enabled for base classes, pseudo classes, dark media queries, responsive
-// media queries, and responsive dark media queries for deep customization. If there is no list
-// specified for `responsive.dark`, then `dark` is used instead.
-//
-
-$generators: helpers.map-list-merge(
-  (
-    base: [],
-    dark: (
-      base: [],
-    ),
-    responsive: (
-      base: [],
-      dark: (
-        base: [],
-      ),
-    ),
-  ),
-  map.get($extend, "generators") or ()
-) !default;
-
-@if meta.type-of($generators) != map {
-  @error "Expected `$generators` to be a map";
-}
-
-//
 // Different screen sizes used to generate responsive breakpoint mixins.
 //
 
@@ -113,6 +72,23 @@ $screens: map.merge(
 
 @if meta.type-of($screens) != map {
   @error "Expected `$screens` to be a map";
+}
+
+//
+// Measures
+//
+
+$measures: map.merge(
+  (
+    narrow: 20em, // ~45 characters
+    regular: 30em, // ~66 characters
+    wide: 34em, // ~80 characters
+  ),
+  map.get($extend, "measures") or ()
+) !default;
+
+@if meta.type-of($measures) != map {
+  @error "Expected `$measures` to be a map";
 }
 
 //
@@ -279,18 +255,52 @@ $text-indent: 1em !default;
 }
 
 //
-// Measures
+// Colors
 //
 
-$measures: map.merge(
+$colors: map.merge(
   (
-    narrow: 20em, // ~45 characters
-    regular: 30em, // ~66 characters
-    wide: 34em, // ~80 characters
+    white: #FFFFFF,
+    black: #000000,
   ),
-  map.get($extend, "measures") or ()
+  map.get($extend, "colors") or ()
 ) !default;
 
-@if meta.type-of($measures) != map {
-  @error "Expected `$measures` to be a map";
+@if meta.type-of($colors) != map {
+  @error "Expected `$colors` to be a map";
+}
+
+//
+// A list of generaters to include for each class type. This helps cut down on file size
+// significantly since every class name in the generators will get a class for each of the 5
+// responsive classes (depending on how many values are in `$screens`), plus dark classes for all
+// of them. It adds up quickly.
+//
+// Each generator can be enabled for base classes, pseudo classes, dark media queries, responsive
+// media queries, and responsive dark media queries for deep customization. If there is no list
+// specified for `responsive.dark`, then `dark` is used instead.
+//
+
+$generators: helpers.map-list-merge(
+  (
+    base: [],
+    dark: (
+      base: [],
+    ),
+    responsive: (
+      base: [],
+      dark: (
+        base: [],
+      ),
+    ),
+  ),
+  map.get($extend, "generators") or ()
+) !default;
+
+@if meta.type-of($generators) != map and
+  // allow an empty list for disabling all generators,
+  // since there is no easy way to create an empty map in sass
+  (meta.type-of($generators) != list or list.length($generators) != 0) {
+
+  @error "Expected `$generators` to be a map";
 }

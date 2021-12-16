@@ -1,9 +1,7 @@
 @use "../config" as config;
 
 @mixin render($pre, $app) {
-  .#{$pre}current#{$app} { color: currentColor; }
-
   @each $key, $value in config.$colors {
-    .#{$pre}#{"" + $key}#{$app} { color: $value; }
+    .#{$pre}bg-#{"" + $key}#{$app} { background-color: $value; }
   }
 }

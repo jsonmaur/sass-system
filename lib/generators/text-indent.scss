@@ -1,0 +1,9 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  .#{$pre}indent#{$app} {
+    text-indent: config.$text-indent;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,7 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  @each $key, $value in config.$font-sizes {
+    .#{$pre}text-#{$key}#{$app} { font-size: $value; }
+  }
+}
