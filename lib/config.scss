@@ -49,23 +49,23 @@ $dark-mode: media !default;
 // Used to append custom values to variable maps rather than replace them.
 //
 
-$extend: map.remove((x: x), x) !default; // weird way to make an empty map (ಠ_ಠ)
+$extend: helpers.empty-map() !default;
 
 @if meta.type-of($extend) != map {
   @error "Expected `$extend` to be a map";
 }
 
 //
-// Different screen sizes used to generate responsive breakpoint mixins.
+// All the supported screen sizes used to generate responsive mixins and classes.
 //
 
 $screens: map.merge(
   (
-    sm: 640px,
-    md: 768px,
-    lg: 1024px,
-    xl: 1280px,
-    xxl: 1792px,
+    xs: 640px,
+    sm: 768px, // +128px
+    md: 1024px, // +256px
+    lg: 1280px, // +256px
+    xl: 1792px, // +512px
   ),
   map.get($extend, "screens") or ()
 ) !default;
@@ -75,7 +75,7 @@ $screens: map.merge(
 }
 
 //
-// Measures
+// All the supported widths used to generate generic containers.
 //
 
 $measures: map.merge(
@@ -107,7 +107,7 @@ $primary-fonts: (
 }
 
 //
-// Font stacks
+// All the supported font families, with the primary font prepended if it exists.
 //
 
 $font-stacks: map.merge(
@@ -166,7 +166,7 @@ $font-stacks: map.merge(
 }
 
 //
-// Font weights
+// All the supported font weights.
 //
 
 $font-weights: map.merge(
@@ -189,7 +189,7 @@ $font-weights: map.merge(
 }
 
 //
-// Font sizes
+// All the supported font sizes.
 //
 
 $font-sizes: map.merge(
@@ -211,7 +211,7 @@ $font-sizes: map.merge(
 }
 
 //
-// Font leading (line spacing)
+// All the supported line spacings.
 //
 
 $font-leading: map.merge(
@@ -228,7 +228,7 @@ $font-leading: map.merge(
 }
 
 //
-// Font tracking (letter spacing)
+// All supported letter spacings.
 //
 
 $font-tracking: map.merge(
@@ -245,7 +245,7 @@ $font-tracking: map.merge(
 }
 
 //
-// Text indent
+// Value used for text indent classes.
 //
 
 $text-indent: 1em !default;
@@ -255,7 +255,7 @@ $text-indent: 1em !default;
 }
 
 //
-// Colors
+// All supported colors.
 //
 
 $colors: map.merge(

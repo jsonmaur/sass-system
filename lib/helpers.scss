@@ -3,6 +3,26 @@
 @use "sass:meta" as meta;
 
 //
+// Weird way to make an empty map (ಠ_ಠ)
+//
+@function empty-map() {
+  @return map.remove((x: x), x);
+}
+
+//
+// Removes items from the beginning of a list
+//
+@function list-shift($list, $count: 1) {
+  $result: [];
+
+  @for $i from $count + 1 through list.length($list) {
+    $result: list.append($result, list.nth($list, $i));
+  }
+
+  @return $result;
+}
+
+//
 // A helper function to merge two lists into one list. Does not remove duplicate values.
 //
 @function list-merge($list1, $list2) {
@@ -24,7 +44,8 @@
 
 //
 // A helper function similar to `map.deep-merge`, but will also merge any nested lists. Items in
-// the second argument list will take priority in the event of a key conflict.
+// the second argument list will take priority in the event of a key conflict. Lists with
+// different separators or surroundings (brackets vs. parenthesis) will not be merged.
 //
 @function map-list-merge($map1, $map2) {
   $result: $map1;
@@ -36,7 +57,10 @@
       not map.has-key($result, $key) or
       not (meta.type-of($value1) == map and meta.type-of($value2) == map) {
 
-      @if meta.type-of($value1) == list and meta.type-of($value2) == list {
+      @if (meta.type-of($value1) == list and meta.type-of($value2) == list) and
+        (list.separator($value1) == list.separator($value2)) and
+        (list.is-bracketed($value1) == list.is-bracketed($value2)) {
+
         $result: map.merge($result, ($key: list-merge($value1, $value2)));
       } @else {
         $result: map.merge($result, ($key: $value2));

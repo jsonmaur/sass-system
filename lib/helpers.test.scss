@@ -1,17 +1,50 @@
+@use "sass:list" as list;
 @use "sass:map" as map;
 @use "sass:meta" as meta;
 @use "./helpers" as helpers;
 
+@function test-empty-map() {
+  $result: helpers.empty-map();
+
+  @if meta.type-of($result) != map or list.length(map.keys($result)) > 0 {
+    @warn "Expected `#{meta.inspect($result)}` to be an empty map";
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-list-shift() {
+  $result: helpers.list-shift([1 2 3 4]);
+  $expected: [2 3 4];
+
+  @if $result != $expected {
+    @warn "Expected `#{meta.inspect($expected)}` but got `#{meta.inspect($result)}`";
+    @return false;
+  }
+
+  $result: helpers.list-shift([1 2 3 4], 2);
+  $expected: [3 4];
+
+  @if $result != $expected {
+    @warn "Expected `#{meta.inspect($expected)}` but got `#{meta.inspect($result)}`";
+    @return false;
+  }
+
+  @return true;
+}
+
 @function test-list-merge() {
   $cases: [
-    (input: ([1 2 3], [4 5 6]), output: [1 2 3 4 5 6])
+    (input: [[1 2 3] [4 5 6]], output: [1 2 3 4 5 6])
   ];
 
   @each $case in $cases {
     $result: helpers.list-merge(map.get($case, input)...);
+    $expected: map.get($case, output);
 
-    @if $result != map.get($case, output) {
-      @warn "Expected `#{map.get($case, output)}` but got `#{$result}`";
+    @if $result != $expected {
+      @warn "Expected `#{meta.inspect($expected)}` but got `#{meta.inspect($result)}`";
       @return false;
     }
   }
@@ -28,6 +61,7 @@
       quux: (
         quuz: quuz,
         corge: [one two],
+        foo: bar baz,
       )
     ),
   );
@@ -39,6 +73,7 @@
       quux: (
         quuz: quux,
         corge: [three],
+        foo: [bar],
       ),
     ),
   );
@@ -52,6 +87,7 @@
       quux: (
         quuz: quux,
         corge: [one two three],
+        foo: [bar],
       ),
     ),
   );
