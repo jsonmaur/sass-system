@@ -8,9 +8,6 @@
 @use "normalize" as normalize;
 
 //
-//
-
-//
 // Renders content within a dark mode media query or class depending on which is enabled.
 //
 @mixin dark-content($generators) {
@@ -66,7 +63,6 @@
       }
 
       @else if meta.type-of($value) == list {
-        // @include inherit-content($value) using ($-value) {
         @if $key == base {
           $prepend: helpers.combine($prefixes, $separator: config.$separator);
 
@@ -84,7 +80,6 @@
 
           @include generators.render($value, $prepend, $append);
         }
-        // }
       }
 
       @else {

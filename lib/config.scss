@@ -339,14 +339,8 @@ $selectors: map.merge(
 //
 // See `$selectors` for a list of available selectors. To support dark classes, use the
 // `dark` selector, and responsive classes are under the `responsive` or individual `$screen`
-// selectors. Responsive dark classes can also be enabled for each screen size with the
-// `$screen.dark` selector.
-//
-// If a value is set to `inherit foo`, it will inherit the generators from the root list or the SSS
-// defaults if at the root. If a value is set to `true`, it will enable all generators for that
-// selector. If a value is set to `false`, it will disable all generators for that selector (which
-// can also be achieved by setting to an empty list with `[]`). Both `dark` and `responsive` can
-// be set to `inherit` to use the same generators as the base.
+// selectors. Nested dark classes can also be enabled for responsive with the `responsive.dark`
+// or `$screen.dark` selectors.
 //
 
 $generators: helpers.map-list-merge(
