@@ -1,4 +1,4 @@
-name: Test CI
+name: tests
 on:
   push:
     branches:
@@ -10,6 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Run tests
-      run: make test
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Install sass
+        run: |
+          curl -LO https://github.com/sass/dart-sass/releases/download/1.45.0/dart-sass-1.45.0-linux-x64.tar.gz
+          tar -xzf dart-sass-1.45.0-linux-x64.tar.gz
+          echo "$PWD/dart-sass" >> $GITHUB_PATH
+      - name: Run tests
+        run: make test

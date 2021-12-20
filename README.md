@@ -1,12 +1,12 @@
 <br /> <br /> <br /> <br />
 
 <div align="center">
-  <img src="logo.svg" alt="SSS Logo" width="200" />
+  <img src=".github/logo.svg" alt="SSS Logo" width="200" />
 </div>
 
 <br /> <br /> <br /> <br />
 
-SSS is a highly customizable style system generator and utility-first CSS framework for quickly building user interfaces. Compare to frameworks such as [Tailwind](https://tailwindcss.com) and [Tachyons](https://tachyons.io), but with zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass). Written for Sass, in Sass—Node and NPM are not required.
+A highly customizable style system generator and utility-first CSS framework for quickly building user interfaces. Built in Sass, for Sass. Similar to frameworks such as [Tailwind](https://tailwindcss.com) and [Tachyons](https://tachyons.io), but with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass).
 
 ## Usage
 
