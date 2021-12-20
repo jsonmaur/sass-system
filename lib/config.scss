@@ -92,6 +92,28 @@ $measures: map.merge(
 }
 
 //
+// All the supported spacing values used for margin and padding.
+//
+
+$spacing: helpers.list-merge(
+  (
+    .25rem,
+    .5rem,
+    1rem,
+    2rem,
+    4rem,
+    8rem,
+    16rem,
+    32rem,
+  ),
+  map.get($extend, "spacing") or ()
+) !default;
+
+@if meta.type-of($spacing) != list {
+  @error "Expected `$spacing` to be a list";
+}
+
+//
 // Allows you to specify a primary font for each type of font stack,
 // without having to redefine the entire font stack from scratch.
 //

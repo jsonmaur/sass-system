@@ -1,4 +1,4 @@
-@use "sass:math";
+@use "sass:math" as math;
 
 @mixin render($pre, $app) {
   $i: 0;

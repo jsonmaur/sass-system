@@ -1,0 +1,44 @@
+@use "sass:list" as list;
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  .#{$pre}m-0#{$app} { margin: 0; }
+  .#{$pre}mt-0#{$app} { margin-top: 0; }
+  .#{$pre}mb-0#{$app} { margin-bottom: 0; }
+  .#{$pre}ml-0#{$app} { margin-left: 0; }
+  .#{$pre}mr-0#{$app} { margin-right: 0; }
+  .#{$pre}mx-0#{$app} { margin-left: 0; margin-right: 0; }
+  .#{$pre}my-0#{$app} { margin-top: 0; margin-bottom: 0; }
+
+  .#{$pre}m-px#{$app} { margin: 1px; }
+  .#{$pre}mt-px#{$app} { margin-top: 1px; }
+  .#{$pre}mb-px#{$app} { margin-bottom: 1px; }
+  .#{$pre}ml-px#{$app} { margin-left: 1px; }
+  .#{$pre}mr-px#{$app} { margin-right: 1px; }
+  .#{$pre}mx-px#{$app} { margin-left: 1px; margin-right: 1px; }
+  .#{$pre}my-px#{$app} { margin-top: 1px; margin-bottom: 1px; }
+
+  .#{$pre}m-auto#{$app} { margin: auto; }
+  .#{$pre}mt-auto#{$app} { margin-top: auto; }
+  .#{$pre}mb-auto#{$app} { margin-bottom: auto; }
+  .#{$pre}ml-auto#{$app} { margin-left: auto; }
+  .#{$pre}mr-auto#{$app} { margin-right: auto; }
+  .#{$pre}mx-auto#{$app} { margin-left: auto; margin-right: auto; }
+  .#{$pre}my-auto#{$app} { margin-top: auto; margin-bottom: auto; }
+
+  @for $i from 1 through list.length(config.$spacing) {
+    $v: list.nth(config.$spacing, $i);
+
+    .#{$pre}m-#{$i}#{$app} { margin: $v; }
+    .#{$pre}mt-#{$i}#{$app} { margin-top: $v; }
+    .#{$pre}mb-#{$i}#{$app} { margin-bottom: $v; }
+    .#{$pre}ml-#{$i}#{$app} { margin-left: $v; }
+    .#{$pre}mr-#{$i}#{$app} { margin-right: $v; }
+    .#{$pre}-mt-#{$i}#{$app} { margin-top: -$v; }
+    .#{$pre}-mb-#{$i}#{$app} { margin-bottom: -$v; }
+    .#{$pre}-ml-#{$i}#{$app} { margin-left: -$v; }
+    .#{$pre}-mr-#{$i}#{$app} { margin-right: -$v; }
+    .#{$pre}mx-#{$i}#{$app} { margin-left: $v; margin-right: $v; }
+    .#{$pre}my-#{$i}#{$app} { margin-top: $v; margin-bottom: $v; }
+  }
+}

@@ -178,11 +178,11 @@ Rather than include everything up front to be removed later, we add in rules as 
 | list-style-image           |                                                                   |
 | list-style-position        |                                                                   |
 | list-style-type            |                                                                   |
-| margin                     |                                                                   |
-| margin-bottom              |                                                                   |
-| margin-left                |                                                                   |
-| margin-right               |                                                                   |
-| margin-top                 |                                                                   |
+| margin                     | `.m-0` `.m-px` `.m-auto` `.m-1` `.m-2` `.m-3` `.m-4` `.m-5` `.m-6` `.m-7` `.m-8` `.mx-0` `.mx-px` `.mx-auto` `.mx-1` `.mx-2` `.mx-3` `.mx-4` `.mx-5` `.mx-6` `.mx-7` `.mx-8` `.my-0` `.my-px` `.my-auto` `.my-1` `.my-2` `.my-3` `.my-4` `.my-5` `.my-6` `.my-7` `.my-8` |
+| margin-bottom              | `.mb-0` `.mb-px` `.mb-auto` `.mb-1` `.-mb-1` `.mb-2` `.-mb-2` `.mb-3` `.-mb-3` `.mb-4` `.-mb-4` `.mb-5` `.-mb-5` `.mb-6` `.-mb-6` `.mb-7` `.-mb-7` `.mb-8` `.-mb-8` |
+| margin-left                | `.ml-0` `.ml-px` `.ml-auto` `.ml-1` `.-ml-1` `.ml-2` `.-ml-2` `.ml-3` `.-ml-3` `.ml-4` `.-ml-4` `.ml-5` `.-ml-5` `.ml-6` `.-ml-6` `.ml-7` `.-ml-7` `.ml-8` `.-ml-8` |
+| margin-right               | `.mr-0` `.mr-px` `.mr-auto` `.mr-1` `.-mr-1` `.mr-2` `.-mr-2` `.mr-3` `.-mr-3` `.mr-4` `.-mr-4` `.mr-5` `.-mr-5` `.mr-6` `.-mr-6` `.mr-7` `.-mr-7` `.mr-8` `.-mr-8` |
+| margin-top                 | `.mt-0` `.mt-px` `.mt-auto` `.mt-1` `.-mt-1` `.mt-2` `.-mt-2` `.mt-3` `.-mt-3` `.mt-4` `.-mt-4` `.mt-5` `.-mt-5` `.mt-6` `.-mt-6` `.mt-7` `.-mt-7` `.mt-8` `.-mt-8` |
 | mask                       |                                                                   |
 | mask-clip                  |                                                                   |
 | mask-composite             |                                                                   |
@@ -212,11 +212,11 @@ Rather than include everything up front to be removed later, we add in rules as 
 | overflow-wrap              |                                                                   |
 | overflow-x                 |                                                                   |
 | overflow-y                 |                                                                   |
-| padding                    |                                                                   |
-| padding-bottom             |                                                                   |
-| padding-left               |                                                                   |
-| padding-right              |                                                                   |
-| padding-top                |                                                                   |
+| padding                    | `.p-0` `.p-px` `.p-1` `.p-2` `.p-3` `.p-4` `.p-5` `.p-6` `.p-7` `.p-8` `.px-0` `.px-px` `.px-1` `.px-2` `.px-3` `.px-4` `.px-5` `.px-6` `.px-7` `.px-8` `.py-0` `.py-px` `.py-1` `.py-2` `.py-3` `.py-4` `.py-5` `.py-6` `.py-7` `.py-8` |
+| padding-bottom             | `.pb-0` `.pb-px` `.pb-1` `.pb-2` `.pb-3` `.pb-4` `.pb-5` `.pb-6` `.pb-7` `.pb-8` |
+| padding-left               | `.pl-0` `.pl-px` `.pl-1` `.pl-2` `.pl-3` `.pl-4` `.pl-5` `.pl-6` `.pl-7` `.pl-8` |
+| padding-right              | `.pr-0` `.pr-px` `.pr-1` `.pr-2` `.pr-3` `.pr-4` `.pr-5` `.pr-6` `.pr-7` `.pr-8` |
+| padding-top                | `.pt-0` `.pt-px` `.pt-1` `.pt-2` `.pt-3` `.pt-4` `.pt-5` `.pt-6` `.pt-7` `.pt-8` |
 | page-break-after           |                                                                   |
 | page-break-before          |                                                                   |
 | page-break-inside          |                                                                   |

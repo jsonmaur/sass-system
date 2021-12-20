@@ -1,0 +1,32 @@
+@use "sass:list" as list;
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  .#{$pre}p-0#{$app} { padding: 0; }
+  .#{$pre}pt-0#{$app} { padding-top: 0; }
+  .#{$pre}pb-0#{$app} { padding-bottom: 0; }
+  .#{$pre}pl-0#{$app} { padding-left: 0; }
+  .#{$pre}pr-0#{$app} { padding-right: 0; }
+  .#{$pre}px-0#{$app} { padding-left: 0; padding-right: 0; }
+  .#{$pre}py-0#{$app} { padding-top: 0; padding-bottom: 0; }
+
+  .#{$pre}p-px#{$app} { padding: 1px; }
+  .#{$pre}pt-px#{$app} { padding-top: 1px; }
+  .#{$pre}pb-px#{$app} { padding-bottom: 1px; }
+  .#{$pre}pl-px#{$app} { padding-left: 1px; }
+  .#{$pre}pr-px#{$app} { padding-right: 1px; }
+  .#{$pre}px-px#{$app} { padding-left: 1px; padding-right: 1px; }
+  .#{$pre}py-px#{$app} { padding-top: 1px; padding-bottom: 1px; }
+
+  @for $i from 1 through list.length(config.$spacing) {
+    $v: list.nth(config.$spacing, $i);
+
+    .#{$pre}p-#{$i}#{$app} { padding: $v; }
+    .#{$pre}pt-#{$i}#{$app} { padding-top: $v; }
+    .#{$pre}pb-#{$i}#{$app} { padding-bottom: $v; }
+    .#{$pre}pl-#{$i}#{$app} { padding-left: $v; }
+    .#{$pre}pr-#{$i}#{$app} { padding-right: $v; }
+    .#{$pre}px-#{$i}#{$app} { padding-left: $v; padding-right: $v; }
+    .#{$pre}py-#{$i}#{$app} { padding-top: $v; padding-bottom: $v; }
+  }
+}
