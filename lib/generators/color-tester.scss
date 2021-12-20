@@ -1,7 +1,0 @@
-//
-// This is a special generater that is only used for unit testing.
-//
-
-@mixin render($pre, $app) {
-  .#{$pre}tester#{$app} { color: red; }
-}

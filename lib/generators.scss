@@ -2,7 +2,7 @@
 @use "config" as config;
 
 @use "generators/background-color" as background-color;
-@use "generators/color-tester" as color-tester;
+@use "generators/box-sizing" as box-sizing;
 @use "generators/color" as color;
 @use "generators/font-family" as font-family;
 @use "generators/font-size" as font-size;
@@ -37,7 +37,7 @@ $-generators: [];
   $-generators: $generators !global;
 
   @include with("background-color") { @include background-color.render($pre, $app); }
-  @include with("color-tester") { @include color-tester.render($pre, $app); }
+  @include with("box-sizing") { @include box-sizing.render($pre, $app); }
   @include with("color") { @include color.render($pre, $app); }
   @include with("font-family") { @include font-family.render($pre, $app); }
   @include with("font-size") { @include font-size.render($pre, $app); }

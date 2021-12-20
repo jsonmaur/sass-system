@@ -1,6 +1,6 @@
 @mixin render($pre, $app) {
-  .#{$pre}baseline#{$app} { vertical-align: baseline; }
-  .#{$pre}middle#{$app} { vertical-align: middle; }
   .#{$pre}top#{$app} { vertical-align: top; }
+  .#{$pre}middle#{$app} { vertical-align: middle; }
   .#{$pre}bottom#{$app} { vertical-align: bottom; }
+  .#{$pre}baseline#{$app} { vertical-align: baseline; }
 }

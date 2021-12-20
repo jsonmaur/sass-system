@@ -1,8 +1,6 @@
 @use "../config" as config;
 
 @mixin render($pre, $app) {
-  .#{$pre}regular#{$app} { font-weight: normal; }
-  .#{$pre}bold#{$app} { font-weight: bold; }
   .#{$pre}bolder#{$app} { font-weight: bolder; }
   .#{$pre}lighter#{$app} { font-weight: lighter; }
 

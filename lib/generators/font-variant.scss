@@ -1,4 +1,4 @@
 @mixin render($pre, $app) {
   .#{$pre}small-caps#{$app} { font-variant: small-caps; }
-  .#{$pre}no-small-caps#{$app} { font-variant: normal; }
+  .#{$pre}no-caps#{$app} { font-variant: normal; }
 }
