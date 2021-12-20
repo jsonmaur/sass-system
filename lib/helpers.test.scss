@@ -101,3 +101,32 @@
 
   @return true;
 }
+
+@function test-combine() {
+  $cases: [
+    (result: helpers.combine(null), expect: "")
+    (result: helpers.combine(""), expect: "")
+    (result: helpers.combine([]), expect: "")
+    (result: helpers.combine([null]), expect: "")
+    (result: helpers.combine([""]), expect: "")
+    (result: helpers.combine([foo]), expect: "foo")
+    (result: helpers.combine((foo,)), expect: "foo")
+    (result: helpers.combine([foo], $separator: _), expect: "foo_")
+    (result: helpers.combine([foo bar]), expect: "foobar")
+    (result: helpers.combine([foo bar], $separator: _), expect: "foo_bar_")
+    (result: helpers.combine((foo bar), $separator: _), expect: "foo_bar_")
+    (result: helpers.combine([foo bar], $separator: _, $trailing: false), expect: "foo_bar")
+  ];
+
+  @each $case in $cases {
+    $result: map.get($case, result);
+    $expect: map.get($case, expect);
+
+    @if $result != $expect {
+      @warn "Expected `#{meta.inspect($expect)}` but got `#{meta.inspect($result)}`";
+      @return false;
+    }
+  }
+
+  @return true;
+}

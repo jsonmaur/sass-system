@@ -5,6 +5,7 @@ suite_addTest testGeneratorDark
 suite_addTest testGeneratorResponsive
 suite_addTest testGeneratorResponsiveDark
 suite_addTest testGeneratorResponsiveScreen
+suite_addTest testGeneratorCustomSelector
 suite_addTest testGeneratorInvalidSelector
 suite_addTest testGeneratorInvalidSelectorValue
 suite_addTest testGeneratorResponsiveInvalidScreen
@@ -18,6 +19,7 @@ testGenerator() {
     base: [background-color color],
     hover: [background-color],
     first: [background-color],
+    hover disabled: [background-color],
   ),
 );
 EOF
@@ -41,6 +43,10 @@ EOF
 }
 
 .first\:bg-black:first-child {
+  background-color: black;
+}
+
+.hover\:disabled\:bg-black:hover:disabled {
   background-color: black;
 }
 EOF
@@ -199,6 +205,31 @@ EOF
   .sm\:dark\:bg-black {
     background-color: black;
   }
+}
+EOF
+  );
+
+  assertEquals "$OUTPUT" "$(echo $INPUT | sass --stdin)"
+}
+
+testGeneratorCustomSelector() {
+  INPUT=$(cat <<EOF
+@use "../index" with (
+  \$normalize: false,
+  \$colors: (black: black),
+  \$selectors: (
+    foo bar: ":foo:bar",
+  ),
+  \$generators: (
+    foo bar: [background-color],
+  ),
+);
+EOF
+  );
+
+  OUTPUT=$(cat <<EOF
+.foo\:bar\:bg-black:foo:bar {
+  background-color: black;
 }
 EOF
   );

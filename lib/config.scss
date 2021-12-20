@@ -319,6 +319,10 @@ $selectors: map.merge(
     placeholder: "::placeholder",
     // attribute selectors
     open: "[open]",
+    // nested selectors
+    hover disabled: ":hover:disabled",
+    hover before: ":hover::before",
+    hover after: ":hover::after",
   ),
   map.get($extend, "selectors") or (),
 ) !default;

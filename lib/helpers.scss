@@ -74,3 +74,33 @@
 
   @return $result;
 }
+
+//
+// Takes in a list of values and returns them each joined with the configured separator.
+// Return value will always have a trailing separator so it can be prefixed to other class names.
+//
+@function combine($values, $opts...) {
+  $opts: meta.keywords($opts);
+  $result: "";
+
+  @if
+    list.length($values) > 0 and
+    (meta.type-of($values) == list or meta.type-of($values) == arglist)  {
+
+    @for $i from 1 through list.length($values) {
+      $value: list.nth($values, $i);
+
+      @if $value != null and $value != "" {
+        @if $i >= list.length($values) and map.get($opts, trailing) == false {
+          $result: $result + $value;
+        }
+
+        @else {
+          $result: $result + $value + map.get($opts, separator);
+        }
+      }
+    }
+  }
+
+  @return $result;
+}

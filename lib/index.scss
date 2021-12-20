@@ -8,20 +8,7 @@
 @use "normalize" as normalize;
 
 //
-// Takes in a list of values and returns them each joined with the configured separator.
-// Return value will always have a trailing separator so it can be prefixed to other class names.
 //
-@function combine($values) {
-  $prefix: "";
-
-  @each $value in $values {
-    @if $value != null and $value != "" {
-      $prefix: $prefix + $value + config.$separator;
-    }
-  }
-
-  @return $prefix;
-}
 
 //
 // Renders content within a dark mode media query or class depending on which is enabled.
@@ -81,12 +68,19 @@
       @else if meta.type-of($value) == list {
         // @include inherit-content($value) using ($-value) {
         @if $key == base {
-          @include generators.render($value, combine($prefixes));
+          $prepend: helpers.combine($prefixes, $separator: config.$separator);
+
+          @include generators.render($value, $prepend);
         }
 
         @else {
-          $prepend: combine(list.append($prefixes, $key));
+          $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
           $append: map.get(config.$selectors, $key);
+
+          @if meta.type-of($key) == list {
+            $k: helpers.combine($key, $separator: config.$separator, $trailing: false);
+            $prepend: helpers.combine(list.append($prefixes, $k), $separator: config.$separator);
+          }
 
           @include generators.render($value, $prepend, $append);
         }

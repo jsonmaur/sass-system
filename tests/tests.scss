@@ -6,11 +6,9 @@
 @use "sass:list" as list;
 @use "sass:meta" as meta;
 @use "sass:string" as string;
-@use "../lib/index.test" as index;
 @use "../lib/helpers.test" as helpers;
 
 $tests: (
-  index: "lib/index.test",
   helpers: "lib/helpers.test",
 );
 
