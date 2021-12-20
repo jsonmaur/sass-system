@@ -1,0 +1,9 @@
+@use "../config" as config;
+
+@mixin render($pre, $app) {
+  .#{$pre}no-shadow#{$app} { box-shadow: 0 0 #000000; }
+
+  @each $key, $value in config.$box-shadows {
+    .#{$pre}shadow-#{$key}#{$app} { box-shadow: $value; }
+  }
+}

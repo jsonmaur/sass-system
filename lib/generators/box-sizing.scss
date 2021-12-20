@@ -1,5 +1,3 @@
-@use "../config" as config;
-
 @mixin render($pre, $app) {
   .#{$pre}border-box#{$app} { box-sizing: border-box; }
   .#{$pre}content-box#{$app} { box-sizing: content-box; }
