@@ -271,33 +271,91 @@ $colors: map.merge(
 }
 
 //
-// A list of generaters to include for each class type. This helps cut down on file size
-// significantly since every class name in the generators will get a class for each of the 5
-// responsive classes (depending on how many values are in `$screens`), plus dark classes for all
-// of them. It adds up quickly.
+// All the supported selectors used when adding generators to the build.
 //
-// Each generator can be enabled for base classes, pseudo classes, dark media queries, responsive
-// media queries, and responsive dark media queries for deep customization. If there is no list
-// specified for `responsive.dark`, then `dark` is used instead.
+
+$selectors: map.merge(
+  (
+    base: null,
+    // pseudo classes
+    hover: ":hover",
+    focus: ":focus",
+    focus-within: ":focus-within",
+    focus-visible: ":focus-visible",
+    active: ":active",
+    visited: ":visited",
+    target: ":target",
+    first: ":first-child",
+    last: ":last-child",
+    only: ":only-child",
+    odd: ":nth-child(odd)",
+    even: ":nth-child(even)",
+    first-of-type: ":first-of-type",
+    last-of-type: ":last-of-type",
+    only-of-type: ":only-of-type",
+    empty: ":empty",
+    disabled: ":disabled",
+    checked: ":checked",
+    indeterminate: ":indeterminate",
+    default: ":default",
+    required: ":required",
+    valid: ":valid",
+    invalid: ":invalid",
+    in-range: ":in-range",
+    out-of-range: ":out-of-range",
+    placeholder-shown: ":placeholder-shown",
+    autofill: ":autofill",
+    read-only: ":read-only",
+    rtl: ":dir(rtl)",
+    ltr: ":dir(ltr)",
+    // pseudo elements
+    before: "::before",
+    after: "::after",
+    first-letter: "::first-letter",
+    first-line: "::first-line",
+    marker: "::marker",
+    selection: "::selection",
+    file: "::file-selector-button",
+    placeholder: "::placeholder",
+    // attribute selectors
+    open: "[open]",
+  ),
+  map.get($extend, "selectors") or (),
+) !default;
+
+@if meta.type-of($selectors) != map {
+  @error "Expected `$selectors` to be a map";
+}
+
+//
+// A list of rule generators to include for each selector type. This helps cut down on file size
+// significantly since every class name in the rules will get a base class, a base dark class, a
+// class within a media query for for each of the 5 screen sizes (depending on how many values are
+// in `$screens`), plus dark classes for each of the media queries. It adds up quickly.
+//
+// See `$selectors` for a list of available selectors. To support dark classes, use the
+// `dark` selector, and responsive classes are under the `responsive` or individual `$screen`
+// selectors. Responsive dark classes can also be enabled for each screen size with the
+// `$screen.dark` selector.
+//
+// If a value is set to `inherit foo`, it will inherit the generators from the root list or the SSS
+// defaults if at the root. If a value is set to `true`, it will enable all generators for that
+// selector. If a value is set to `false`, it will disable all generators for that selector (which
+// can also be achieved by setting to an empty list with `[]`). Both `dark` and `responsive` can
+// be set to `inherit` to use the same generators as the base.
 //
 
 $generators: helpers.map-list-merge(
   (
     base: [],
-    dark: (
-      base: [],
-    ),
-    responsive: (
-      base: [],
-      dark: (
-        base: [],
-      ),
-    ),
+    dark: [],
+    responsive: [],
   ),
   map.get($extend, "generators") or ()
 ) !default;
 
-@if meta.type-of($generators) != map and
+@if
+  meta.type-of($generators) != map and
   // allow an empty list for disabling all generators,
   // since there is no easy way to create an empty map in sass
   (meta.type-of($generators) != list or list.length($generators) != 0) {

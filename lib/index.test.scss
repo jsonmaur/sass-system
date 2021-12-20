@@ -1,7 +1,7 @@
 @use "sass:map" as map;
 @use "./index" as index;
 
-@function test-prefix() {
+@function test-combine() {
   $cases: [
     (input: null, output: "")
     (input: "", output: "")
@@ -13,7 +13,7 @@
   ];
 
   @each $case in $cases {
-    $result: index.prefix(map.get($case, input));
+    $result: index.combine(map.get($case, input));
 
     @if $result != map.get($case, output) {
       @warn "Expected `#{map.get($case, output)}` but got `#{$result}`";

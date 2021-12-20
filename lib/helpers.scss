@@ -53,11 +53,13 @@
   @each $key, $value2 in $map2 {
     $value1: map.get($result, $key);
 
-    @if meta.type-of($value1) != meta.type-of($value2) or
+    @if
+      meta.type-of($value1) != meta.type-of($value2) or
       not map.has-key($result, $key) or
       not (meta.type-of($value1) == map and meta.type-of($value2) == map) {
 
-      @if (meta.type-of($value1) == list and meta.type-of($value2) == list) and
+      @if
+        (meta.type-of($value1) == list and meta.type-of($value2) == list) and
         (list.separator($value1) == list.separator($value2)) and
         (list.is-bracketed($value1) == list.is-bracketed($value2)) {
 

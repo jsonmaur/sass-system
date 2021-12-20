@@ -1,65 +1,17 @@
 @use "sass:list" as list;
 @use "sass:map" as map;
+@use "sass:meta" as meta;
 @use "config" as config;
 @use "generators" as generators;
+@use "helpers" as helpers;
 @use "media" as media;
 @use "normalize" as normalize;
-
-//
-// All the selectors available to be enabled for a generator.
-//
-$selectors: (
-  // pseudo classes
-  hover: ":hover",
-  focus: ":focus",
-  focus-within: ":focus-within",
-  focus-visible: ":focus-visible",
-  active: ":active",
-  visited: ":visited",
-  target: ":target",
-  first: ":first-child",
-  last: ":last-child",
-  only: ":only-child",
-  odd: ":nth-child(odd)",
-  even: ":nth-child(even)",
-  first-of-type: ":first-of-type",
-  last-of-type: ":last-of-type",
-  only-of-type: ":only-of-type",
-  empty: ":empty",
-  disabled: ":disabled",
-  checked: ":checked",
-  indeterminate: ":indeterminate",
-  default: ":default",
-  required: ":required",
-  valid: ":valid",
-  invalid: ":invalid",
-  in-range: ":in-range",
-  out-of-range: ":out-of-range",
-  placeholder-shown: ":placeholder-shown",
-  autofill: ":autofill",
-  read-only: ":read-only",
-  rtl: ":dir(rtl)",
-  ltr: ":dir(ltr)",
-  // pseudo elements
-  before: "::before",
-  after: "::after",
-  first-letter: "::first-letter",
-  first-line: "::first-line",
-  marker: "::marker",
-  selection: "::selection",
-  file: "::file-selector-button",
-  placeholder: "::placeholder",
-  // attribute selectors
-  open: "[open]",
-  rtl-attr: "[dir="rtl"]",
-  ltr-attr: "[dir="ltr"]",
-);
 
 //
 // Takes in a list of values and returns them each joined with the configured separator.
 // Return value will always have a trailing separator so it can be prefixed to other class names.
 //
-@function prefix($values) {
+@function combine($values) {
   $prefix: "";
 
   @each $value in $values {
@@ -74,38 +26,76 @@ $selectors: (
 //
 // Renders content within a dark mode media query or class depending on which is enabled.
 //
-@mixin dark-mode-content {
+@mixin dark-content($generators) {
+  $generators:
+    map.get($generators, dark) or
+    helpers.empty-map();
+
   @if config.$dark-mode == media {
     @include media.media-dark {
-      @content;
+      @content($generators);
     }
   }
 
   @if config.$dark-mode == class {
     .dark {
-      @content;
+      @content($generators);
     }
   }
 }
 
 //
-// Loops through each generator list and renders classes for each generator. Can be used with any
-// number of class prefixes.
+// Renders content within responsive media queries, as well as responsive dark media queries.
 //
-// For example, calling `@include generator-content(__, "foo", "bar")` will result in class names
-// such as `.foo\:bar\:classname:selector {}`.
+@mixin responsive-content {
+  @each $key, $value in config.$screens {
+    $generators:
+      map.get(config.$generators, $key) or
+      map.get(config.$generators, responsive) or
+      helpers.empty-map();
+
+    @include media.media-up-to($key) {
+      @content($generators, $key);
+
+      @include dark-content($generators) using ($-generators) {
+        @content($-generators, $key, dark);
+      }
+    }
+  }
+}
+
+//
+// Loops through each generator list and renders classes for each generator with optional class
+// prefixes. For example, calling `@include generator-content(_, "foo", "bar")` will result in
+// class names such as `.foo\:bar\:classname:selector {}`.
 //
 @mixin generator-content($generators, $prefixes...) {
-  @each $type, $enabled in $generators {
-    @if $type == base {
-      @include generators.render($enabled, prefix($prefixes));
-    }
+  $reserved: list.join([dark responsive], map.keys(config.$screens));
 
-    @else if map.get($selectors, $type) {
-      $prepend: prefix(list.append($prefixes, $type));
-      $append: map.get($selectors, $type);
+  @each $key, $value in $generators {
+    @if not list.index($reserved, $key) {
+      @if not list.index(map.keys(config.$selectors), $key) {
+        @error "`#{$key}` is not a supported selector for $generators";
+      }
 
-      @include generators.render($enabled, $prepend, $append);
+      @else if meta.type-of($value) == list {
+        // @include inherit-content($value) using ($-value) {
+        @if $key == base {
+          @include generators.render($value, combine($prefixes));
+        }
+
+        @else {
+          $prepend: combine(list.append($prefixes, $key));
+          $append: map.get(config.$selectors, $key);
+
+          @include generators.render($value, $prepend, $append);
+        }
+        // }
+      }
+
+      @else {
+        @error "`#{$value}` is not a supported value for $generators";
+      }
     }
   }
 }
@@ -120,22 +110,11 @@ $selectors: (
   }
 
   @include generator-content(config.$generators);
-
-  @include dark-mode-content {
-    @include generator-content(map.get(config.$generators, dark), dark);
+  @include dark-content(config.$generators) using ($-generators) {
+    @include generator-content($-generators, dark);
   }
 
-  @each $name, $value in config.$screens {
-    @include media.media-up-to($name) {
-      @include generator-content(map.get(config.$generators, responsive), $name);
-
-      @include dark-mode-content {
-        @if map.has-key(config.$generators, responsive, dark) {
-          @include generator-content(map.get(config.$generators, responsive, dark), dark, $name);
-        } @else {
-          @include generator-content(map.get(config.$generators, dark), dark, $name);
-        }
-      }
-    }
+  @include responsive-content using ($-generators, $-keys...) {
+    @include generator-content($-generators, $-keys...);
   }
 }

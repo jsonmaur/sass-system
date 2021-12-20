@@ -16,6 +16,10 @@ SSS is a highly customizable style system generator and utility-first CSS framew
 );
 ```
 
+## Generators
+
+Rather than include everything up front to be removed later, we add in rules as needed to keep the file size down.
+
 ## Reference
 
 | Rule                       | Classnames                                                        |

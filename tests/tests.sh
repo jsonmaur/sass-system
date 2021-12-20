@@ -1,8 +1,8 @@
 #! /bin/sh
 
 suite() {
-  . ./dark-class.test.sh
-  . ./dark-media.test.sh
+  . ./dark-mode.test.sh
+  . ./generators.test.sh
 }
 
 # Load shUnit2.
