@@ -200,7 +200,7 @@ Rather than include everything up front to be removed later, we add in rules as 
 | mix-blend-mode             |                                                                   |
 | object-fit                 |                                                                   |
 | object-position            |                                                                   |
-| opacity                    |                                                                   |
+| opacity                    | `.o-0` `.o-5` `.o-10` `.o-15` `.o-20` `.o-25` `.o-30` `.o-35` `.o-40` `.o-45` `.o-50` `.o-55` `.o-60` `.o-65` `.o-70` `.o-75` `.o-80` `.o-85` `.o-90` `.o-95` `.o-100` |
 | order                      |                                                                   |
 | orphans                    |                                                                   |
 | outline                    |                                                                   |

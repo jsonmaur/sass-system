@@ -13,6 +13,7 @@
 @use "generators/letter-spacing" as letter-spacing;
 @use "generators/line-height" as line-height;
 @use "generators/max-width" as max-width;
+@use "generators/opacity" as opacity;
 @use "generators/text-align" as text-align;
 @use "generators/text-decoration" as text-decoration;
 @use "generators/text-indent" as text-indent;
@@ -49,6 +50,7 @@ $-generators: [];
   @include with("letter-spacing") { @include letter-spacing.render($pre, $app); }
   @include with("line-height") { @include line-height.render($pre, $app); }
   @include with("max-width") { @include max-width.render($pre, $app); }
+  @include with("opacity") { @include opacity.render($pre, $app); }
   @include with("text-align") { @include text-align.render($pre, $app); }
   @include with("text-decoration") { @include text-decoration.render($pre, $app); }
   @include with("text-indent") { @include text-indent.render($pre, $app); }
