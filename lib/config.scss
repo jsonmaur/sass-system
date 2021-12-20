@@ -352,6 +352,7 @@ $selectors: map.merge(
 $generators: helpers.map-list-merge(
   (
     base: [],
+    hover: [],
     dark: [],
     responsive: [],
   ),

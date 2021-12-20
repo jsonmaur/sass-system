@@ -8,6 +8,8 @@
 
 A highly customizable style system generator and utility-first CSS framework for quickly building user interfaces. Built in Sass, for Sass. Similar to frameworks such as [Tailwind](https://tailwindcss.com) and [Tachyons](https://tachyons.io), but with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass).
 
+[![tests](https://github.com/maurandco/sss/actions/workflows/test.yml/badge.svg)](https://github.com/maurandco/sss/actions/workflows/test.yml)
+
 ## Usage
 
 ```sass
