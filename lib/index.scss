@@ -8,7 +8,33 @@
 @use "normalize" as normalize;
 
 //
+// Allows a generator to be set to `inherit foo bar baz` to inherit its generator list from
+// another generator elsewhere in the map (relative to the root). The previous example would
+// inherit the generators from `$generators.foo.bar.baz`. Generators can inherit from generators
+// that also inherit (they can recurse).
 //
+@mixin inherit-content($value) {
+  @if
+    list.nth($value, 1) == inherit and
+    list.separator($value) == space and
+    list.is-bracketed($value) == false {
+
+    $keys: helpers.list-shift($value);
+    $value: map.get(config.$generators, $keys...);
+
+    @if not $value {
+      @error "`#{meta.inspect($keys)}` was not found in the $generators";
+    }
+
+    @include inherit-content($value) using ($-value) {
+      @content($-value);
+    }
+  }
+
+  @else {
+    @content($value);
+  }
+}
 
 //
 // Renders content within a dark mode media query or class depending on which is enabled.
@@ -66,25 +92,25 @@
       }
 
       @else if meta.type-of($value) == list {
-        // @include inherit-content($value) using ($-value) {
-        @if $key == base {
-          $prepend: helpers.combine($prefixes, $separator: config.$separator);
+        @include inherit-content($value) using ($-value) {
+          @if $key == base {
+            $prepend: helpers.combine($prefixes, $separator: config.$separator);
 
-          @include generators.render($value, $prepend);
-        }
-
-        @else {
-          $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
-          $append: map.get(config.$selectors, $key);
-
-          @if meta.type-of($key) == list {
-            $k: helpers.combine($key, $separator: config.$separator, $trailing: false);
-            $prepend: helpers.combine(list.append($prefixes, $k), $separator: config.$separator);
+            @include generators.render($value, $prepend);
           }
 
-          @include generators.render($value, $prepend, $append);
+          @else {
+            $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
+            $append: map.get(config.$selectors, $key);
+
+            @if meta.type-of($key) == list {
+              $k: helpers.combine($key, $separator: config.$separator, $trailing: false);
+              $prepend: helpers.combine(list.append($prefixes, $k), $separator: config.$separator);
+            }
+
+            @include generators.render($value, $prepend, $append);
+          }
         }
-        // }
       }
 
       @else {
