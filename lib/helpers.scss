@@ -1,3 +1,4 @@
+@use "sass:color" as color;
 @use "sass:list" as list;
 @use "sass:map" as map;
 @use "sass:meta" as meta;
@@ -130,4 +131,45 @@
   }
 
   @return $result;
+}
+
+//
+// Generate darker and ligher shades of each color.
+//
+@function color-variants($colors) {
+  @if meta.type-of($colors) != map {
+    @error "Expected a map, but got a #{meta.type-of($colors)}";
+  }
+
+  @each $key, $value in $colors {
+    $variants: empty-map();
+    $base-class: #{$key}-500;
+
+    @for $i from 1 through 4 { // 80%, 60%, 40%, 20%
+      $class: #{$key}-#{$i}00;
+      $mixed: color.mix(black, $value, $weight: 100 - ($i * 20%));
+      $variants: map.set($variants, $class, $mixed);
+
+      @if $mixed == $value {
+        @warn "Color `#{$value}` is too dark, unable to generate darker shades. `.#{$class}` will be the same as `.#{$base-class}`.";
+      }
+    }
+
+    $variants: map.set($variants, $base-class, $value);
+
+    @for $i from 6 through 9 { // 30%, 50%, 70%, 90%
+      $class: #{$key}-#{$i}00;
+      $mixed: color.mix(white, $value, $weight: 30 + (($i - 6) * 20%));
+      $variants: map.set($variants, $class, $mixed);
+
+      @if $mixed == $value {
+        @warn "Color `#{$value}` is too light, unable to generate lighter tints. `.#{$class}` will be the same as `.#{$base-class}`.";
+      }
+    }
+
+    $colors: map.remove($colors, $key); // remove original color key without scale suffix
+    $colors: map.merge($colors, $variants);
+  }
+
+  @return $colors;
 }

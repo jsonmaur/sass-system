@@ -1,7 +1,8 @@
+@use "sass:list" as list;
 @use "../config" as config;
 
 @mixin render($pre, $app) {
-  @each $key, $value in config.$colors {
+  @each $key, $value in list.join(config.$colors, config.$auto-colors) {
     .#{$pre}bg-#{"" + $key}#{$app} { background-color: $value; }
   }
 }

@@ -9,6 +9,7 @@ testDarkModeMedia() {
   \$normalize: false,
   \$dark-mode: media,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$generators: (
     dark: (
       base: [background-color],
@@ -46,6 +47,7 @@ testDarkModeClass() {
   \$normalize: false,
   \$dark-mode: class,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$generators: (
     dark: (
       base: [background-color],

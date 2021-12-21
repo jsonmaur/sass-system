@@ -267,13 +267,39 @@ $box-shadows: map.merge(
 
 $colors: map.merge(
   (
-    white: #FFFFFF,
     black: #000000,
+    white: #ffffff,
   ),
   map.get($extend, "colors") or ()
 ) !default;
 
 @if helpers.type(map, $colors, "$colors") {}
+
+//
+// A list of colors that have auto-generated variations. By default, it will generate 4 darker
+// variations and 4 lighter variations for each color.
+//
+
+$auto-colors: helpers.color-variants(
+  map.merge(
+    (
+      gray: #adb5bd,
+      cyan: #0dcaf0,
+      teal: #20c997,
+      green: #198754,
+      yellow: #ffc107,
+      orange: #fd7e14,
+      red: #dc3545,
+      pink: #d63384,
+      purple: #6f42c1,
+      indigo: #6610f2,
+      blue: #0d6efd,
+    ),
+    map.get($extend, "auto-colors") or ()
+  )
+) !default;
+
+@if helpers.type(map, $auto-colors, "$auto-colors") {}
 
 //
 // All the supported selectors used when adding generators to the build.
@@ -348,10 +374,41 @@ $selectors: map.merge(
 
 $generators: helpers.map-list-merge(
   (
-    base: [],
+    base: [
+      background-color
+      box-shadow
+      box-sizing
+      color
+      font-family
+      font-size
+      font-style
+      font-variant
+      font-weight
+      letter-spacing
+      line-height
+      margin
+      max-width
+      opacity
+      padding
+      text-align
+      text-decoration
+      text-indent
+      text-overflow
+      text-transform
+      vertical-align
+      white-space
+      width
+    ],
     hover: [],
-    dark: [],
-    responsive: [],
+    dark: (
+      base: [],
+    ),
+    responsive: (
+      base: [],
+      dark: (
+        base: [],
+      ),
+    ),
   ),
   map.get($extend, "generators") or ()
 ) !default;

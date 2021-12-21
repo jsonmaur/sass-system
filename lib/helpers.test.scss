@@ -148,3 +148,26 @@
 
   @return true;
 }
+
+@function test-color-variants() {
+  $result: helpers.color-variants((gray: #adb5bd));
+
+  $expected: (
+    gray-100: #232426,
+    gray-200: #45484c,
+    gray-300: #686d71,
+    gray-400: #8a9197,
+    gray-500: #adb5bd,
+    gray-600: #c6cbd1,
+    gray-700: #d6dade,
+    gray-800: #e6e9eb,
+    gray-900: #f7f8f8,
+  );
+
+  @if $result != $expected {
+    @warn "Expected `#{$expected}` but got `#{$result}`";
+    @return false;
+  }
+
+  @return true;
+}

@@ -15,6 +15,7 @@ testGenerator() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$generators: (
     base: [background-color color],
     hover: [background-color],
@@ -30,7 +31,7 @@ EOF
   background-color: black;
 }
 
-.current {
+.current-color {
   color: currentColor;
 }
 
@@ -60,6 +61,7 @@ testGeneratorDark() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$generators: (
     base: [background-color],
     dark: (
@@ -96,6 +98,7 @@ testGeneratorResponsive() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -131,6 +134,7 @@ testGeneratorResponsiveDark() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -179,6 +183,7 @@ testGeneratorResponsiveScreen() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -217,6 +222,7 @@ testGeneratorCustomSelector() {
 @use "../index" with (
   \$normalize: false,
   \$colors: (black: black),
+  \$auto-colors: (),
   \$selectors: (
     foo bar: ":foo:bar",
   ),

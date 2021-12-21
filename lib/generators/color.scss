@@ -1,9 +1,10 @@
+@use "sass:list" as list;
 @use "../config" as config;
 
 @mixin render($pre, $app) {
-  .#{$pre}current#{$app} { color: currentColor; }
+  .#{$pre}current-color#{$app} { color: currentColor; }
 
-  @each $key, $value in config.$colors {
+  @each $key, $value in list.join(config.$colors, config.$auto-colors) {
     .#{$pre}#{"" + $key}#{$app} { color: $value; }
   }
 }
