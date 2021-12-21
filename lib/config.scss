@@ -1,14 +1,21 @@
-@use "sass:map" as map;
-@use "helpers" as helpers;
+@use "sass:map";
+@use "helpers";
 
 //
-// Whether or not to import the opinionated normalize rules.
-// Can be set to `true` or `false`.
+// Append custom values to config maps/lists rather than replace them.
+//
+
+$extend: helpers.empty-map() !default;
+
+@if helpers.check-type(map, $extend, "$extend") {}
+
+//
+// Import the opinionated normalize rules.
 //
 
 $normalize: true !default;
 
-@if helpers.type(bool, $normalize, "$normalize") {}
+@if helpers.check-type(bool, $normalize, "$normalize") {}
 
 //
 // String that gets prefixed to every generated class name.
@@ -16,7 +23,7 @@ $normalize: true !default;
 
 $class-prefix: "" !default;
 
-@if helpers.type(string, $class-prefix, "$class-prefix") {}
+@if helpers.check-type(string, $class-prefix, "$class-prefix") {}
 
 //
 // String that gets used to separate base classes from advanced/responsive selectors.
@@ -24,27 +31,19 @@ $class-prefix: "" !default;
 
 $separator: "\\:" !default;
 
-@if helpers.type(string, $separator, "$separator") {}
+@if helpers.check-type(string, $separator, "$separator") {}
 
 //
-// Whether to enable dark mode using a media query or a body class.
+// Enable dark mode using a media query or a body class.
 // Can be set to `media` or `class`.
 //
 
 $dark-mode: media !default;
 
-@if helpers.type(string, $dark-mode, "$dark-mode") {}
+@if helpers.check-type(string, $dark-mode, "$dark-mode") {}
 
 //
-// Used to append custom values to variable maps rather than replace them.
-//
-
-$extend: helpers.empty-map() !default;
-
-@if helpers.type(map, $extend, "$extend") {}
-
-//
-// All the supported screen sizes used to generate responsive mixins and classes.
+// Named screen size values used to generate responsive mixins and classes.
 //
 
 $screens: map.merge(
@@ -58,10 +57,10 @@ $screens: map.merge(
   map.get($extend, "screens") or ()
 ) !default;
 
-@if helpers.type(map, $screens, "$screens") {}
+@if helpers.check-type(map, $screens, "$screens") {}
 
 //
-// All the supported widths used to generate generic containers.
+// Named width values used for paragraph and other containers.
 //
 
 $measures: map.merge(
@@ -73,10 +72,10 @@ $measures: map.merge(
   map.get($extend, "measures") or ()
 ) !default;
 
-@if helpers.type(map, $measures, "$measures") {}
+@if helpers.check-type(map, $measures, "$measures") {}
 
 //
-// All the supported spacing values used for margin and padding.
+// Spacing values used for margin and padding. Classes correspond with index in list.
 //
 
 $spacing: helpers.list-merge(
@@ -93,11 +92,10 @@ $spacing: helpers.list-merge(
   map.get($extend, "spacing") or ()
 ) !default;
 
-@if helpers.type(list, $spacing, "$spacing") {}
+@if helpers.check-type(list, $spacing, "$spacing") {}
 
 //
-// Allows you to specify a primary font for each type of font stack,
-// without having to redefine the entire font stack from scratch.
+// Primary fonts for each type of font stack, to avoid redefining the font stacks from scratch.
 //
 
 $primary-fonts: (
@@ -106,10 +104,10 @@ $primary-fonts: (
   monospace: null,
 ) !default;
 
-@if helpers.type(map, $primary-fonts, "$primary-fonts") {}
+@if helpers.check-type(map, $primary-fonts, "$primary-fonts") {}
 
 //
-// All the supported font families, with the primary font prepended if it exists.
+// Named values for font family with the associated primary font prepended if it exists.
 //
 
 $font-stacks: map.merge(
@@ -163,10 +161,10 @@ $font-stacks: map.merge(
   map.get($extend, "font-stacks") or ()
 ) !default;
 
-@if helpers.type(map, $font-stacks, "$font-stacks") {}
+@if helpers.check-type(map, $font-stacks, "$font-stacks") {}
 
 //
-// All the supported font weights.
+// Named values for font weight.
 //
 
 $font-weights: map.merge(
@@ -184,10 +182,10 @@ $font-weights: map.merge(
   map.get($extend, "font-weights") or ()
 ) !default;
 
-@if helpers.type(map, $font-weights, "$font-weights") {}
+@if helpers.check-type(map, $font-weights, "$font-weights") {}
 
 //
-// All the supported font sizes.
+// Named values for font size.
 //
 
 $font-sizes: map.merge(
@@ -204,10 +202,10 @@ $font-sizes: map.merge(
   map.get($extend, "font-sizes") or ()
 ) !default;
 
-@if helpers.type(map, $font-sizes, "$font-sizes") {}
+@if helpers.check-type(map, $font-sizes, "$font-sizes") {}
 
 //
-// All the supported line spacings.
+// Named values for font leading (line spacing).
 //
 
 $font-leading: map.merge(
@@ -219,10 +217,10 @@ $font-leading: map.merge(
   map.get($extend, "font-leading") or ()
 ) !default;
 
-@if helpers.type(map, $font-leading, "$font-leading") {}
+@if helpers.check-type(map, $font-leading, "$font-leading") {}
 
 //
-// All supported letter spacings.
+// Named values for font tracking (letter spacing).
 //
 
 $font-tracking: map.merge(
@@ -234,18 +232,18 @@ $font-tracking: map.merge(
   map.get($extend, "font-tracking") or ()
 ) !default;
 
-@if helpers.type(map, $font-tracking, "$font-tracking") {}
+@if helpers.check-type(map, $font-tracking, "$font-tracking") {}
 
 //
-// Value used for text indent classes.
+// Value used for text indentation.
 //
 
 $text-indent: 1em !default;
 
-@if helpers.type(number, $text-indent, "$text-indent") {}
+@if helpers.check-type(number, $text-indent, "$text-indent") {}
 
 //
-// All supported box shadows.
+// Named values for box shadow.
 //
 
 $box-shadows: map.merge(
@@ -259,10 +257,11 @@ $box-shadows: map.merge(
   map.get($extend, "box-shadows") or ()
 ) !default;
 
-@if helpers.type(map, $box-shadows, "$box-shadows") {}
+@if helpers.check-type(map, $box-shadows, "$box-shadows") {}
 
 //
-// All supported colors.
+// Named values for color. The color classes are not prefixed with anything, so be careful while
+// naming to avoid conflicts with other generated classes. e.g. `black` creates a `.black` class.
 //
 
 $colors: map.merge(
@@ -273,11 +272,13 @@ $colors: map.merge(
   map.get($extend, "colors") or ()
 ) !default;
 
-@if helpers.type(map, $colors, "$colors") {}
+@if helpers.check-type(map, $colors, "$colors") {}
 
 //
-// A list of colors that have auto-generated variations. By default, it will generate 4 darker
-// variations and 4 lighter variations for each color.
+// Named values for colors that have auto-generated variations. By default, it will generate 4
+// darker variations and 4 lighter variations of each color for a total of 9. The base color will
+// exist as `.[name]-500` with `.[name]-[100-400]` for darker variations and `.[name]-[600-900]`
+// for lighter variations.
 //
 
 $auto-colors: helpers.color-variants(
@@ -299,10 +300,13 @@ $auto-colors: helpers.color-variants(
   )
 ) !default;
 
-@if helpers.type(map, $auto-colors, "$auto-colors") {}
+@if helpers.check-type(map, $auto-colors, "$auto-colors") {}
 
 //
-// All the supported selectors used when adding generators to the build.
+// Named values for selectors that can be used when adding generators, and the associated suffix
+// for the class. The selector name can be a space-separated list for nested selectors. e.g.
+// `hover disabled: ":hover:disabled"` will create `.hover\:disabled\:classname:hover:disabled`.
+// Using a space in the key name is to ensure the configured `$separator` is used in the class.
 //
 
 $selectors: map.merge(
@@ -358,18 +362,21 @@ $selectors: map.merge(
   map.get($extend, "selectors") or (),
 ) !default;
 
-@if helpers.type(map, $selectors, "$selectors") {}
+@if helpers.check-type(map, $selectors, "$selectors") {}
 
 //
-// A list of rule generators to include for each selector type. This helps cut down on file size
-// significantly since every class name in the rules will get a base class, a base dark class, a
-// class within a media query for for each of the 5 screen sizes (depending on how many values are
-// in `$screens`), plus dark classes for each of the media queries. It adds up quickly.
+// Classname generators to include for each selector type. Deciding what to include before
+// building rather than removing afterwards cuts down on build system complexity, and helps cut
+// down the final CSS file size. Since every class name could potentially have a base class, a
+// base dark class, classes within media queries for for each of the 5 screen sizes (depending on
+// how many screens are configured), and dark classes for each of those media queries. It adds up
+// very quickly, and we want to keep stuff out of the build unless it's needed.
 //
-// See `$selectors` for a list of available selectors. To support dark classes, use the
-// `dark` selector, and responsive classes are under the `responsive` or individual `$screen`
-// selectors. Nested dark classes can also be enabled for responsive with the `responsive.dark`
-// or `$screen.dark` selectors.
+// See `$selectors` for a list of available selectors. Use the `dark` selector to support dark
+// classes, and the `responsive` selector or individual screen selectors (such as `sm` and `md`)
+// for responsive classes. Responsive dark classes can be enabled with the nested `dark` selector
+// within `responsive` or the individual screen selectors. To avoid copying the same lists over
+// and over if multiple selectors are used, user can use a Sass variable.
 //
 
 $generators: helpers.map-list-merge(
@@ -413,4 +420,4 @@ $generators: helpers.map-list-merge(
   map.get($extend, "generators") or ()
 ) !default;
 
-@if helpers.type(map, $generators, "$generators") {}
+@if helpers.check-type(map, $generators, "$generators") {}

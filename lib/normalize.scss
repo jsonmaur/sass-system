@@ -1,7 +1,6 @@
 //
 // Some opinionated normalization classes. Inspired by https://tailwindcss.com/docs/preflight
 //
-
 @mixin custom {
   html {
     scroll-behavior: smooth;
@@ -75,7 +74,6 @@
 //
 // modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize
 //
-
 @mixin modern {
   /*
   Document

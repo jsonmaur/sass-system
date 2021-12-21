@@ -13,7 +13,7 @@ build: #: build the final output file
 test: test-unit test-integration #: run testing suite
 
 test-unit: #: run the unit tests
-	@sass tests/tests.scss
+	@sass test/test-helper.scss
 
 test-integration: #: run the integration tests
-	@cd tests && sh ./tests.sh
+	@cd test && sh ./test-integration.sh

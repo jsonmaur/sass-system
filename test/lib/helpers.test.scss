@@ -1,0 +1,199 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "../../lib/helpers";
+
+@function test-empty-map() {
+  $result: helpers.empty-map();
+
+  @if meta.type-of($result) != map or list.length(map.keys($result)) > 0 {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-check-type() {
+  $cases: [
+    (input: [number, 0], output: true)
+    (input: [string, ""], output: true)
+    (input: [map, ()], output: true)
+    (input: [map, (foo: bar)], output: true)
+  ];
+
+  @each $case in $cases {
+    $result: helpers.check-type(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-list-shift() {
+  $cases: (
+    (input: [[1 2 3 4]], output: [2 3 4])
+    (input: [[1 2 3 4], 2], output: [3 4])
+  );
+
+  @each $case in $cases {
+    $result: helpers.list-shift(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-list-merge() {
+  $cases: [
+    (input: [[1 2 3], []], output: [1 2 3])
+    (input: [[1 2 3], [4 5 6]], output: [1 2 3 4 5 6])
+  ];
+
+  @each $case in $cases {
+    $result: helpers.list-merge(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-map-list-merge() {
+  $cases: (
+    (
+      input: [
+        (
+          foo: foo,
+          bar: (
+            qux: qux,
+            baz: [1 2 3],
+            quux: (
+              quuz: quuz,
+              corge: [one two],
+              foo: bar baz,
+            )
+          ),
+        ),
+        (
+          qux: qux,
+          bar: (
+            foo: foo,
+            baz: [4 5 6],
+            quux: (
+              quuz: quux,
+              corge: [three],
+              foo: [bar],
+            ),
+          ),
+        ),
+      ],
+      output: (
+        foo: foo,
+        qux: qux,
+        bar: (
+          foo: foo,
+          qux: qux,
+          baz: [1 2 3 4 5 6],
+          quux: (
+            quuz: quux,
+            corge: [one two three],
+            foo: [bar],
+          ),
+        ),
+      ),
+    ),
+  );
+
+  @each $case in $cases {
+    $result: helpers.map-list-merge(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-combine() {
+  $cases: [
+    (input: [null], output: "")
+    (input: [""], output: "")
+    (input: [[]], output: "")
+    (input: [[null]], output: "")
+    (input: [[""]], output: "")
+    (input: [[foo]], output: "foo")
+    (input: [(foo,)], output: "foo")
+    (input: [[foo bar]], output: "foobar")
+    (input: [[foo]], separator: "_", output: "foo_")
+    (input: [[foo bar]], separator: "_", output: "foo_bar_")
+    (input: [(foo bar)], separator: "_", output: "foo_bar_")
+    (input: [[foo bar]], separator: "_", trailing: false, output: "foo_bar")
+    (input: [[foo bar]], separator: "-", trailing: true, output: "foo-bar-")
+  ];
+
+  @each $case in $cases {
+    $result: helpers.combine(
+      map.get($case, input)...,
+      $separator: map.get($case, separator),
+      $trailing: map.get($case, trailing),
+    );
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+@function test-color-variants() {
+  $cases: (
+    (
+      input: [(foobar: #555555)],
+      output: (
+        foobar-100: #111111,
+        foobar-200: #222222,
+        foobar-300: #333333,
+        foobar-400: #444444,
+        foobar-500: #555555,
+        foobar-600: #888888,
+        foobar-700: #aaaaaa,
+        foobar-800: #cccccc,
+        foobar-900: #eeeeee,
+      ),
+    ),
+    (
+      input: [(gray: #adb5bd)],
+      output: (
+        gray-100: #232426,
+        gray-200: #45484c,
+        gray-300: #686d71,
+        gray-400: #8a9197,
+        gray-500: #adb5bd,
+        gray-600: #c6cbd1,
+        gray-700: #d6dade,
+        gray-800: #e6e9eb,
+        gray-900: #f7f8f8,
+      ),
+    ),
+  );
+
+  @each $case in $cases {
+    $result: helpers.color-variants(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}

@@ -1,26 +1,33 @@
-@use "sass:color" as color;
-@use "sass:list" as list;
-@use "sass:map" as map;
-@use "sass:meta" as meta;
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
 
 //
-// Check the type of a variable, while allowing an empty list in place of a map for the sake of
+// Weird way to make an empty map (ಠ_ಠ)
+//
+@function empty-map() {
+  @return map.remove((x: x), x);
+}
+
+//
+// Check the type of a variable while allowing an empty list in place of a map for the sake of
 // simplicity. e.g. If you want to disable something in the config, you can simply use `()`
-// instead of `helpers.empty-map()`.
+// instead of the annoying `helpers.empty-map()`.
 //
-@function type($expected-type, $value, $name: null) {
-  $type: meta.type-of($value);
-  $message: "Expected a #{$expected-type}, got a #{$type}";
-
-  @if $name {
-    $message: "Expected `#{$name}` to be a #{$expected-type}, got a #{$type}";
+@function check-type($expected, $value, $name: null) {
+  @if meta.type-of($expected) != string {
+    @error "`check-type` expects a type as the first argument";
   }
 
-  @if $type != $expected-type {
-    @if
-      $expected-type == map and
-      ($type == list and list.length($value) == 0) {
+  $type: meta.type-of($value);
+  $message: "Expected a #{$expected}, got a #{$type}";
+  @if $name {
+    $message: "Expected `#{$name}` to be a #{$expected}, got a #{$type}";
+  }
 
+  @if $type != $expected {
+    @if $expected == map and ($type == list and list.length($value) == 0) {
       @return true;
     }
 
@@ -31,17 +38,14 @@
 }
 
 //
-// Weird way to make an empty map (ಠ_ಠ)
-//
-@function empty-map() {
-  @return map.remove((x: x), x);
-}
-
-//
 // Removes items from the beginning of a list
 //
 @function list-shift($list, $count: 1) {
   $result: [];
+
+  @if meta.type-of($list) != list {
+    @error "`list-shift` expected a list, got #{meta.type-of($list)}";
+  }
 
   @for $i from $count + 1 through list.length($list) {
     $result: list.append($result, list.nth($list, $i));
@@ -57,10 +61,10 @@
   $result: $list1;
 
   @if meta.type-of($list1) != list {
-    @error "list-merge expected a list, got #{meta.type-of($list1)}";
+    @error "`list-merge` expected a list, got #{meta.type-of($list1)}";
   }
   @if meta.type-of($list2) != list {
-    @error "list-merge expected a list, got #{meta.type-of($list2)}";
+    @error "`list-merge` expected a list, got #{meta.type-of($list2)}";
   }
 
   @each $value in $list2 {
@@ -77,6 +81,13 @@
 //
 @function map-list-merge($map1, $map2) {
   $result: $map1;
+
+  @if meta.type-of($map1) != map {
+    @error "`map-list-merge` expected a map, got #{meta.type-of($map1)}";
+  }
+  @if meta.type-of($map2) != map {
+    @error "`map-list-merge` expected a map, got #{meta.type-of($map2)}";
+  }
 
   @each $key, $value2 in $map2 {
     $value1: map.get($result, $key);
@@ -104,8 +115,10 @@
 }
 
 //
-// Takes in a list of values and returns them each joined with the configured separator.
-// Return value will always have a trailing separator so it can be prefixed to other class names.
+// Takes in a list of values and some options, and returns each value joined into one string.
+// If `$separator` is passed, it is used to join the values. If `$trailing` is passed, the
+// resulting string will have a trailing separator (this is useful so the result can be prefixed
+// to other classnames without any hassle).
 //
 @function combine($values, $opts...) {
   $opts: meta.keywords($opts);
@@ -121,9 +134,7 @@
       @if $value != null and $value != "" {
         @if $i >= list.length($values) and map.get($opts, trailing) == false {
           $result: $result + $value;
-        }
-
-        @else {
+        } @else {
           $result: $result + $value + map.get($opts, separator);
         }
       }
@@ -134,40 +145,42 @@
 }
 
 //
-// Generate darker and ligher shades of each color.
+// Generate darker and ligher colors for each color in a map. 4 variants of each for a total of 9.
 //
 @function color-variants($colors) {
   @if meta.type-of($colors) != map {
-    @error "Expected a map, but got a #{meta.type-of($colors)}";
+    @error "`color-variants` expected a map, got #{meta.type-of($colors)}";
   }
 
   @each $key, $value in $colors {
     $variants: empty-map();
-    $base-class: #{$key}-500;
+    $name-base: #{$key}-500;
 
     @for $i from 1 through 4 { // 80%, 60%, 40%, 20%
-      $class: #{$key}-#{$i}00;
+      $name: #{$key}-#{$i}00;
       $mixed: color.mix(black, $value, $weight: 100 - ($i * 20%));
-      $variants: map.set($variants, $class, $mixed);
+      $variants: map.set($variants, $name, $mixed);
 
       @if $mixed == $value {
-        @warn "Color `#{$value}` is too dark, unable to generate darker shades. `.#{$class}` will be the same as `.#{$base-class}`.";
+        @warn "Color `#{$value}` is too dark, unable to generate darker shades. `.#{$name}` will be the same as `.#{$name-base}`.";
       }
     }
 
-    $variants: map.set($variants, $base-class, $value);
+    // add original color with suffix
+    $variants: map.set($variants, $name-base, $value);
 
     @for $i from 6 through 9 { // 30%, 50%, 70%, 90%
-      $class: #{$key}-#{$i}00;
+      $name: #{$key}-#{$i}00;
       $mixed: color.mix(white, $value, $weight: 30 + (($i - 6) * 20%));
-      $variants: map.set($variants, $class, $mixed);
+      $variants: map.set($variants, $name, $mixed);
 
       @if $mixed == $value {
-        @warn "Color `#{$value}` is too light, unable to generate lighter tints. `.#{$class}` will be the same as `.#{$base-class}`.";
+        @warn "Color `#{$value}` is too light, unable to generate lighter tints. `.#{$name}` will be the same as `.#{$name-base}`.";
       }
     }
 
-    $colors: map.remove($colors, $key); // remove original color key without scale suffix
+    // remove original color without suffix
+    $colors: map.remove($colors, $key);
     $colors: map.merge($colors, $variants);
   }
 

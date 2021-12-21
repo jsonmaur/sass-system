@@ -1,11 +1,11 @@
-@use "sass:list" as list;
-@use "sass:map" as map;
-@use "sass:meta" as meta;
-@use "config" as config;
-@use "generators" as generators;
-@use "helpers" as helpers;
-@use "media" as media;
-@use "normalize" as normalize;
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "mixins/media";
+@use "config";
+@use "generators";
+@use "helpers";
+@use "normalize";
 
 //
 // Renders content within a dark mode media query or class depending on which is enabled.
@@ -50,8 +50,8 @@
 
 //
 // Loops through each generator list and renders classes for each generator with optional class
-// prefixes. For example, calling `@include generator-content(_, "foo", "bar")` will result in
-// class names such as `.foo\:bar\:classname:selector {}`.
+// prefixes. For example, calling `@include generator-content([], "foo", "bar")` will result in
+// classnames such as `.foo\:bar\:classname:selector {}`.
 //
 @mixin generator-content($generators, $prefixes...) {
   $reserved: list.join([dark responsive], map.keys(config.$screens));
@@ -60,16 +60,12 @@
     @if not list.index($reserved, $key) {
       @if not list.index(map.keys(config.$selectors), $key) {
         @error "`#{$key}` is not a supported selector for $generators";
-      }
-
-      @else if meta.type-of($value) == list {
+      } @else if meta.type-of($value) == list {
         @if $key == base {
           $prepend: helpers.combine($prefixes, $separator: config.$separator);
 
           @include generators.render($value, $prepend);
-        }
-
-        @else {
+        } @else {
           $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
           $append: map.get(config.$selectors, $key);
 
@@ -80,9 +76,7 @@
 
           @include generators.render($value, $prepend, $append);
         }
-      }
-
-      @else {
+      } @else {
         @error "`#{$value}` is not a supported value for $generators";
       }
     }

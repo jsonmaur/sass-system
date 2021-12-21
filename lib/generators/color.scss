@@ -1,5 +1,5 @@
-@use "sass:list" as list;
-@use "../config" as config;
+@use "sass:list";
+@use "../config";
 
 @mixin render($pre, $app) {
   .#{$pre}current-color#{$app} { color: currentColor; }
