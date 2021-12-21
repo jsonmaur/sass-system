@@ -1,6 +1,4 @@
-@use "sass:list" as list;
 @use "sass:map" as map;
-@use "sass:meta" as meta;
 @use "helpers" as helpers;
 
 //
@@ -10,9 +8,7 @@
 
 $normalize: true !default;
 
-@if meta.type-of($normalize) != bool {
-  @error "Expected `$normalize` to be a bool";
-}
+@if helpers.type(bool, $normalize, "$normalize") {}
 
 //
 // String that gets prefixed to every generated class name.
@@ -20,9 +16,7 @@ $normalize: true !default;
 
 $class-prefix: "" !default;
 
-@if meta.type-of($class-prefix) != string {
-  @error "Expected `$class-prefix` to be a string";
-}
+@if helpers.type(string, $class-prefix, "$class-prefix") {}
 
 //
 // String that gets used to separate base classes from advanced/responsive selectors.
@@ -30,9 +24,7 @@ $class-prefix: "" !default;
 
 $separator: "\\:" !default;
 
-@if meta.type-of($separator) != string {
-  @error "Expected `$separator` to be a string";
-}
+@if helpers.type(string, $separator, "$separator") {}
 
 //
 // Whether to enable dark mode using a media query or a body class.
@@ -41,9 +33,7 @@ $separator: "\\:" !default;
 
 $dark-mode: media !default;
 
-@if meta.type-of($dark-mode) != string {
-  @error "Expected `$dark-mode` to be a string";
-}
+@if helpers.type(string, $dark-mode, "$dark-mode") {}
 
 //
 // Used to append custom values to variable maps rather than replace them.
@@ -51,9 +41,7 @@ $dark-mode: media !default;
 
 $extend: helpers.empty-map() !default;
 
-@if meta.type-of($extend) != map {
-  @error "Expected `$extend` to be a map";
-}
+@if helpers.type(map, $extend, "$extend") {}
 
 //
 // All the supported screen sizes used to generate responsive mixins and classes.
@@ -70,9 +58,7 @@ $screens: map.merge(
   map.get($extend, "screens") or ()
 ) !default;
 
-@if meta.type-of($screens) != map {
-  @error "Expected `$screens` to be a map";
-}
+@if helpers.type(map, $screens, "$screens") {}
 
 //
 // All the supported widths used to generate generic containers.
@@ -87,9 +73,7 @@ $measures: map.merge(
   map.get($extend, "measures") or ()
 ) !default;
 
-@if meta.type-of($measures) != map {
-  @error "Expected `$measures` to be a map";
-}
+@if helpers.type(map, $measures, "$measures") {}
 
 //
 // All the supported spacing values used for margin and padding.
@@ -109,9 +93,7 @@ $spacing: helpers.list-merge(
   map.get($extend, "spacing") or ()
 ) !default;
 
-@if meta.type-of($spacing) != list {
-  @error "Expected `$spacing` to be a list";
-}
+@if helpers.type(list, $spacing, "$spacing") {}
 
 //
 // Allows you to specify a primary font for each type of font stack,
@@ -124,9 +106,7 @@ $primary-fonts: (
   monospace: null,
 ) !default;
 
-@if meta.type-of($primary-fonts) != map {
-  @error "Expected `$primary-fonts` to be a map";
-}
+@if helpers.type(map, $primary-fonts, "$primary-fonts") {}
 
 //
 // All the supported font families, with the primary font prepended if it exists.
@@ -183,9 +163,7 @@ $font-stacks: map.merge(
   map.get($extend, "font-stacks") or ()
 ) !default;
 
-@if meta.type-of($font-stacks) != map {
-  @error "Expected `$font-stacks` to be a map";
-}
+@if helpers.type(map, $font-stacks, "$font-stacks") {}
 
 //
 // All the supported font weights.
@@ -206,9 +184,7 @@ $font-weights: map.merge(
   map.get($extend, "font-weights") or ()
 ) !default;
 
-@if meta.type-of($font-weights) != map {
-  @error "Expected `$font-weights` to be a map";
-}
+@if helpers.type(map, $font-weights, "$font-weights") {}
 
 //
 // All the supported font sizes.
@@ -228,9 +204,7 @@ $font-sizes: map.merge(
   map.get($extend, "font-sizes") or ()
 ) !default;
 
-@if meta.type-of($font-sizes) != map {
-  @error "Expected `$font-sizes` to be a map";
-}
+@if helpers.type(map, $font-sizes, "$font-sizes") {}
 
 //
 // All the supported line spacings.
@@ -245,9 +219,7 @@ $font-leading: map.merge(
   map.get($extend, "font-leading") or ()
 ) !default;
 
-@if meta.type-of($font-leading) != map {
-  @error "Expected `$font-leading` to be a map";
-}
+@if helpers.type(map, $font-leading, "$font-leading") {}
 
 //
 // All supported letter spacings.
@@ -262,9 +234,7 @@ $font-tracking: map.merge(
   map.get($extend, "font-tracking") or ()
 ) !default;
 
-@if meta.type-of($font-tracking) != map {
-  @error "Expected `$font-tracking` to be a map";
-}
+@if helpers.type(map, $font-tracking, "$font-tracking") {}
 
 //
 // Value used for text indent classes.
@@ -272,9 +242,7 @@ $font-tracking: map.merge(
 
 $text-indent: 1em !default;
 
-@if meta.type-of($text-indent) != number {
-  @error "Expected `$text-indent` to be a number";
-}
+@if helpers.type(number, $text-indent, "$text-indent") {}
 
 //
 // All supported box shadows.
@@ -291,9 +259,7 @@ $box-shadows: map.merge(
   map.get($extend, "box-shadows") or ()
 ) !default;
 
-@if meta.type-of($box-shadows) != map {
-  @error "Expected `$box-shadows` to be a map";
-}
+@if helpers.type(map, $box-shadows, "$box-shadows") {}
 
 //
 // All supported colors.
@@ -307,9 +273,7 @@ $colors: map.merge(
   map.get($extend, "colors") or ()
 ) !default;
 
-@if meta.type-of($colors) != map {
-  @error "Expected `$colors` to be a map";
-}
+@if helpers.type(map, $colors, "$colors") {}
 
 //
 // All the supported selectors used when adding generators to the build.
@@ -368,9 +332,7 @@ $selectors: map.merge(
   map.get($extend, "selectors") or (),
 ) !default;
 
-@if meta.type-of($selectors) != map {
-  @error "Expected `$selectors` to be a map";
-}
+@if helpers.type(map, $selectors, "$selectors") {}
 
 //
 // A list of rule generators to include for each selector type. This helps cut down on file size
@@ -394,11 +356,4 @@ $generators: helpers.map-list-merge(
   map.get($extend, "generators") or ()
 ) !default;
 
-@if
-  meta.type-of($generators) != map and
-  // allow an empty list for disabling all generators,
-  // since there is no easy way to create an empty map in sass
-  (meta.type-of($generators) != list or list.length($generators) != 0) {
-
-  @error "Expected `$generators` to be a map";
-}
+@if helpers.type(map, $generators, "$generators") {}

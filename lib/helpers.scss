@@ -3,6 +3,33 @@
 @use "sass:meta" as meta;
 
 //
+// Check the type of a variable, while allowing an empty list in place of a map for the sake of
+// simplicity. e.g. If you want to disable something in the config, you can simply use `()`
+// instead of `helpers.empty-map()`.
+//
+@function type($expected-type, $value, $name: null) {
+  $type: meta.type-of($value);
+  $message: "Expected a #{$expected-type}, got a #{$type}";
+
+  @if $name {
+    $message: "Expected `#{$name}` to be a #{$expected-type}, got a #{$type}";
+  }
+
+  @if $type != $expected-type {
+    @if
+      $expected-type == map and
+      ($type == list and list.length($value) == 0) {
+
+      @return true;
+    }
+
+    @error $message;
+  }
+
+  @return true;
+}
+
+//
 // Weird way to make an empty map (ಠ_ಠ)
 //
 @function empty-map() {

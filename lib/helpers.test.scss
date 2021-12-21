@@ -3,6 +3,24 @@
 @use "sass:meta" as meta;
 @use "./helpers" as helpers;
 
+@function test-type() {
+  $cases: [
+    helpers.type(map, (foo: bar))
+    helpers.type(map, ())
+    helpers.type(number, 0)
+    helpers.type(string, "")
+  ];
+
+  @each $result in $cases {
+    @if not $result {
+      @warn "Expected `true` but got `#{meta.inspect($result)}`";
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
 @function test-empty-map() {
   $result: helpers.empty-map();
 
