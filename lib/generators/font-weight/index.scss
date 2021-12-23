@@ -5,6 +5,6 @@
   .#{$pre}lighter#{$app} { font-weight: lighter; }
 
   @each $key, $value in config.$font-weights {
-    .#{$pre}#{$key}#{$app} { font-weight: $value; }
+    .#{$pre}text-#{$key}#{$app} { font-weight: $value; }
   }
 }

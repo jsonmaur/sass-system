@@ -2,12 +2,12 @@
 
 `.bolder`
 `.lighter`
-`.thin`
-`.extra-light`
-`.light`
-`.regular`
-`.medium`
-`.semi-bold`
-`.bold`
-`.extra-bold`
-`.heavy`
+`.text-thin`
+`.text-extra-light`
+`.text-light`
+`.text-regular`
+`.text-medium`
+`.text-semi-bold`
+`.text-bold`
+`.text-extra-bold`
+`.text-heavy`
