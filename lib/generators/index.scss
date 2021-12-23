@@ -34,8 +34,7 @@ $-generators: [];
 }
 
 //
-// Manually include each generator and make sure it's enabled for the current generator being
-// rendered. This mixin gets called for base classes, dark classes, and responsive classes.
+// Manually include each generator and render it for the current selector if it's enabled.
 //
 @mixin render($generators, $pre: null, $app: null) {
   $-generators: $generators !global;

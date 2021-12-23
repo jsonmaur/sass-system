@@ -14,8 +14,9 @@
   <a aria-label="test status" href="https://github.com/maurandco/sss/actions/workflows/test.yml">
     <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/sss/test.yml?label=test&style=flat-square" />
   </a>
+
   <a aria-label="version status" href="https://github.com/maurandco/sss/releases">
-    <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sss?display_name=tag&style=flat-square&color=AD5F88" />
+    <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sss?display_name=tag&style=flat-square&color=B85A8A" />
   </a>
 </p>
 
@@ -31,12 +32,11 @@
 - Automatic color scale generator for custom colors.
 - Easily extend with mixins and custom Sass.
 - Add or remove classes from build as needed.
-- 10KB gzipped for default build.
-- No dependencies required other than [dart-sass](https://sass-lang.com/dart-sass).
+- 10kB gzipped for default build.
 
-## Why?
+### Why?
 
-SSS was inspired by similar functional CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to depending on a Node build system and PostCSS with it's plethora of plugins.
+SSS was inspired by similar functional CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass) (which is fast and self-contained). As opposed to dealing with a Node build system and PostCSS with its plethora of plugins.
 
 ## Install
 
