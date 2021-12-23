@@ -30,9 +30,9 @@
 - Support for dark mode classes and media queries.
 - Stacked pseudo selectors for precision styling.
 - Automatic color scale generator for custom colors.
-- Easily extend with mixins and custom Sass.
+- Easily extended with mixins and custom Sass.
 - Add or remove classes from build as needed.
-- 10kB gzipped for default build.
+- 10kB gzipped and 8kB brotli'd for default build.
 
 ### Why?
 
@@ -40,11 +40,96 @@ SSS was inspired by similar functional CSS frameworks such as TailwindCSS and Ta
 
 ## Install
 
-TODO
+### Default Build
+
+If you don't need any customization and want to use the utility classes right away, you can link directly to the default build in your HTML.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sss@0.1/index.min.css" />
+```
+
+### Custom Build
+
+If you want to customize your build, you'll need to install the Sass source code into your project using any of the following methods.
+
+- [Download the latest release](https://github.com/maurandco/sss/releases)
+- Install with [hex](https://hex.pm) (Elixir): _not supported yet_
+- Install with [gem](https://rubygems.org) (Ruby): _not supported yet_
+- Install with [pip](https://pypi.org) (Python): _not supported yet_
+- Install with [npm](https://www.npmjs.com) (Node): _not supported yet_
 
 ## Usage
 
-TODO
+```scss
+@use "sss" with (
+  $config_name: config_value,
+);
+```
+
+## Configuration
+
+- [normalize](#normalize)
+- [class-prefix](#class-prefix)
+- [separator](#separator)
+- [dark-mode](#dark-mode)
+- [screens](#screens)
+- [measures](#measures)
+- [spacing](#spacing)
+- [primary-fonts](#primary-fonts)
+- [font-stacks](#font-stacks)
+- [font-weights](#font-weights)
+- [font-sizes](#font-sizes)
+- [font-leading](#font-leading)
+- [font-tracking](#font-tracking)
+- [text-indent](#text-indent)
+- [box-shadows](#box-shadows)
+- [colors](#colors)
+- [auto-colors](#auto-colors)
+- [selectors](#selectors)
+- [generators](#generators)
+- [extending](#extending)
+
+### Normalize
+
+### Class Prefix
+
+### Separator
+
+### Dark Mode
+
+### Screens
+
+### Measures
+
+### Spacing
+
+### Primary Fonts
+
+### Font Stacks
+
+### Font Weights
+
+### Font Sizes
+
+### Font Leading
+
+### Font Tracking
+
+### Text Indent
+
+### Box Shadows
+
+### Colors
+
+### Auto Colors
+
+### Selectors
+
+### Generators
+
+Rather than include everything up front to be removed later, we add in rules as needed to keep the file size down.
+
+### Extending
 
 ## Remaining Rules
 
