@@ -154,10 +154,10 @@
 
   @each $key, $value in $colors {
     $variants: empty-map();
-    $name-base: #{$key}-500;
+    $name-base: #{$key}-5;
 
     @for $i from 1 through 4 { // 80%, 60%, 40%, 20%
-      $name: #{$key}-#{$i}00;
+      $name: #{$key}-#{$i};
       $mixed: color.mix(black, $value, $weight: 100 - ($i * 20%));
       $variants: map.set($variants, $name, $mixed);
 
@@ -170,7 +170,7 @@
     $variants: map.set($variants, $name-base, $value);
 
     @for $i from 6 through 9 { // 30%, 50%, 70%, 90%
-      $name: #{$key}-#{$i}00;
+      $name: #{$key}-#{$i};
       $mixed: color.mix(white, $value, $weight: 30 + (($i - 6) * 20%));
       $variants: map.set($variants, $name, $mixed);
 
