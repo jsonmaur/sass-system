@@ -1,6 +1,30 @@
 # Generators
 
-## Remaining Rules
+- [background-color](background-color#readme)
+- [box-shadow](box-shadow#readme)
+- [box-sizing](box-sizing#readme)
+- [color](color#readme)
+- [font-family](font-family#readme)
+- [font-size](font-size#readme)
+- [font-style](font-style#readme)
+- [font-variant](font-variant#readme)
+- [font-weight](font-weight#readme)
+- [letter-spacing](letter-spacing#readme)
+- [line-height](line-height#readme)
+- [margin](margin#readme)
+- [max-width](max-width#readme)
+- [opacity](opacity#readme)
+- [padding](padding#readme)
+- [text-align](text-align#readme)
+- [text-decoration](text-decoration#readme)
+- [text-indent](text-indent#readme)
+- [text-overflow](text-overflow#readme)
+- [text-transform](text-transform#readme)
+- [vertical-align](vertical-align#readme)
+- [white-space](white-space#readme)
+- [width](width#readme)
+
+## Remaining Generators
 
 - `align-content`
 - `align-items`
