@@ -1,5 +1,5 @@
 @use "sass:list";
-@use "../config";
+@use "../../config";
 
 @mixin render($pre, $app) {
   .#{$pre}m-0#{$app} { margin: 0; }

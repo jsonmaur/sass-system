@@ -1,5 +1,5 @@
 @use "sass:list";
-@use "../config";
+@use "../../config";
 
 @mixin render($pre, $app) {
   @each $key, $value in config.$font-stacks {
