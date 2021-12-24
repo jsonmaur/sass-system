@@ -45,7 +45,7 @@ ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssbuild@0.1/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssbuild@0.0.1/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
@@ -54,7 +54,7 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 - Install with [hex](https://hex.pm) (Elixir): _not supported yet_
 - Install with [gem](https://rubygems.org) (Ruby): _not supported yet_
 - Install with [pip](https://pypi.org) (Python): _not supported yet_
-- Install with [npm](https://www.npmjs.com) (Node): _not supported yet_
+- Install with [npm](https://www.npmjs.com) (Node): `npm install ssbuild`
 
 ## Usage
 
@@ -453,11 +453,11 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
 
 ### Generators
 
-Rather than include every single possible utility class in the final CSS (which would result in an enormous file), we added the ability to add or remove specific classes in the config, which we call "generators". Not using dark mode? Set the generators to an empty list. Want to add utility classes for a specific pseudo selector, or even nested pseudo selectors? Add them to the generators list.
+Rather than include every single possible utility class in the final CSS (which would result in an enormous file), you have the ability to add or remove specific classes in the config—which we call "generators". Not using dark mode? Set those generators to an empty list. Want to add utility classes for a specific pseudo selector, or even nested pseudo selectors? Add those to the generators list.
 
-This is different than other systems like Tailwind, which uses a just-in-time method where a file watcher scans your HTML files for classes being used and includes them in the final CSS. We decided to leave that up to the configuration. It's a bit more work on the developer side to manually include the class variations they need, but it's also more predicable.
+This is different from other systems like Tailwind, which use a just-in-time method where a file watcher scans your HTML files for classes being used and includes them in the final CSS. We decided to leave that up to the configuration. It's a bit more work on the developer side to manually include the class variations they need, but it's more predicable in the end.
 
-See [selectors](#selectors) for a list of available selectors. Use the `dark` selector to support dark classes, and the `responsive` selector or individual screen selectors (such as `sm` and `md`) for responsive classes. Responsive dark classes can be enabled with the nested `dark` selector within `responsive` or the individual screen selectors. To avoid copying the same lists over and over if multiple selectors are used, you can use a Sass variable.
+See [selectors](#selectors) for a list of available selectors. Use the `dark` selector to support dark classes, and the `responsive` selector (or individual screen selectors such as `sm` and `md`) for responsive classes. Responsive dark classes can be enabled with the nested `dark` selector within `responsive` or individual screen selectors. To avoid copying the same lists over and over if multiple selectors are used, simply use Sass variables.
 
 > type: `map`  
 > default:
