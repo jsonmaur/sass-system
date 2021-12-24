@@ -1,26 +1,26 @@
-<br /> <br /> <br />
+<br /> <br /> <br /> <br />
 
 <div align="center">
-  <img src=".github/logo.svg" alt="sss logo" width="200" />
+  <img src=".github/logo.svg" alt="ssbuild logo" width="300" />
 </div>
 
-<br /> <br /> <br />
+<br /> <br />
 
 <p align="center">
   A style system generator and utility-first CSS framework built in Sass.
 </p>
 
 <p align="center">
-  <a aria-label="test status" href="https://github.com/maurandco/sss/actions/workflows/test.yml">
-    <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/sss/test.yml?label=test&style=flat-square" />
+  <a aria-label="test status" href="https://github.com/maurandco/ssbuild/actions/workflows/test.yml">
+    <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/ssbuild/test.yml?label=test&style=flat-square" />
   </a>
 
-  <a aria-label="version status" href="https://github.com/maurandco/sss/releases">
-    <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sss?display_name=tag&style=flat-square&color=B85A8A" />
+  <a aria-label="version status" href="https://github.com/maurandco/ssbuild/releases">
+    <img alt="version" src="https://img.shields.io/github/v/release/maurandco/ssbuild?display_name=tag&style=flat-square&color=B85A8A" />
   </a>
 </p>
 
-<br /> <br /> <br />
+<br /> <br /> <br /> <br />
 
 ⚠️ **This project is still under active development. Check back soon for a release!**
 
@@ -33,24 +33,24 @@
 - Stacked pseudo selector classes for precision styling.
 - Automatic color scale generator for custom colors.
 - Easily extended with mixins and custom Sass.
-<!-- - 0kB gzipped and 0kB brotli'd for default build. -->
 - [Add or remove classes from build as needed.](#generators)
+<!-- - 0kB gzipped and 0kB brotli'd for default build. -->
 
 ## Why?
 
-Sass Style System was inspired by similar utility-first CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass) (which is fast and self-contained). As opposed to dealing with a Node build system and PostCSS with its plethora of plugins.
+ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass) (which is fast and self-contained). As opposed to dealing with a Node build system and PostCSS with its plethora of plugins.
 
 ## Installation
 
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sss@0.1/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ssbuild@0.1/index.min.css" />
 ```
 
-If you want to customize your build, you'll need to install sss into your project using one of these methods.
+If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
 
-- [Download the latest release](https://github.com/maurandco/sss/releases)
+- [Download the latest release](https://github.com/maurandco/ssbuild/releases)
 - Install with [hex](https://hex.pm) (Elixir): _not supported yet_
 - Install with [gem](https://rubygems.org) (Ruby): _not supported yet_
 - Install with [pip](https://pypi.org) (Python): _not supported yet_
@@ -59,7 +59,7 @@ If you want to customize your build, you'll need to install sss into your projec
 ## Usage
 
 ```scss
-@use "sss";
+@use "ssbuild";
 ```
 
 That's it! All the utility classes will now be included in your CSS output.
@@ -67,7 +67,7 @@ That's it! All the utility classes will now be included in your CSS output.
 ```html
 <div class="measure-narrow bg-gray-1">
   <h1 class="text-xxl text-heavy pink-5 mb-4">
-    Welcome to Sass Style System!
+    Welcome to ssbuild!
   </h1>
 
   <p class="text-sm text-light">
@@ -80,12 +80,10 @@ That's it! All the utility classes will now be included in your CSS output.
 
 ## Customization
 
-Sass Style System can be configured to your heart's content by adding `with ()` to the end of the use statement with a map of your customization values.
-
 ### Example
 
 ```sass
-@use "sss" with (
+@use "ssbuild" with (
   $normalize: false,
   $dark-mode: class,
   $primary-fonts: (
@@ -134,7 +132,7 @@ Whether to import [modern-normalize](https://github.com/sindresorhus/modern-norm
 
 ### Class Prefix
 
-Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `sss-`, all the classes generated will look like `.sss-bg-black`.
+Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `ss-`, all the classes generated will look like `.ss-bg-black`.
 
 > type: `string`  
 > default: none
@@ -374,7 +372,7 @@ Named values for color and background color. These classes **do not** have a pre
 
 ### Auto Colors
 
-Named values for colors that need auto-generated variations. Sass Style System will generate 4 darker variations and 4 lighter variations of each color, for a total of 9. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
+Named values for colors that need auto-generated variations. ssbuild will generate 4 darker variations and 4 lighter variations of each color, for a total of 9. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 > type: `map`  
 > default:
