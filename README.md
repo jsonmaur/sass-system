@@ -28,12 +28,11 @@
 
 - Highly customizable style system.
 - Resonsive-first & utility-first classes.
-- Beautiful defaults for color, shadow, scale, and typography.
-- Support for dark mode utility classes and media queries.
+- Support for dark mode utility classes.
+- Beautiful presets for color, shadow, scale, and typography.
 - Stacked pseudo selector classes for precision styling.
-- Automatic color scale generator for custom colors.
-- Easily extended with mixins and custom Sass.
-- [Add or remove classes from build as needed.](#generators)
+- Color scale generator for custom colors.
+- Easily extended with custom Sass.
 <!-- - 0kB gzipped and 0kB brotli'd for default build. -->
 
 ## Why?
@@ -65,7 +64,7 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 That's it! All the utility classes will now be included in your CSS output.
 
 ```html
-<div class="measure-narrow bg-gray-1">
+<div class="measure-narrow md:measure-regular bg-gray-1">
   <h1 class="text-xxl text-heavy pink-5 mb-4">
     Welcome to ssbuild!
   </h1>
@@ -79,8 +78,6 @@ That's it! All the utility classes will now be included in your CSS output.
 ```
 
 ## Customization
-
-### Example
 
 ```sass
 @use "ssbuild" with (
@@ -98,7 +95,7 @@ That's it! All the utility classes will now be included in your CSS output.
 );
 ```
 
-All custom values will **override the defaults** unless they are configured within the [$extend](#extend) map.
+_Note that all custom values will **override the defaults** unless they are configured within the [$extend](#extend) map._
 
 ### Options
 
@@ -132,14 +129,14 @@ Whether to import [modern-normalize](https://github.com/sindresorhus/modern-norm
 
 ### Class Prefix
 
-Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `ss-`, all the classes generated will look like `.ss-bg-black`.
+Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `ss-`, classes will look like `.ss-bg-black`.
 
 > type: `string`  
 > default: none
 
 ### Separator
 
-Used to separate base class names from variants such as dark selectors, pseudo selectors, and responsive selectors. Using the default value of an escaped colon will generate classes following the pattern of `.sm\:dark\:bg-black`.
+Used to separate base class names from variants such as dark selectors, pseudo selectors, and responsive selectors. Using the default value of an escaped colon will generate classes such as `.sm\:dark\:bg-black`, which can be used as `<div class="sm:dark:bg-black">`.
 
 > type: `string`  
 > default: `\\:`
@@ -153,7 +150,7 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
 
 ### Screens
 
-Named screen size values which are used to generate responsive mixins and classes such as `.md\:bg-black`.
+Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
 
 > type: `map`  
 > default:
@@ -183,7 +180,7 @@ Named width values used for paragraphs and other sized containers. These classes
 
 ### Spacing
 
-Spacing values used for margin and padding. Class names correspond with index in list starting at 1. e.g. `.m-1` will correspond to `margin: .25rem`, and `.m-8` will correspond to `margin: 32rem`. These classes are prefixed with `.m-*` and `.p-*`. See the [margin generator](lib/generators/margin#readme) and [padding generator](lib/generators/padding#readme) for more info.
+Spacing values used for margin and padding. Class names correspond with the list index starting at 1. e.g. `.m-1` will correspond to `margin: .25rem`, and `.p-8` will correspond to `padding: 32rem`. These classes are prefixed with `.m-*` and `.p-*`. See the [margin generator](lib/generators/margin#readme) and [padding generator](lib/generators/padding#readme) for more info.
 
 > type: `list`  
 > default:
@@ -308,7 +305,7 @@ Named values used for font size. These classes are prefixed with `.text-*`. See 
 
 ### Font Leading
 
-Named values used for font leading (which is line height). These classes are prefixed with `.lead-*`. See the [line-height generator](lib/generators/line-height#readme) for more info.
+Named values used for font leading (line height). These classes are prefixed with `.lead-*`. See the [line-height generator](lib/generators/line-height#readme) for more info.
 
 > type: `map`  
 > default:
@@ -322,7 +319,7 @@ Named values used for font leading (which is line height). These classes are pre
 
 ### Font Tracking
 
-Named values used for font tracking (which is letter spacing). These classes are prefixed with `.track-*`. See the [letter-spacing generator](lib/generators/letter-spacing#readme) for more info.
+Named values used for font tracking (letter spacing). These classes are prefixed with `.track-*`. See the [letter-spacing generator](lib/generators/letter-spacing#readme) for more info.
 
 > type: `map`  
 > default:
@@ -372,7 +369,7 @@ Named values for color and background color. These classes **do not** have a pre
 
 ### Auto Colors
 
-Named values for colors that need auto-generated variations. ssbuild will generate 4 darker variations and 4 lighter variations of each color, for a total of 9. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
+Named values for colors that get auto-generated variations. 4 darker variations and 4 lighter variations will be generated for each color, for a total of 9 colors per key. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 > type: `map`  
 > default:
@@ -394,9 +391,9 @@ Named values for colors that need auto-generated variations. ssbuild will genera
 
 ### Selectors
 
-All the selectors that can be specified in the [generators](#generators), and the associated suffix for the classes. e.g. If the `first` selector is enabled for a generator, it will create classes such as `.first\:bg-black:first-child`.
+All the selectors that can be specified in [generators](#generators), and the associated suffix for the classes. The key is used in the class name, and the value is used as the selector. e.g. If the `first` selector is enabled for a generator, it will create classes such as `.first\:bg-black:first-child`.
 
-The selector name can also be a space-separated list for nested selectors. e.g. `hover first: ":hover:first-child"` will create `.hover\:first\:classname:hover:first-child`. Using a space in the key name is to ensure the configured `$separator` is used in the final class.
+The selector name can also be a space-separated list for nested selectors. e.g. `hover first: ":hover:first-child"` will create `.hover\:first\:classname:hover:first-child` classes. We included a few by default, but add your own using [$extend](#extend) as needed. Using a space in the key name is to ensure the configured `$separator` is used in the generated class.
 
 > type: `map`  
 > default:
@@ -453,20 +450,21 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
 
 ### Generators
 
-Rather than include every single possible utility class in the final CSS (which would result in an enormous file), you have the ability to add or remove specific classes in the config—which we call "generators". Not using dark mode? Set those generators to an empty list. Want to add utility classes for a specific pseudo selector, or even nested pseudo selectors? Add those to the generators list.
+Rather than include every single possible utility class in the final CSS (which would result in an enormous file), you can add or remove specific classes in the config—which we call "generators". Not using dark mode? Set those generators to an empty list. Want to add utility classes for a specific pseudo selector, or even nested pseudo selectors? Add those to the generators list. We added some sane defaults that will work for most sites, but you will need to add custom generator lists for anything beyond that.
 
-This is different from other systems like Tailwind, which use a just-in-time method where a file watcher scans your HTML files for classes being used and includes them in the final CSS. We decided to leave that up to the configuration. It's a bit more work on the developer side to manually include the class variations they need, but it's more predicable in the end.
+This is different from other systems like Tailwind, which use a just-in-time method where a file watcher scans your HTML files for classes being used and includes them in the outputted CSS. We decided to leave that up to the configuration. It's a bit more work on the developer's side to manually include the class variations they need, but it's more predicable in the end.
 
-See [selectors](#selectors) for a list of available selectors. Use the `dark` selector to support dark classes, and the `responsive` selector (or individual screen selectors such as `sm` and `md`) for responsive classes. Responsive dark classes can be enabled with the nested `dark` selector within `responsive` or individual screen selectors. To avoid copying the same lists over and over if multiple selectors are used, simply use Sass variables.
+See [selectors](#selectors) for a list of available selectors. `dark` can be set to a nested list of selectors to support dark classes, and `responsive` (or individual screens such as `sm` and `md`) can be set to a nested list to support responsive classes. Dark responsive classes can be enabled with by setting `dark` to a nested list _within_ `responsive`. If you find yourself with duplicated lists of generators, simply use a Sass variable.
 
 > type: `map`  
 > default:
 > ```sass
 > (
 >   base: [
->     background-color box-shadow box-sizing color font-family font-size font-style font-variant
->     font-weight letter-spacing line-height margin max-width opacity padding text-align
->     text-decoration text-indent text-overflow text-transform vertical-align white-space width
+>     background-color box-shadow box-sizing color font-family font-size font-style
+>     font-variant font-weight letter-spacing line-height margin max-width opacity
+>     padding text-align text-decoration text-indent text-overflow text-transform
+>     vertical-align white-space width
 >   ],
 >   hover: [],
 >   dark: (
@@ -485,7 +483,7 @@ See [selectors](#selectors) for a list of available selectors. Use the `dark` se
 
 ### Extend
 
-This can be used to append custom values onto config maps without replacing the existing values. For example, if you'd like to add a new font size called `huge` while keeping the original font sizes:
+This can be used to append custom values onto config maps and lists without replacing the existing values. For example, if you'd like to add a new font size called `huge` while retaining the default font sizes:
 
 ```sass
 $extend: (
@@ -494,6 +492,8 @@ $extend: (
   ),
 )
 ```
+
+_Note that key names nested within `$extend` are **not** prefixed with `$`._
 
 > type: `map`  
 > default: none
