@@ -20,13 +20,10 @@ test-integration: #: run the integration tests
 
 release: build #: create a new tagged release
 	@git tag v$(version)
-
-release-npm: #: create an npm release
 	@git archive \
 		--format tar.gz \
 		--prefix ssbuild/ \
 		--add-file _build/index.min.css \
 		--add-file _build/index.min.css.map \
 		--add-file publish/npm/package.json \
-		v$(version) > _build/ssbuild-$(version).tar.gz
-	@npm publish ./_build/ssbuild-$(version).tar.gz --dry-run
+		v$(version) > _build/npm-ssbuild-$(version).tar.gz

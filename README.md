@@ -12,7 +12,7 @@
 
 <p align="center">
   <a aria-label="test status" href="https://github.com/maurandco/ssbuild/actions/workflows/test.yml">
-    <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/ssbuild/test.yml?label=test&style=flat-square" />
+    <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/ssbuild/Test?label=tests&style=flat-square" />
   </a>
 
   <a aria-label="version status" href="https://github.com/maurandco/ssbuild/releases">
