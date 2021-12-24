@@ -37,7 +37,7 @@
 
 ## Why?
 
-ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass) (which is fast and self-contained). As opposed to dealing with a Node build system and PostCSS with its plethora of plugins.
+ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass) (which is fast and self-contained). As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or PostCSS with its plethora of plugins.
 
 ## Installation
 
@@ -58,18 +58,18 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 ## Usage
 
 ```scss
-@use "ssbuild";
+@use "@maurandco/ssbuild";
 ```
 
 That's it! All the utility classes will now be included in your CSS output.
 
 ```html
-<div class="measure-narrow md:measure-regular bg-gray-1">
+<div class="measure-regular md:measure-wide bg-gray-8 p-5 m-5">
   <h1 class="text-xxl text-heavy pink-5 mb-4">
     Welcome to ssbuild!
   </h1>
 
-  <p class="text-sm text-light">
+  <p class="text-sm text-light lead-copy">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
     ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
     ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -80,7 +80,7 @@ That's it! All the utility classes will now be included in your CSS output.
 ## Customization
 
 ```sass
-@use "ssbuild" with (
+@use "@maurandco/ssbuild" with (
   $normalize: false,
   $dark-mode: class,
   $primary-fonts: (
