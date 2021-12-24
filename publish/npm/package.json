@@ -1,5 +1,5 @@
 {
-  "name": "ssbuild",
+  "name": "@maurandco/ssbuild",
   "version": "0.0.1",
   "description": "A style system generator and utility-first CSS framework built in Sass.",
   "main": "index.scss",
