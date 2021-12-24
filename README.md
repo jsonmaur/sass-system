@@ -44,7 +44,7 @@ ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0.2/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0.1/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
