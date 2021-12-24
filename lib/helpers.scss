@@ -11,9 +11,23 @@
 }
 
 //
-// Check the type of a variable while allowing an empty list in place of a map for the sake of
-// simplicity. e.g. If you want to disable something in the config, you can simply use `()`
-// instead of the annoying `helpers.empty-map()`.
+// Check if the type of a variable is a map while allowing an empty list in place of a map for the
+// sake of simplicity. e.g. If you want to disable something in the config, you can simply use
+// `()` instead of the annoying `helpers.empty-map()`.
+//
+@function is-map($value) {
+  @if
+    meta.type-of($value) == map or
+    (meta.type-of($value) == list and list.length($value) == 0) {
+
+    @return true;
+  }
+
+  @return false;
+}
+
+//
+// Check the type of a variable and throw a generic error message if it doesn't match.
 //
 @function check-type($expected, $value, $name: null) {
   @if meta.type-of($expected) != string {
@@ -27,7 +41,7 @@
   }
 
   @if $type != $expected {
-    @if $expected == map and ($type == list and list.length($value) == 0) {
+    @if $expected == map and is-map($value) {
       @return true;
     }
 
@@ -82,10 +96,10 @@
 @function map-list-merge($map1, $map2) {
   $result: $map1;
 
-  @if meta.type-of($map1) != map {
+  @if not is-map($map1) {
     @error "`map-list-merge` expected a map, got #{meta.type-of($map1)}";
   }
-  @if meta.type-of($map2) != map {
+  @if not is-map($map2) {
     @error "`map-list-merge` expected a map, got #{meta.type-of($map2)}";
   }
 

@@ -13,6 +13,24 @@
   @return true;
 }
 
+@function test-is-map() {
+  $cases: [
+    (input: ["foo"], output: false)
+    (input: [()], output: true)
+    (input: [(foo: bar)], output: true)
+  ];
+
+  @each $case in $cases {
+    $result: helpers.is-map(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
 @function test-check-type() {
   $cases: [
     (input: [number, 0], output: true)
