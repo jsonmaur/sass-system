@@ -44,7 +44,7 @@ ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@maurandco/ssbuild@0.0.1/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0.2/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
@@ -53,12 +53,12 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 - Install with [hex](https://hex.pm) (Elixir): _not supported yet_
 - Install with [gem](https://rubygems.org) (Ruby): _not supported yet_
 - Install with [pip](https://pypi.org) (Python): _not supported yet_
-- Install with [npm](https://www.npmjs.com) (Node): `npm install @maurandco/ssbuild`
+- Install with [npm](https://www.npmjs.com) (Node): `npm install @ssbuild/core`
 
 ## Usage
 
 ```scss
-@use "@maurandco/ssbuild";
+@use "@ssbuild/core";
 ```
 
 That's it! All the utility classes will now be included in your CSS output.
@@ -80,7 +80,7 @@ That's it! All the utility classes will now be included in your CSS output.
 ## Customization
 
 ```sass
-@use "@maurandco/ssbuild" with (
+@use "@ssbuild/core" with (
   $normalize: false,
   $dark-mode: class,
   $primary-fonts: (
