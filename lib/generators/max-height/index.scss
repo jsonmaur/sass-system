@@ -1,0 +1,16 @@
+@use "sass:list";
+@use "../../config";
+
+@mixin render($pre, $app) {
+  .#{$pre}max-h-0#{$app} { max-height: 0rem; }
+  .#{$pre}max-h-full#{$app} { max-height: 100%; }
+  .#{$pre}max-h-screen#{$app} { max-height: 100vh; }
+  .#{$pre}max-h-min#{$app} { max-height: min-content; }
+  .#{$pre}max-h-max#{$app} { max-height: max-content; }
+  .#{$pre}max-h-fit#{$app} { max-height: fit-content; }
+
+  @for $i from 1 through list.length(config.$sizing) {
+    $value: list.nth(config.$sizing, $i);
+    .#{$pre}max-h-#{$i}#{$app} { max-height: $value; }
+  }
+}

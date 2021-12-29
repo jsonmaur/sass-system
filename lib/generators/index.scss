@@ -10,10 +10,13 @@
 @use "font-style";
 @use "font-variant";
 @use "font-weight";
+@use "height";
 @use "letter-spacing";
 @use "line-height";
 @use "margin";
+@use "max-height";
 @use "max-width";
+@use "min-height";
 @use "min-width";
 @use "opacity";
 @use "padding";
@@ -49,10 +52,13 @@ $-generators: [];
   @include with("font-style") { @include font-style.render($pre, $app); }
   @include with("font-variant") { @include font-variant.render($pre, $app); }
   @include with("font-weight") { @include font-weight.render($pre, $app); }
+  @include with("height") { @include height.render($pre, $app); }
   @include with("letter-spacing") { @include letter-spacing.render($pre, $app); }
   @include with("line-height") { @include line-height.render($pre, $app); }
   @include with("margin") { @include margin.render($pre, $app); }
+  @include with("max-height") { @include max-height.render($pre, $app); }
   @include with("max-width") { @include max-width.render($pre, $app); }
+  @include with("min-height") { @include max-width.render($pre, $app); }
   @include with("min-width") { @include min-width.render($pre, $app); }
   @include with("opacity") { @include opacity.render($pre, $app); }
   @include with("padding") { @include padding.render($pre, $app); }

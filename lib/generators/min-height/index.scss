@@ -1,0 +1,8 @@
+@mixin render($pre, $app) {
+  .#{$pre}min-h-0#{$app} { min-height: 0rem; }
+  .#{$pre}min-h-full#{$app} { min-height: 100%; }
+  .#{$pre}min-h-screen#{$app} { min-height: 100vh; }
+  .#{$pre}min-h-min#{$app} { min-height: min-content; }
+  .#{$pre}min-h-max#{$app} { min-height: max-content; }
+  .#{$pre}min-h-fit#{$app} { min-height: fit-content; }
+}

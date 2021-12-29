@@ -9,10 +9,14 @@
 - [font-style](font-style#readme)
 - [font-variant](font-variant#readme)
 - [font-weight](font-weight#readme)
+- [height](height#readme)
 - [letter-spacing](letter-spacing#readme)
 - [line-height](line-height#readme)
 - [margin](margin#readme)
+- [max-height](max-height#readme)
 - [max-width](max-width#readme)
+- [min-height](min-height#readme)
+- [min-width](min-width#readme)
 - [opacity](opacity#readme)
 - [padding](padding#readme)
 - [text-align](text-align#readme)
@@ -150,7 +154,6 @@
 - `grid-template-columns`
 - `grid-template-rows`
 - `hanging-punctuation`
-- `height`
 - `hyphens`
 - `image-rendering`
 - `isolation`
@@ -171,9 +174,6 @@
 - `mask-repeat`
 - `mask-size`
 - `mask-type`
-- `max-height`
-- `min-height`
-- `min-width`
 - `mix-blend-mode`
 - `object-fit`
 - `object-position`
