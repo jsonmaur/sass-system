@@ -52,7 +52,23 @@
 }
 
 //
-// Removes items from the beginning of a list
+// Check if there are any key conflicts in two maps, and return the potential conflicting key.
+//
+@function key-conflict($map1, $map2) {
+  $keys1: map.keys($map1);
+  $keys2: map.keys($map2);
+
+  @each $key in $keys1 {
+    @if list.index($keys2, $key) != null {
+      @return $key;
+    }
+  }
+
+  @return null;
+}
+
+//
+// Removes items from the beginning of a list.
 //
 @function list-shift($list, $count: 1) {
   $result: [];

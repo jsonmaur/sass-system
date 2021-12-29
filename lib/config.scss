@@ -473,3 +473,17 @@ $generators: helpers.map-list-merge(
 ) !default;
 
 @if helpers.check-type(map, $generators, "$generators") {}
+
+//
+// Sanity checks to ensure values that have the same class prefix don't have conflicting keys.
+//
+
+$-base-conflict: helpers.key-conflict($font-stacks, $brand-colors);
+@if $-base-conflict {
+  @error "Found conflicting keys in $font-stacks and $brand-colors: `#{$-base-conflict}`";
+}
+
+$-text-conflict: helpers.key-conflict($font-weights, $font-sizes);
+@if $-text-conflict {
+  @error "Found conflicting keys in $font-weights and $font-sizes: `#{$-text-conflict}`";
+}

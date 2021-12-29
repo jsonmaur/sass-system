@@ -50,6 +50,23 @@
   @return true;
 }
 
+@function test-key-conflict() {
+  $cases: [
+    (input: [(foo: bar), (foo: bar)], output: foo)
+    (input: [(foo: bar), (bar: baz)], output: null)
+  ];
+
+  @each $case in $cases {
+    $result: helpers.key-conflict(map.get($case, input)...);
+
+    @if $result != map.get($case, output) {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
 @function test-list-shift() {
   $cases: (
     (input: [[1 2 3 4]], output: [2 3 4])

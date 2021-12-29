@@ -371,7 +371,7 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
   > ```
 </details>
 
-Named list values for font family stacks. Rather than redefining entire font stacks to specify a single custom font, it's recommended to specify a [primary font](#primary-fonts) instead. These classes **do not** have a prefix. See the [font-family generator](lib/generators/font-family#readme) for more info.
+Named list values for font family stacks. Rather than redefining entire font stacks to specify a single custom font, it's recommended to specify a [primary font](#primary-fonts) instead. These classes **do not** have a prefix, so make sure there are no key conflicts with [$brand-colors](#brand-colors). See the [font-family generator](lib/generators/font-family#readme) for more info.
 
 ### Font Weights
 
@@ -396,7 +396,7 @@ Named list values for font family stacks. Rather than redefining entire font sta
   > ```
 </details>
 
-Named values used for font weight. These classes are prefixed with `.text-*`. See the [font-weight generator](lib/generators/font-weight#readme) for more info.
+Named values used for font weight. These classes are prefixed with `.text-*`, so make sure there are no key conflicts with [$font-sizes](#font-sizes). See the [font-weight generator](lib/generators/font-weight#readme) for more info.
 
 ### Font Sizes
 
@@ -420,7 +420,7 @@ Named values used for font weight. These classes are prefixed with `.text-*`. Se
   > ```
 </details>
 
-Named values used for font size. These classes are prefixed with `.text-*`. See the [font-size generator](lib/generators/font-size#readme) for more info.
+Named values used for font size. These classes are prefixed with `.text-*`, so make sure there are no key conflicts with [$font-weights](#font-weights). See the [font-size generator](lib/generators/font-size#readme) for more info.
 
 ### Font Leading
 
@@ -535,7 +535,7 @@ Named values for colors that get auto-generated variations. 4 darker variations 
   > ```
 </details>
 
-Named values for brand colors that don't have auto-generated variations. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
+Named values for brand colors that don't have auto-generated variations. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. Make sure there are no key conflicts with [$font-stacks](#font-stacks). See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 ### Selectors
 
