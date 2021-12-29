@@ -1,0 +1,19 @@
+@use "sass:list";
+@use "sass:meta";
+@use "../../../lib/forward/functions";
+
+@function test-config-function() {
+  @if functions.config(normalize) != true {
+    @return false;
+  }
+
+  @if functions.config(text-indent) != 1em {
+    @return false;
+  }
+
+  @if meta.type-of(functions.config(colors)) != map {
+    @return false;
+  }
+
+  @return true;
+}

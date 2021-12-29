@@ -1,0 +1,15 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:meta";
+@use "../config";
+
+//
+// A helper function for getting config values in custom classes.
+//
+@function config($name) {
+  @if not meta.global-variable-exists($name, $module: config) {
+    @error "Could not find config value for `#{$name}`";
+  }
+
+  @return map.get(meta.module-variables(config), $name);
+}

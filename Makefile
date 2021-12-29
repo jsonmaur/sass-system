@@ -16,7 +16,7 @@ test-unit: #: run the unit tests
 	@sass test/test-helper.scss
 
 test-integration: #: run the integration tests
-	@cd test && sh ./test-integration.sh
+	@cd test && ./test-integration.sh
 
 release: build #: create a new tagged release
 	@git tag v$(version)

@@ -1,3 +1,7 @@
+<div align="center">
+  ⚠️ <b>This project is still under active development. Check back soon for a stable release!</b>
+</div>
+
 <br /> <br /> <br /> <br />
 
 <div align="center">
@@ -22,7 +26,40 @@
 
 <br /> <br /> <br /> <br />
 
-⚠️ **This project is still under active development. Check back soon for a release!**
+<details>
+  <summary><b>Table of contents</b></summary>
+
+  - [Features](#features)
+  - [Why?](#why)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Custom Classes](#custom-classes)
+  - [Configuration](#configuration)
+    - [Normalize](#normalize)
+    - [Class Prefix](#class-prefix)
+    - [Separator](#separator)
+    - [Dark Mode](#dark-mode)
+    - [Screens](#screens)
+    - [Measures](#measures)
+    - [Spacing](#spacing)
+    - [Primary Fonts](#primary-fonts)
+    - [Font Stacks](#font-stacks)
+    - [Font Weights](#font-weights)
+    - [Font Sizes](#font-sizes)
+    - [Font Leading](#font-leading)
+    - [Font Tracking](#font-tracking)
+    - [Text Indent](#text-indent)
+    - [Box Shadows](#box-shadows)
+    - [Colors](#colors)
+    - [Auto Colors](#auto-colors)
+    - [Selectors](#selectors)
+    - [Generators](#generators)
+    - [Extend](#extend)
+  - [Getters](#getters)
+  - [Media Queries](#media-queries)
+  - [(Auto)Prefixer](#autoprefixer)
+  - [Acknowledgements](#acknowledgements)
+</details>
 
 ## Features
 
@@ -44,7 +81,7 @@ ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0.1/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
@@ -61,11 +98,11 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 @use "@ssbuild/core";
 ```
 
-That's it! All the utility classes will now be included in your CSS output.
+Point Sass to the parent path of the ssbuild project folder using [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path), whether it's in `vendor`, `deps`, or `node_modules`. That's it! All the utility classes will now be included in your CSS output.
 
 ```html
-<div class="measure-regular md:measure-wide bg-gray-8 p-5 m-5">
-  <h1 class="text-xxl text-heavy pink-5 mb-4">
+<div class="m-5 p-5 bg-gray-8 measure-regular md:measure-wide">
+  <h1 class="mb-4 pink-5 text-xxl text-heavy">
     Welcome to ssbuild!
   </h1>
 
@@ -77,7 +114,38 @@ That's it! All the utility classes will now be included in your CSS output.
 </div>
 ```
 
-## Customization
+### Custom Classes
+
+If you find yourself frequently reusing utility classes and would like to extract common components into custom classes, you can use the [@extend](https://sass-lang.com/documentation/at-rules/extend) syntax.
+
+```scss
+.text-container {
+  @extend .m-5;
+  @extend .p-5;
+  @extend .bg-gray-8;
+  @extend .measure-regular;
+  @extend .md\:measure-wide;
+}
+```
+
+Alternatively, you can access style system values directly using [getters](#getters).
+
+```scss
+@use "ssbuild" as ss;
+
+.text-container {
+  background-color: ss.color(gray-8);
+  max-width: ss.measure(regular);
+  padding: ss.space(5);
+  margin: ss.space(5);
+
+  @include ss.media-up-to(md) {
+    max-width: ss.measure(wide);
+  }
+}
+```
+
+## Configuration
 
 ```sass
 @use "@ssbuild/core" with (
@@ -96,8 +164,6 @@ That's it! All the utility classes will now be included in your CSS output.
 ```
 
 _Note that all custom values will **override the defaults** unless they are configured within the [$extend](#extend) map._
-
-### Options
 
 - [$normalize](#normalize)
 - [$class-prefix](#class-prefix)
@@ -153,6 +219,7 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
 Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
 
 > type: `map`  
+> getter: `screen($name)`  
 > default:
 > ```sass
 > (
@@ -169,6 +236,7 @@ Named screen size values which are used to generate responsive classes within me
 Named width values used for paragraphs and other sized containers. These classes are prefixed with `.measure-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
 
 > type: `map`  
+> getter: `measure($name)`  
 > default:
 > ```sass
 > (
@@ -183,6 +251,7 @@ Named width values used for paragraphs and other sized containers. These classes
 Spacing values used for margin and padding. Class names correspond with the list index starting at 1. e.g. `.m-1` will correspond to `margin: .25rem`, and `.p-8` will correspond to `padding: 32rem`. These classes are prefixed with `.m-*` and `.p-*`. See the [margin generator](lib/generators/margin#readme) and [padding generator](lib/generators/padding#readme) for more info.
 
 > type: `list`  
+> getter: `space($index)`  
 > default:
 > ```sass
 > [
@@ -216,6 +285,7 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
 Named list values for font family stacks. Rather than redefining entire font stacks to specify a single custom font, it's recommended to specify a [primary font](#primary-fonts) instead. These classes **do not** have a prefix. See the [font-family generator](lib/generators/font-family#readme) for more info.
 
 > type: `map`  
+> getter: `font($name)`  
 > default:
 > ```sass
 > (
@@ -269,6 +339,7 @@ Named list values for font family stacks. Rather than redefining entire font sta
 Named values used for font weight. These classes are prefixed with `.text-*`. See the [font-weight generator](lib/generators/font-weight#readme) for more info.
 
 > type: `map`  
+> getter: `font-weight($name)`  
 > default:
 > ```sass
 > (
@@ -289,6 +360,7 @@ Named values used for font weight. These classes are prefixed with `.text-*`. Se
 Named values used for font size. These classes are prefixed with `.text-*`. See the [font-size generator](lib/generators/font-size#readme) for more info.
 
 > type: `map`  
+> getter: `font-size($name)`  
 > default:
 > ```sass
 > (
@@ -308,6 +380,7 @@ Named values used for font size. These classes are prefixed with `.text-*`. See 
 Named values used for font leading (line height). These classes are prefixed with `.lead-*`. See the [line-height generator](lib/generators/line-height#readme) for more info.
 
 > type: `map`  
+> getter: `font-lead($name)`  
 > default:
 > ```sass
 > (
@@ -322,6 +395,7 @@ Named values used for font leading (line height). These classes are prefixed wit
 Named values used for font tracking (letter spacing). These classes are prefixed with `.track-*`. See the [letter-spacing generator](lib/generators/letter-spacing#readme) for more info.
 
 > type: `map`  
+> getter: `font-track($name)`  
 > default:
 > ```sass
 > (
@@ -343,6 +417,7 @@ Value used for the text indentation class. See the [text-indent generator](lib/g
 Named values used for box shadow. These classes are prefixed with `.shadow-*`. See the [box-shadow generator](lib/generators/box-shadow#readme) for more info.
 
 > type: `map`  
+> getter: `box-shadow($name)`  
 > default:
 > ```sass
 > (
@@ -359,6 +434,7 @@ Named values used for box shadow. These classes are prefixed with `.shadow-*`. S
 Named values for color and background color. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 > type: `map`  
+> getter: `color($name)`  
 > default:
 > ```sass
 > (
@@ -372,6 +448,7 @@ Named values for color and background color. These classes **do not** have a pre
 Named values for colors that get auto-generated variations. 4 darker variations and 4 lighter variations will be generated for each color, for a total of 9 colors per key. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 > type: `map`  
+> getter: `color($name-$index)`  
 > default:
 > ```sass
 > (
@@ -483,17 +560,233 @@ See [selectors](#selectors) for a list of available selectors. `dark` can be set
 
 ### Extend
 
-This can be used to append custom values onto config maps and lists without replacing the existing values. For example, if you'd like to add a new font size called `huge` while retaining the default font sizes:
+This can be used to append custom values onto config maps and lists while retaining the existing values.
+
+> type: `map`  
+> default: none
+
+For example:
 
 ```sass
 $extend: (
-  font-sizes: (
-    huge: 10rem,
+  measures: (
+    gaping: 60em,
   ),
+)
+```
+
+Will result in these measures:
+
+```sass
+(
+  narrow: 20em,
+  regular: 30em,
+  wide: 34em,
+  gaping: 60em,
 )
 ```
 
 _Note that key names nested within `$extend` are **not** prefixed with `$`._
 
-> type: `map`  
-> default: none
+## Getters
+
+These functions are useful for getting style system values inside [custom classes](#custom-classes).
+
+- `screen($name)` to get values from [$screens](#screens)
+- `measure($name)` to get values from [$measures](#measures)
+- `space($index)` to get values from [$spacing](#spacing)
+- `font($name)` to get values from [$font-stacks](#font-stacks)
+- `font-weight($name)` to get values from [$font-weights](#font-weights)
+- `font-size($name)` to get values from [$font-sizes](#font-sizes)
+- `font-lead($name)` to get values from [$font-leading](#font-leading)
+- `font-track($name)` to get values from [$font-tracking](#font-tracking)
+- `box-shadow($name)` to get values from [$box-shadows](#box-shadows)
+- `color($name)` to get values from [$colors](#colors)
+- `color($name-$index)` to get values from [$auto-colors](#auto-colors)
+
+For example:
+
+```scss
+.foobar {
+  color: ssbuild.color(gray-8);
+  padding: ssbuild.space(4);
+}
+```
+
+Will result in:
+
+```css
+.foobar {
+  color: #e6e9eb;
+  padding: 2rem;
+}
+```
+
+## Media Queries
+
+These mixins are useful for defining custom breakpoints using the sizes from [$screens](#screens).
+
+For example:
+
+```scss
+.foobar {
+  padding: ssbuild.space(4);
+
+  @include ssbuild.media-up-to(md) {
+    padding: ssbuild.space(5);
+  }
+}
+```
+
+Will result in:
+
+```css
+.foobar {
+  padding: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .foobar {
+    padding: 4rem;
+  }
+}
+```
+
+#### `media-up-to($screen)`
+
+Generates a media query using `min-width` (the given screen size or _larger_):
+
+```scss
+@include ssbuild.media-up-to(md) {}
+```
+
+Will result in:
+
+```css
+@media (min-width: 1024px) {}
+```
+
+#### `media-down-to($screen)`
+
+Generates a media query using `max-width` (the given screen size or _smaller_) with 0.5px subtracted from the screen size:
+
+```scss
+@include ssbuild.media-down-to(md) {}
+```
+
+Will result in:
+
+```css
+@media (max-width: 1023.5px) {}
+```
+
+#### `media-only($screen)`
+
+Generates a media query using `min-width` and `max-width` to target a single screen size:
+
+```scss
+@include ssbuild.media-only(md) {}
+```
+
+Will result in:
+
+```css
+@media (min-width: 1024px) and (max-width: 1279.5px) {}
+```
+
+#### `media-between($screen1, $screen2)`
+
+Generate a media query using `min-width` and `max-width` to target screen sizes between the two specified:
+
+```scss
+@include ssbuild.media-between(sm, lg) {}
+```
+
+Will result in:
+
+```css
+@media (min-width: 768px) and (max-width: 1279.5px) {}
+```
+
+## (Auto)Prefixer
+
+Since [Autoprefixer](https://github.com/postcss/autoprefixer) requires a post-processor and Sass is a pre-processor, there is no straightforward way to implement automatic vendor prefixing. This is automatically taken care of for ssbuild utility classes, but for custom classes you will need to add the necessary prefixes manually or use these mixins.
+
+Prefixing is becoming less and less of a concern with modern browsers, so these mixins will continue to be deprecated as they are no longer needed in the future. For now, using mixins in place of the following rules should be sufficient for most use cases.
+
+For example:
+
+```scss
+.foobar {
+  @include ssbuild.prefix-transform(rotate(90deg));
+}
+```
+
+Will result in:
+
+```css
+.foobar {
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+```
+
+#### `prefix-animation($value)`
+
+Adds `-webkit` prefix to `animation: $value;`.
+
+#### `prefix-appearance($value)`
+
+Adds `-webkit` and `-ms` prefixes to `appearance: $value;`.
+
+#### `prefix-background-clip($value)`
+
+Adds `-webkit` prefix to `background-clip: $value;`.
+
+#### `prefix-filter($value)`
+
+Adds `-webkit` prefix to `filter: $value;`.
+
+#### `prefix-flexbox`
+
+Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: flex;`.
+
+#### `prefix-flexbox-inline`
+
+Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: inline-flex;`.
+
+#### `prefix-flex($value)`
+
+Adds `-webkit` and `-ms` prefixes to `flex: $value;`.
+
+#### `prefix-grid`
+
+Adds `-ms` prefix to `display: grid;`.
+
+#### `prefix-keyframes($name)`
+
+Adds `-webkit` prefix to `@keyframes($name) { }`. This mixin requires content:
+
+```scss
+@include ss.keyframes(slidein) {
+  from { transform: translateX(0%); }
+  to { transform: translateX(100%); }
+}
+```
+
+#### `prefix-object-fit($value)`
+
+Adds `-o` prefix to `object-fit: $value;`.
+
+#### `prefix-transform($value)`
+
+Adds `-webkit` and `-ms` prefixes to `transform: $value;`
+
+#### `prefix-user-select($value)`
+
+Adds `-webkit`, `-moz`, and `-ms` prefixes to `user-select: $value;`.
+
+## Acknowledgements
+
+Created by [Maur & Co.](https://maur.co)

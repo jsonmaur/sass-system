@@ -21,7 +21,7 @@
     @error "`#{$name}` is not a valid screen size";
   }
 
-  @media (max-width: $value - 1) {
+  @media (max-width: $value - .5) {
     @content;
   }
 }
@@ -53,36 +53,6 @@
   }
 
   @media (min-width: $value1) and (max-width: $value2 - 1) {
-    @content;
-  }
-}
-
-@mixin media-portrait {
-  @media (orientation: portrait) {
-    @content;
-  }
-}
-
-@mixin media-landscape {
-  @media (orientation: landscape) {
-    @content;
-  }
-}
-
-@mixin media-motion-safe {
-  @media (prefers-reduced-motion: no-preference) {
-    @content;
-  }
-}
-
-@mixin media-motion-reduce {
-  @media (prefers-reduced-motion: reduce) {
-    @content;
-  }
-}
-
-@mixin media-dark {
-  @media (prefers-color-scheme: dark) {
     @content;
   }
 }

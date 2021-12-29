@@ -1,0 +1,94 @@
+@use "sass:list";
+@use "../../lib/config";
+
+@function test-screen() {
+  @if config.screen(md) != 1024px {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-measure() {
+  @if config.measure(wide) != 34em {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-space() {
+  @if config.space(4) != 2rem {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-font() {
+  @if list.nth(config.font(serif), 2) != ui-serif {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-font-weight() {
+  @if config.font-weight(light) != 300 {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-font-size() {
+  @if config.font-size(md) != 1.25rem {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-font-lead() {
+  @if config.font-lead(solid) != 1em {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-font-track() {
+  @if config.font-track(mega) != .25em {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-box-shadow() {
+  @if config.box-shadow(inner) != (inset 0 2px 4px 0 rgb(0 0 0 / 0.05)) {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-color() {
+  @if config.color(black) != #000000 {
+    @return false;
+  }
+
+  @return true;
+}
+
+@function test-auto-color() {
+  @if config.color(gray-5) != #adb5bd {
+    @return false;
+  }
+
+  @if config.color(gray-8) != #e6e9eb {
+    @return false;
+  }
+
+  @return true;
+}

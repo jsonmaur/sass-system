@@ -1,7 +1,7 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
-@use "mixins/media";
+@use "forward/media";
 @use "config";
 @use "generators";
 @use "helpers";
@@ -16,7 +16,7 @@
     helpers.empty-map();
 
   @if config.$dark-mode == media {
-    @include media.media-dark {
+    @media (prefers-color-scheme: dark) {
       @content($generators);
     }
   }

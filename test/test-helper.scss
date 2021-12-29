@@ -8,10 +8,14 @@
 @use "sass:meta";
 @use "sass:string";
 
+@use "./lib/config.test";
 @use "./lib/helpers.test";
+@use "./lib/forward/functions.test";
 
 $tests: (
+  config: "lib/config.test",
   helpers: "lib/helpers.test",
+  functions: "lib/forward/functions.test",
 );
 
 @debug "Running tests from #{list.length($tests)} files";

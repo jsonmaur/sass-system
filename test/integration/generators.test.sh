@@ -9,6 +9,7 @@ suite_addTest testGeneratorCustomSelector
 suite_addTest testGeneratorInvalidSelector
 suite_addTest testGeneratorInvalidSelectorValue
 suite_addTest testGeneratorResponsiveInvalidScreen
+suite_addTest testGeneratorExtend
 
 testGenerator() {
   INPUT=$(cat <<EOF
@@ -289,4 +290,87 @@ EOF
 
   echo $INPUT | sass --stdin 2>/dev/null
   assertEquals 65 $?
+}
+
+testGeneratorExtend() {
+  INPUT=$(cat <<EOF
+@use "sass:list";
+@use "sass:map";
+@use "../index" with (
+  \$normalize: false,
+  \$auto-colors: (),
+  \$colors: (black: black),
+  \$generators: (
+    base: [background-color],
+    dark: (
+      base: [background-color],
+    ),
+    sm: (
+      base: [background-color],
+    ),
+  ),
+);
+
+.test {
+  @extend .bg-black;
+  @extend .sm\:bg-black;
+  color: white;
+}
+
+.test-dark {
+  @extend .dark\:bg-black;
+  color: gray;
+}
+
+.test-container {
+  max-width: index.measure(regular);
+  background-color: index.color(black);
+  padding: index.space(5);
+  margin: index.space(5);
+
+  @include index.media-up-to(md) {
+    max-width: index.measure(wide);
+  }
+}
+EOF
+  );
+
+  OUTPUT=$(cat <<EOF
+.bg-black, .test {
+  background-color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-black, .test-dark {
+    background-color: black;
+  }
+}
+@media (min-width: 768px) {
+  .sm\:bg-black, .test {
+    background-color: black;
+  }
+}
+.test {
+  color: white;
+}
+
+.test-dark {
+  color: gray;
+}
+
+.test-container {
+  max-width: 30em;
+  background-color: black;
+  padding: 4rem;
+  margin: 4rem;
+}
+@media (min-width: 1024px) {
+  .test-container {
+    max-width: 34em;
+  }
+}
+EOF
+  );
+
+  assertEquals "$OUTPUT" "$(echo $INPUT | sass --stdin)"
 }

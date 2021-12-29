@@ -1,4 +1,6 @@
+@use "sass:list";
 @use "sass:map";
+@use "sass:meta";
 @use "helpers";
 
 //
@@ -59,6 +61,10 @@ $screens: map.merge(
 
 @if helpers.check-type(map, $screens, "$screens") {}
 
+@function screen($name) {
+  @return map.get($screens, $name);
+}
+
 //
 // Named width values used for paragraph and other containers.
 //
@@ -73,6 +79,10 @@ $measures: map.merge(
 ) !default;
 
 @if helpers.check-type(map, $measures, "$measures") {}
+
+@function measure($name) {
+  @return map.get($measures, $name);
+}
 
 //
 // Spacing values used for margin and padding. Classes correspond with index in list.
@@ -93,6 +103,10 @@ $spacing: helpers.list-merge(
 ) !default;
 
 @if helpers.check-type(list, $spacing, "$spacing") {}
+
+@function space($index) {
+  @return list.nth($spacing, $index);
+}
 
 //
 // Primary fonts for each type of font stack, to avoid redefining the font stacks from scratch.
@@ -163,6 +177,10 @@ $font-stacks: map.merge(
 
 @if helpers.check-type(map, $font-stacks, "$font-stacks") {}
 
+@function font($name) {
+  @return map.get($font-stacks, $name);
+}
+
 //
 // Named values for font weight.
 //
@@ -184,6 +202,10 @@ $font-weights: map.merge(
 
 @if helpers.check-type(map, $font-weights, "$font-weights") {}
 
+@function font-weight($name) {
+  @return map.get($font-weights, $name);
+}
+
 //
 // Named values for font size.
 //
@@ -204,6 +226,10 @@ $font-sizes: map.merge(
 
 @if helpers.check-type(map, $font-sizes, "$font-sizes") {}
 
+@function font-size($name) {
+  @return map.get($font-sizes, $name);
+}
+
 //
 // Named values for font leading (line spacing).
 //
@@ -219,6 +245,10 @@ $font-leading: map.merge(
 
 @if helpers.check-type(map, $font-leading, "$font-leading") {}
 
+@function font-lead($name) {
+  @return map.get($font-leading, $name);
+}
+
 //
 // Named values for font tracking (letter spacing).
 //
@@ -233,6 +263,10 @@ $font-tracking: map.merge(
 ) !default;
 
 @if helpers.check-type(map, $font-tracking, "$font-tracking") {}
+
+@function font-track($name) {
+  @return map.get($font-tracking, $name);
+}
 
 //
 // Value used for text indentation.
@@ -258,6 +292,10 @@ $box-shadows: map.merge(
 ) !default;
 
 @if helpers.check-type(map, $box-shadows, "$box-shadows") {}
+
+@function box-shadow($name) {
+  @return map.get($box-shadows, $name);
+}
 
 //
 // Named values for color. The color classes are not prefixed with anything, so be careful while
@@ -301,6 +339,10 @@ $auto-colors: helpers.color-variants(
 ) !default;
 
 @if helpers.check-type(map, $auto-colors, "$auto-colors") {}
+
+@function color($name) {
+  @return map.get(map.merge($colors, $auto-colors), $name);
+}
 
 //
 // Named values for selectors that can be used when adding generators, and the associated suffix

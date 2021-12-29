@@ -2,8 +2,9 @@
 // config too. If it's not first in line, then SSS can't be configured using `with ()`.
 @forward "lib/config";
 
-@forward "lib/mixins/autoprefixer";
-@forward "lib/mixins/media";
+@forward "lib/forward/autoprefixer";
+@forward "lib/forward/functions";
+@forward "lib/forward/media";
 
 @use "lib/index";
 
