@@ -247,7 +247,7 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
   > ```
 </details>
 
-Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
+Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`. These key names cannot be used for screen sizes due to conflicts with [width](lib/generators/width#readme) classes: `0`, `px`, `full`, `screen`, `min`, `max`, `fit`, `auto`
 
 ### Sizing
 

@@ -4,6 +4,7 @@ suite_addTest testIndexBuild
 suite_addTest testConfigInvalidType
 suite_addTest testConfigBaseConflicts
 suite_addTest testConfigTextConflicts
+suite_addTest testConfigScreenConflicts
 
 testIndexBuild() {
   INPUT=$(cat ../index.scss);
@@ -43,6 +44,18 @@ testConfigTextConflicts() {
 @use "../index" with (
   \$font-weights: (foobar: 400),
   \$font-sizes: (foobar: 1rem),
+);
+EOF
+  );
+
+  echo $INPUT | sass --stdin 2>/dev/null
+  assertEquals 65 $?
+}
+
+testConfigScreenConflicts() {
+  INPUT=$(cat <<EOF
+@use "../index" with (
+  \$screens: (full: 100px),
 );
 EOF
   );

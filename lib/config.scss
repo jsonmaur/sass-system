@@ -527,3 +527,17 @@ $-text-conflict: helpers.key-conflict($font-weights, $font-sizes);
 @if $-text-conflict {
   @error "Found conflicting keys in $font-weights and $font-sizes: `#{$-text-conflict}`";
 }
+
+$-screen-reserved-conflict: helpers.key-conflict($screens, (
+  0: null,
+  px: null,
+  full: null,
+  screen: null,
+  min: null,
+  max: null,
+  fit: null,
+  auto: null,
+));
+@if $-screen-reserved-conflict {
+  @error "The following key cannot be used for $screens:: `#{$-screen-reserved-conflict}`";
+}
