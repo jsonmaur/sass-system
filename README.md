@@ -610,10 +610,10 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
   > ```sass
   > (
   >   base: [
-  >     background-color box-shadow box-sizing color font-family font-size font-style
-  >     font-variant font-weight letter-spacing line-height margin max-width opacity
-  >     padding text-align text-decoration text-indent text-overflow text-transform
-  >     vertical-align white-space width
+  >     background-color box-shadow box-sizing color font-family font-size font-style font-variant
+  >     font-weight height letter-spacing line-height margin max-height max-width min-height
+  >     min-width opacity padding text-align text-decoration text-indent text-overflow
+  >     text-transform vertical-align white-space width
   >   ],
   >   hover: [],
   >   dark: (

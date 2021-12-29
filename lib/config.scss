@@ -9,7 +9,9 @@
 
 $extend: helpers.empty-map() !default;
 
-@if helpers.check-type(map, $extend, "$extend") {}
+@if not helpers.check-type($extend, map) {
+  @error "Expected $extend to be a map";
+}
 
 //
 // Import the opinionated normalize rules.
@@ -17,7 +19,9 @@ $extend: helpers.empty-map() !default;
 
 $normalize: true !default;
 
-@if helpers.check-type(bool, $normalize, "$normalize") {}
+@if not helpers.check-type($normalize, bool) {
+  @error "Expected $normalize to be a boolean";
+}
 
 //
 // String that gets prefixed to every generated class name.
@@ -25,7 +29,9 @@ $normalize: true !default;
 
 $class-prefix: "" !default;
 
-@if helpers.check-type(string, $class-prefix, "$class-prefix") {}
+@if not helpers.check-type($class-prefix, string) {
+  @error "Expected $class-prefix to be a string";
+}
 
 //
 // String that gets used to separate base classes from advanced/responsive selectors.
@@ -33,7 +39,9 @@ $class-prefix: "" !default;
 
 $separator: "\\:" !default;
 
-@if helpers.check-type(string, $separator, "$separator") {}
+@if not helpers.check-type($separator, string) {
+  @error "Expected $separator to be a string";
+}
 
 //
 // Enable dark mode using a media query or a body class.
@@ -42,7 +50,9 @@ $separator: "\\:" !default;
 
 $dark-mode: media !default;
 
-@if helpers.check-type(string, $dark-mode, "$dark-mode") {}
+@if not helpers.check-type($dark-mode, string) {
+  @error "Expected $dark-mode to be a string";
+}
 
 //
 // Named screen size values used to generate responsive mixins and classes.
@@ -59,7 +69,9 @@ $screens: map.merge(
   map.get($extend, "screens") or ()
 ) !default;
 
-@if helpers.check-type(map, $screens, "$screens") {}
+@if not helpers.check-type($screens, map, number) {
+  @error "Expected $screens to be a map of numbers";
+}
 
 @function screen($name) {
   @return map.get($screens, $name);
@@ -83,7 +95,9 @@ $sizing: helpers.list-merge(
   map.get($extend, "sizing") or ()
 ) !default;
 
-@if helpers.check-type(list, $sizing, "$sizing") {}
+@if not helpers.check-type($sizing, list, number) {
+  @error "Expected $sizing to be a list of numbers";
+}
 
 @function size($index) {
   @return list.nth($sizing, $index);
@@ -107,7 +121,9 @@ $spacing: helpers.list-merge(
   map.get($extend, "spacing") or ()
 ) !default;
 
-@if helpers.check-type(list, $spacing, "$spacing") {}
+@if not helpers.check-type($spacing, list, number) {
+  @error "Expected $spacing to be a list of numbers";
+}
 
 @function space($index) {
   @return list.nth($spacing, $index);
@@ -123,7 +139,9 @@ $primary-fonts: (
   monospace: null,
 ) !default;
 
-@if helpers.check-type(map, $primary-fonts, "$primary-fonts") {}
+@if not helpers.check-type($primary-fonts, map) {
+  @error "Expected $primary-fonts to be a map";
+}
 
 //
 // Named values for font family with the associated primary font prepended if it exists.
@@ -180,7 +198,9 @@ $font-stacks: map.merge(
   map.get($extend, "font-stacks") or ()
 ) !default;
 
-@if helpers.check-type(map, $font-stacks, "$font-stacks") {}
+@if not helpers.check-type($font-stacks, map, list) {
+  @error "Expected $font-stacks to be a map of lists";
+}
 
 @function font($name) {
   @return map.get($font-stacks, $name);
@@ -205,7 +225,9 @@ $font-weights: map.merge(
   map.get($extend, "font-weights") or ()
 ) !default;
 
-@if helpers.check-type(map, $font-weights, "$font-weights") {}
+@if not helpers.check-type($font-weights, map, number) {
+  @error "Expected $font-weights to be a map of numbers";
+}
 
 @function font-weight($name) {
   @return map.get($font-weights, $name);
@@ -229,7 +251,9 @@ $font-sizes: map.merge(
   map.get($extend, "font-sizes") or ()
 ) !default;
 
-@if helpers.check-type(map, $font-sizes, "$font-sizes") {}
+@if not helpers.check-type($font-sizes, map, number) {
+  @error "Expected $font-sizes to be a map of numbers";
+}
 
 @function font-size($name) {
   @return map.get($font-sizes, $name);
@@ -248,7 +272,9 @@ $font-leading: map.merge(
   map.get($extend, "font-leading") or ()
 ) !default;
 
-@if helpers.check-type(map, $font-leading, "$font-leading") {}
+@if not helpers.check-type($font-leading, map, number) {
+  @error "Expected $font-leading to be a map of numbers";
+}
 
 @function font-lead($name) {
   @return map.get($font-leading, $name);
@@ -267,7 +293,9 @@ $font-tracking: map.merge(
   map.get($extend, "font-tracking") or ()
 ) !default;
 
-@if helpers.check-type(map, $font-tracking, "$font-tracking") {}
+@if not helpers.check-type($font-tracking, map, number) {
+  @error "Expected $font-tracking to be a map of numbers";
+}
 
 @function font-track($name) {
   @return map.get($font-tracking, $name);
@@ -279,7 +307,9 @@ $font-tracking: map.merge(
 
 $text-indent: 1em !default;
 
-@if helpers.check-type(number, $text-indent, "$text-indent") {}
+@if not helpers.check-type($text-indent, number) {
+  @error "Expected $text-indent to be a number";
+}
 
 //
 // Named values for box shadow.
@@ -296,7 +326,9 @@ $box-shadows: map.merge(
   map.get($extend, "box-shadows") or ()
 ) !default;
 
-@if helpers.check-type(map, $box-shadows, "$box-shadows") {}
+@if not helpers.check-type($box-shadows, map, list) {
+  @error "Expected $box-shadows to be a map of lists";
+}
 
 @function box-shadow($name) {
   @return map.get($box-shadows, $name);
@@ -328,7 +360,9 @@ $colors: helpers.color-variants(
   )
 ) !default;
 
-@if helpers.check-type(map, $colors, "$colors") {}
+@if not helpers.check-type($colors, map, color) {
+  @error "Expected $colors to be a map of colors";
+}
 
 //
 // Named values for brand colors that don't have auto-generated variations. The color classes are
@@ -344,7 +378,9 @@ $brand-colors: map.merge(
   map.get($extend, "brand-colors") or ()
 ) !default;
 
-@if helpers.check-type(map, $brand-colors, "$brand-colors") {}
+@if not helpers.check-type($brand-colors, map, color) {
+  @error "Expected $brand-colors to be a map of colors";
+}
 
 @function color($name) {
   @return map.get(map.merge($colors, $brand-colors), $name);
@@ -359,7 +395,7 @@ $brand-colors: map.merge(
 
 $selectors: map.merge(
   (
-    base: null,
+    base: "",
     // pseudo classes
     hover: ":hover",
     focus: ":focus",
@@ -410,7 +446,9 @@ $selectors: map.merge(
   map.get($extend, "selectors") or (),
 ) !default;
 
-@if helpers.check-type(map, $selectors, "$selectors") {}
+@if not helpers.check-type($selectors, map, string) {
+  @error "Expected $selectors to be a map of strings";
+}
 
 //
 // Classname generators to include for each selector type. Deciding what to include before
@@ -472,7 +510,9 @@ $generators: helpers.map-list-merge(
   map.get($extend, "generators") or ()
 ) !default;
 
-@if helpers.check-type(map, $generators, "$generators") {}
+@if not helpers.check-type($generators, map) {
+  @error "Expected $generators to be a map";
+}
 
 //
 // Sanity checks to ensure values that have the same class prefix don't have conflicting keys.

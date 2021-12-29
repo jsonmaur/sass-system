@@ -33,10 +33,20 @@
 
 @function test-check-type() {
   $cases: [
-    (input: [number, 0], output: true)
-    (input: [string, ""], output: true)
-    (input: [map, ()], output: true)
-    (input: [map, (foo: bar)], output: true)
+    (input: [0, number], output: true)
+    (input: [0, string], output: false)
+    (input: ["", string], output: true)
+    (input: [#000, color], output: true)
+    (input: [1em, number], output: true)
+    (input: [(), map], output: true)
+    (input: [[one], map], output: false)
+    (input: [(foo: bar), map], output: true)
+    (input: [(foo: bar), map, string], output: true)
+    (input: [(foo: bar), map, number], output: false)
+    (input: [(foo: 0), map, number], output: true)
+    (input: [[foo bar], list, string], output: true)
+    (input: [[foo bar], list, number], output: false)
+    (input: [[1 2], list, number], output: true)
   ];
 
   @each $case in $cases {

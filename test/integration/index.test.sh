@@ -1,6 +1,7 @@
 #! /bin/sh
 
 suite_addTest testIndexBuild
+suite_addTest testConfigInvalidType
 suite_addTest testConfigBaseConflicts
 suite_addTest testConfigTextConflicts
 
@@ -10,6 +11,18 @@ testIndexBuild() {
 
   echo $INPUT | sass --stdin 2>/dev/null
   assertEquals 0 $?
+}
+
+testConfigInvalidType() {
+  INPUT=$(cat <<EOF
+@use "../index" with (
+  \$colors: (foobar: 1),
+);
+EOF
+  );
+
+  echo $INPUT | sass --stdin 2>/dev/null
+  assertEquals 65 $?
 }
 
 testConfigBaseConflicts() {
