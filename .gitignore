@@ -9,5 +9,8 @@
 *.sass.map
 *.scss.map
 
-# The directory we write compiled artifacts to.
+# The directory we write compiled artifacts to
 /_build/
+
+# The example file sometimes used for manual testing
+example.scss
