@@ -98,7 +98,7 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 @use "@ssbuild/core";
 ```
 
-Point Sass to the parent path of the ssbuild project folder using [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path), whether it's in `vendor`, `deps`, or `node_modules`. That's it! All the utility classes will now be included in your CSS output.
+Point Sass to the parent path of the ssbuild project folder using [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path), whether it's in `vendor`, `deps`, or `node_modules`, and that's it! All the utility classes will now be included in your CSS output.
 
 ```html
 <div class="m-5 p-5 bg-gray-8 measure-regular md:measure-wide">
@@ -116,7 +116,7 @@ Point Sass to the parent path of the ssbuild project folder using [--load-path](
 
 ### Custom Classes
 
-If you find yourself frequently reusing utility classes and would like to extract common components into custom classes, you can use the [@extend](https://sass-lang.com/documentation/at-rules/extend) syntax.
+If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can use the [@extend](https://sass-lang.com/documentation/at-rules/extend) syntax.
 
 ```scss
 .text-container {
@@ -149,8 +149,6 @@ Alternatively, you can access style system values directly using [getters](#gett
 
 ```sass
 @use "@ssbuild/core" with (
-  $normalize: false,
-  $dark-mode: class,
   $primary-fonts: (
     sans-serif: "Fira Sans",
     monospace: "Fira Mono",
@@ -188,344 +186,443 @@ _Note that all custom values will **override the defaults** unless they are conf
 
 ### Normalize
 
-Whether to import [modern-normalize](https://github.com/sindresorhus/modern-normalize) and some other [opinionated normalize rules](lib/normalize.scss) at the top of your stylesheet.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `boolean`  
-> default: `true`
+  > type: `boolean`  
+  > default: `true`
+</details>
+
+Whether to import [modern-normalize](https://github.com/sindresorhus/modern-normalize) and some other [opinionated normalize rules](lib/normalize.scss) at the top of your stylesheet.
 
 ### Class Prefix
 
-Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `ss-`, classes will look like `.ss-bg-black`.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `string`  
-> default: none
+  > type: `string`  
+  > default: none
+</details>
+
+Used to prefix a value to every generated class name. This is turned off by default, so classes will look like `.bg-black`. e.g. If set to `ss-`, classes will look like `.ss-bg-black`.
 
 ### Separator
 
-Used to separate base class names from variants such as dark selectors, pseudo selectors, and responsive selectors. Using the default value of an escaped colon will generate classes such as `.sm\:dark\:bg-black`, which can be used as `<div class="sm:dark:bg-black">`.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `string`  
-> default: `\\:`
+  > type: `string`  
+  > default: `\\:`
+</details>
+
+Used to separate base class names from variants such as dark selectors, pseudo selectors, and responsive selectors. Using the default value of an escaped colon will generate classes such as `.sm\:dark\:bg-black`, which can be used as `<div class="sm:dark:bg-black">`.
 
 ### Dark Mode
 
-Enables dark mode classes using media queries or a parent class. Setting to `media` will create classes within `@media (prefers-color-scheme: dark)`, and setting to `class` will create classes under a parent `.dark` class such as `.dark .dark\:bg-black`.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `string`  
-> default: `media`
+  > type: `string`  
+  > default: `media`
+</details>
+
+Enables dark mode classes using media queries or a parent class. Setting to `media` will create classes within `@media (prefers-color-scheme: dark)`, and setting to `class` will create classes under a parent `.dark` class such as `.dark .dark\:bg-black`.
 
 ### Screens
 
-Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `screen($name)`  
-> default:
-> ```sass
-> (
->   xs: 640px,
->   sm: 768px,
->   md: 1024px,
->   lg: 1280px,
->   xl: 1792px,
-> )
-> ```
+  > type: `map`  
+  > getter: `screen($name)`  
+  > default:
+  > ```sass
+  > (
+  >   xs: 640px,
+  >   sm: 768px,
+  >   md: 1024px,
+  >   lg: 1280px,
+  >   xl: 1792px,
+  > )
+  > ```
+</details>
+
+Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
 
 ### Measures
 
-Named width values used for paragraphs and other sized containers. These classes are prefixed with `.measure-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `measure($name)`  
-> default:
-> ```sass
-> (
->   narrow: 20em,
->   regular: 30em,
->   wide: 34em,
-> )
-> ```
+  > type: `map`  
+  > getter: `measure($name)`  
+  > default:
+  > ```sass
+  > (
+  >   narrow: 20em,
+  >   regular: 30em,
+  >   wide: 34em,
+  > )
+  > ```
+</details>
+
+Named width values used for paragraphs and other sized containers. These classes are prefixed with `.measure-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
 
 ### Spacing
 
-Spacing values used for margin and padding. Class names correspond with the list index starting at 1. e.g. `.m-1` will correspond to `margin: .25rem`, and `.p-8` will correspond to `padding: 32rem`. These classes are prefixed with `.m-*` and `.p-*`. See the [margin generator](lib/generators/margin#readme) and [padding generator](lib/generators/padding#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `list`  
-> getter: `space($index)`  
-> default:
-> ```sass
-> [
->   .25rem,
->   .5rem,
->   1rem,
->   2rem,
->   4rem,
->   8rem,
->   16rem,
->   32rem,
-> ]
-> ```
+  > type: `list`  
+  > getter: `space($index)`  
+  > default:
+  > ```sass
+  > [
+  >   .25rem,
+  >   .5rem,
+  >   1rem,
+  >   2rem,
+  >   4rem,
+  >   8rem,
+  >   16rem,
+  >   32rem,
+  > ]
+  > ```
+</details>
+
+Spacing values used for margin and padding. Class names correspond with the list index starting at 1. e.g. `.m-1` will correspond to `margin: .25rem`, and `.p-8` will correspond to `padding: 32rem`. These classes are prefixed with `.m-*` and `.p-*`. See the [margin generator](lib/generators/margin#readme) and [padding generator](lib/generators/padding#readme) for more info.
 
 ### Primary Fonts
 
-A primary font can be set for each type of font stack, such as `monospace: "Fira Mono"`, which prepends to the default font stack of that same type. This avoids having to redefine entire system font stacks from scratch just to add a custom font.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> default:
-> ```sass
-> (
->   serif: null,
->   sans-serif: null,
->   monospace: null,
-> )
-> ```
+  > type: `map`  
+  > default:
+  > ```sass
+  > (
+  >   serif: null,
+  >   sans-serif: null,
+  >   monospace: null,
+  > )
+  > ```
+</details>
+
+A primary font can be set for each type of font stack, such as `monospace: "Fira Mono"`, which prepends to the default font stack of that same type. This avoids having to redefine entire system font stacks from scratch just to add a custom font.
 
 ### Font Stacks
 
-Named list values for font family stacks. Rather than redefining entire font stacks to specify a single custom font, it's recommended to specify a [primary font](#primary-fonts) instead. These classes **do not** have a prefix. See the [font-family generator](lib/generators/font-family#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `font($name)`  
-> default:
-> ```sass
-> (
->   serif: [
->     ui-serif,
->     Georgia,
->     Cambria,
->     "Times New Roman",
->     Times,
->     serif,
->     "Apple Color Emoji",
->     "Segoe UI Emoji",
->     "Segoe UI Symbol",
->     "Noto Color Emoji",
->   ],
->   sans-serif: [
->     ui-sans-serif,
->     system-ui,
->     -apple-system,
->     BlinkMacSystemFont,
->     "Segoe UI",
->     Roboto,
->     "Helvetica Neue",
->     Arial,
->     "Noto Sans",
->     sans-serif,
->     "Apple Color Emoji",
->     "Segoe UI Emoji",
->     "Segoe UI Symbol",
->     "Noto Color Emoji",
->   ],
->   monospace: [
->     ui-monospace,
->     SFMono-Regular,
->     Menlo,
->     Monaco,
->     Consolas,
->     "Liberation Mono",
->     "Courier New",
->     monospace,
->     "Apple Color Emoji",
->     "Segoe UI Emoji",
->     "Segoe UI Symbol",
->     "Noto Color Emoji",
->   ],
-> )
-> ```
+  > type: `map`  
+  > getter: `font($name)`  
+  > default:
+  > ```sass
+  > (
+  >   serif: [
+  >     ui-serif,
+  >     Georgia,
+  >     Cambria,
+  >     "Times New Roman",
+  >     Times,
+  >     serif,
+  >     "Apple Color Emoji",
+  >     "Segoe UI Emoji",
+  >     "Segoe UI Symbol",
+  >     "Noto Color Emoji",
+  >   ],
+  >   sans-serif: [
+  >     ui-sans-serif,
+  >     system-ui,
+  >     -apple-system,
+  >     BlinkMacSystemFont,
+  >     "Segoe UI",
+  >     Roboto,
+  >     "Helvetica Neue",
+  >     Arial,
+  >     "Noto Sans",
+  >     sans-serif,
+  >     "Apple Color Emoji",
+  >     "Segoe UI Emoji",
+  >     "Segoe UI Symbol",
+  >     "Noto Color Emoji",
+  >   ],
+  >   monospace: [
+  >     ui-monospace,
+  >     SFMono-Regular,
+  >     Menlo,
+  >     Monaco,
+  >     Consolas,
+  >     "Liberation Mono",
+  >     "Courier New",
+  >     monospace,
+  >     "Apple Color Emoji",
+  >     "Segoe UI Emoji",
+  >     "Segoe UI Symbol",
+  >     "Noto Color Emoji",
+  >   ],
+  > )
+  > ```
+</details>
+
+Named list values for font family stacks. Rather than redefining entire font stacks to specify a single custom font, it's recommended to specify a [primary font](#primary-fonts) instead. These classes **do not** have a prefix. See the [font-family generator](lib/generators/font-family#readme) for more info.
 
 ### Font Weights
 
-Named values used for font weight. These classes are prefixed with `.text-*`. See the [font-weight generator](lib/generators/font-weight#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `font-weight($name)`  
-> default:
-> ```sass
-> (
->   thin: 100,
->   extra-light: 200,
->   light: 300,
->   regular: 400,
->   medium: 500,
->   semi-bold: 600,
->   bold: 700,
->   extra-bold: 800,
->   heavy: 900,
-> )
-> ```
+  > type: `map`  
+  > getter: `font-weight($name)`  
+  > default:
+  > ```sass
+  > (
+  >   thin: 100,
+  >   extra-light: 200,
+  >   light: 300,
+  >   regular: 400,
+  >   medium: 500,
+  >   semi-bold: 600,
+  >   bold: 700,
+  >   extra-bold: 800,
+  >   heavy: 900,
+  > )
+  > ```
+</details>
+
+Named values used for font weight. These classes are prefixed with `.text-*`. See the [font-weight generator](lib/generators/font-weight#readme) for more info.
 
 ### Font Sizes
 
-Named values used for font size. These classes are prefixed with `.text-*`. See the [font-size generator](lib/generators/font-size#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `font-size($name)`  
-> default:
-> ```sass
-> (
->   xxs: .75rem,
->   xs: .875rem,
->   sm: 1rem,
->   md: 1.25rem,
->   lg: 1.5rem,
->   xl: 2.25rem,
->   xxl: 3rem,
->   jumbo: 6rem,
-> )
-> ```
+  > type: `map`  
+  > getter: `font-size($name)`  
+  > default:
+  > ```sass
+  > (
+  >   xxs: .75rem,
+  >   xs: .875rem,
+  >   sm: 1rem,
+  >   md: 1.25rem,
+  >   lg: 1.5rem,
+  >   xl: 2.25rem,
+  >   xxl: 3rem,
+  >   jumbo: 6rem,
+  > )
+  > ```
+</details>
+
+Named values used for font size. These classes are prefixed with `.text-*`. See the [font-size generator](lib/generators/font-size#readme) for more info.
 
 ### Font Leading
 
-Named values used for font leading (line height). These classes are prefixed with `.lead-*`. See the [line-height generator](lib/generators/line-height#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `font-lead($name)`  
-> default:
-> ```sass
-> (
->   solid: 1em,
->   title: 1.25em,
->   copy: 1.5em,
-> )
-> ```
+  > type: `map`  
+  > getter: `font-lead($name)`  
+  > default:
+  > ```sass
+  > (
+  >   solid: 1em,
+  >   title: 1.25em,
+  >   copy: 1.5em,
+  > )
+  > ```
+</details>
+
+Named values used for font leading (line height). These classes are prefixed with `.lead-*`. See the [line-height generator](lib/generators/line-height#readme) for more info.
 
 ### Font Tracking
 
-Named values used for font tracking (letter spacing). These classes are prefixed with `.track-*`. See the [letter-spacing generator](lib/generators/letter-spacing#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `font-track($name)`  
-> default:
-> ```sass
-> (
->   tight: -.05em,
->   open: .1em,
->   mega: .25em,
-> )
-> ```
+  > type: `map`  
+  > getter: `font-track($name)`  
+  > default:
+  > ```sass
+  > (
+  >   tight: -.05em,
+  >   open: .1em,
+  >   mega: .25em,
+  > )
+  > ```
+</details>
+
+Named values used for font tracking (letter spacing). These classes are prefixed with `.track-*`. See the [letter-spacing generator](lib/generators/letter-spacing#readme) for more info.
 
 ### Text Indent
 
-Value used for the text indentation class. See the [text-indent generator](lib/generators/text-indent#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `number`  
-> default: `1em`
+  > type: `number`  
+  > default: `1em`
+</details>
+
+Value used for the text indentation class. See the [text-indent generator](lib/generators/text-indent#readme) for more info.
 
 ### Box Shadows
 
-Named values used for box shadow. These classes are prefixed with `.shadow-*`. See the [box-shadow generator](lib/generators/box-shadow#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `box-shadow($name)`  
-> default:
-> ```sass
-> (
->   low: (0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)),
->   mid: (0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)),
->   high: (0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)),
->   mega: 0 25px 50px -12px rgb(0 0 0 / 0.25),
->   inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05),
-> )
-> ```
+  > type: `map`  
+  > getter: `box-shadow($name)`  
+  > default:
+  > ```sass
+  > (
+  >   low: (0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)),
+  >   mid: (0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)),
+  >   high: (0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)),
+  >   mega: 0 25px 50px -12px rgb(0 0 0 / 0.25),
+  >   inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05),
+  > )
+  > ```
+</details>
+
+Named values used for box shadow. These classes are prefixed with `.shadow-*`. See the [box-shadow generator](lib/generators/box-shadow#readme) for more info.
 
 ### Colors
 
-Named values for color and background color. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> getter: `color($name)`  
-> default:
-> ```sass
-> (
->   black: #000000,
->   white: #ffffff,
-> )
-> ```
+  > type: `map`  
+  > getter: `color($name)`  
+  > default:
+  > ```sass
+  > (
+  >   black: #000000,
+  >   white: #ffffff,
+  > )
+  > ```
+</details>
+
+Named values for color and background color. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 ### Auto Colors
 
+<details>
+  <summary><b>Specs</b></summary>
+
+  > type: `map`  
+  > getter: `color($name-$index)`  
+  > default:
+  > ```sass
+  > (
+  >   gray: #adb5bd,
+  >   cyan: #0dcaf0,
+  >   teal: #20c997,
+  >   green: #198754,
+  >   yellow: #ffc107,
+  >   orange: #fd7e14,
+  >   red: #dc3545,
+  >   pink: #d63384,
+  >   purple: #6f42c1,
+  >   indigo: #6610f2,
+  >   blue: #0d6efd,
+  > )
+  > ```
+</details>
+
 Named values for colors that get auto-generated variations. 4 darker variations and 4 lighter variations will be generated for each color, for a total of 9 colors per key. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
-> type: `map`  
-> getter: `color($name-$index)`  
-> default:
-> ```sass
-> (
->   gray: #adb5bd,
->   cyan: #0dcaf0,
->   teal: #20c997,
->   green: #198754,
->   yellow: #ffc107,
->   orange: #fd7e14,
->   red: #dc3545,
->   pink: #d63384,
->   purple: #6f42c1,
->   indigo: #6610f2,
->   blue: #0d6efd,
-> )
-> ```
-
 ### Selectors
+
+<details>
+  <summary><b>Specs</b></summary>
+
+  > type: `map`  
+  > default:
+  > ```sass
+  > (
+  >   // pseudo classes
+  >   hover: ":hover",
+  >   focus: ":focus",
+  >   focus-within: ":focus-within",
+  >   focus-visible: ":focus-visible",
+  >   active: ":active",
+  >   visited: ":visited",
+  >   target: ":target",
+  >   first: ":first-child",
+  >   last: ":last-child",
+  >   only: ":only-child",
+  >   odd: ":nth-child(odd)",
+  >   even: ":nth-child(even)",
+  >   first-of-type: ":first-of-type",
+  >   last-of-type: ":last-of-type",
+  >   only-of-type: ":only-of-type",
+  >   empty: ":empty",
+  >   disabled: ":disabled",
+  >   checked: ":checked",
+  >   indeterminate: ":indeterminate",
+  >   default: ":default",
+  >   required: ":required",
+  >   valid: ":valid",
+  >   invalid: ":invalid",
+  >   in-range: ":in-range",
+  >   out-of-range: ":out-of-range",
+  >   placeholder-shown: ":placeholder-shown",
+  >   autofill: ":autofill",
+  >   read-only: ":read-only",
+  >   rtl: ":dir(rtl)",
+  >   ltr: ":dir(ltr)",
+  >   // pseudo elements
+  >   before: "::before",
+  >   after: "::after",
+  >   first-letter: "::first-letter",
+  >   first-line: "::first-line",
+  >   marker: "::marker",
+  >   selection: "::selection",
+  >   file: "::file-selector-button",
+  >   placeholder: "::placeholder",
+  >   // attribute selectors
+  >   open: "[open]",
+  >   // nested selectors
+  >   hover disabled: ":hover:disabled",
+  >   hover before: ":hover::before",
+  >   hover after: ":hover::after",
+  > )
+  > ```
+</details>
 
 All the selectors that can be specified in [generators](#generators), and the associated suffix for the classes. The key is used in the class name, and the value is used as the selector. e.g. If the `first` selector is enabled for a generator, it will create classes such as `.first\:bg-black:first-child`.
 
 The selector name can also be a space-separated list for nested selectors. e.g. `hover first: ":hover:first-child"` will create `.hover\:first\:classname:hover:first-child` classes. We included a few by default, but add your own using [$extend](#extend) as needed. Using a space in the key name is to ensure the configured `$separator` is used in the generated class.
 
-> type: `map`  
-> default:
-> ```sass
-> (
->   // pseudo classes
->   hover: ":hover",
->   focus: ":focus",
->   focus-within: ":focus-within",
->   focus-visible: ":focus-visible",
->   active: ":active",
->   visited: ":visited",
->   target: ":target",
->   first: ":first-child",
->   last: ":last-child",
->   only: ":only-child",
->   odd: ":nth-child(odd)",
->   even: ":nth-child(even)",
->   first-of-type: ":first-of-type",
->   last-of-type: ":last-of-type",
->   only-of-type: ":only-of-type",
->   empty: ":empty",
->   disabled: ":disabled",
->   checked: ":checked",
->   indeterminate: ":indeterminate",
->   default: ":default",
->   required: ":required",
->   valid: ":valid",
->   invalid: ":invalid",
->   in-range: ":in-range",
->   out-of-range: ":out-of-range",
->   placeholder-shown: ":placeholder-shown",
->   autofill: ":autofill",
->   read-only: ":read-only",
->   rtl: ":dir(rtl)",
->   ltr: ":dir(ltr)",
->   // pseudo elements
->   before: "::before",
->   after: "::after",
->   first-letter: "::first-letter",
->   first-line: "::first-line",
->   marker: "::marker",
->   selection: "::selection",
->   file: "::file-selector-button",
->   placeholder: "::placeholder",
->   // attribute selectors
->   open: "[open]",
->   // nested selectors
->   hover disabled: ":hover:disabled",
->   hover before: ":hover::before",
->   hover after: ":hover::after",
-> )
-> ```
-
 ### Generators
+
+<details>
+  <summary><b>Specs</b></summary>
+
+  > type: `map`  
+  > default:
+  > ```sass
+  > (
+  >   base: [
+  >     background-color box-shadow box-sizing color font-family font-size font-style
+  >     font-variant font-weight letter-spacing line-height margin max-width opacity
+  >     padding text-align text-decoration text-indent text-overflow text-transform
+  >     vertical-align white-space width
+  >   ],
+  >   hover: [],
+  >   dark: (
+  >     base: [],
+  >   ),
+  >   responsive: (
+  >     base: [],
+  >     dark: (
+  >       base: [],
+  >     ),
+  >   ),
+  > )
+  > ```
+</details>
 
 Rather than include every single possible utility class in the final CSS (which would result in an enormous file), you can add or remove specific classes in the config—which we call "generators". Not using dark mode? Set those generators to an empty list. Want to add utility classes for a specific pseudo selector, or even nested pseudo selectors? Add those to the generators list. We added some sane defaults that will work for most sites, but you will need to add custom generator lists for anything beyond that.
 
@@ -533,39 +630,18 @@ This is different from other systems like Tailwind, which use a just-in-time met
 
 See [selectors](#selectors) for a list of available selectors. `dark` can be set to a nested list of selectors to support dark classes, and `responsive` (or individual screens such as `sm` and `md`) can be set to a nested list to support responsive classes. Dark responsive classes can be enabled with by setting `dark` to a nested list _within_ `responsive`. If you find yourself with duplicated lists of generators, simply use a Sass variable.
 
-> type: `map`  
-> default:
-> ```sass
-> (
->   base: [
->     background-color box-shadow box-sizing color font-family font-size font-style
->     font-variant font-weight letter-spacing line-height margin max-width opacity
->     padding text-align text-decoration text-indent text-overflow text-transform
->     vertical-align white-space width
->   ],
->   hover: [],
->   dark: (
->     base: [],
->   ),
->   responsive: (
->     base: [],
->     dark: (
->       base: [],
->     ),
->   ),
-> )
-> ```
-
 [See all the available generators.](lib/generators#readme)
 
 ### Extend
 
-This can be used to append custom values onto config maps and lists while retaining the existing values.
+<details>
+  <summary><b>Specs</b></summary>
 
-> type: `map`  
-> default: none
+  > type: `map`  
+  > default: none
+</details>
 
-For example:
+This can be used to append custom values onto config maps and lists while retaining the existing values. For example:
 
 ```sass
 $extend: (
@@ -624,9 +700,7 @@ Will result in:
 
 ## Media Queries
 
-These mixins are useful for defining custom breakpoints using the sizes from [$screens](#screens).
-
-For example:
+These mixins are useful for defining custom breakpoints using the sizes from [$screens](#screens). For example:
 
 ```scss
 .foobar {
@@ -652,61 +726,69 @@ Will result in:
 }
 ```
 
-#### `media-up-to($screen)`
+<details>
+  <summary><code>media-up-to($screen)</code></summary>
 
-Generates a media query using `min-width` (the given screen size or _larger_):
+  Generates a media query using `min-width` (the given screen size or _larger_):
 
-```scss
-@include ssbuild.media-up-to(md) {}
-```
+  ```scss
+  @include ssbuild.media-up-to(md) {}
+  ```
 
-Will result in:
+  Will result in:
 
-```css
-@media (min-width: 1024px) {}
-```
+  ```css
+  @media (min-width: 1024px) {}
+  ```
+</details>
 
-#### `media-down-to($screen)`
+<details>
+  <summary><code>media-down-to($screen)</code></summary>
 
-Generates a media query using `max-width` (the given screen size or _smaller_) with 0.5px subtracted from the screen size:
+  Generates a media query using `max-width` (the given screen size or _smaller_) with 0.5px subtracted from the screen size:
 
-```scss
-@include ssbuild.media-down-to(md) {}
-```
+  ```scss
+  @include ssbuild.media-down-to(md) {}
+  ```
 
-Will result in:
+  Will result in:
 
-```css
-@media (max-width: 1023.5px) {}
-```
+  ```css
+  @media (max-width: 1023.5px) {}
+  ```
+</details>
 
-#### `media-only($screen)`
+<details>
+  <summary><code>media-only($screen)</code></summary>
 
-Generates a media query using `min-width` and `max-width` to target a single screen size:
+  Generates a media query using `min-width` and `max-width` to target a single screen size:
 
-```scss
-@include ssbuild.media-only(md) {}
-```
+  ```scss
+  @include ssbuild.media-only(md) {}
+  ```
 
-Will result in:
+  Will result in:
 
-```css
-@media (min-width: 1024px) and (max-width: 1279.5px) {}
-```
+  ```css
+  @media (min-width: 1024px) and (max-width: 1279.5px) {}
+  ```
+</details>
 
-#### `media-between($screen1, $screen2)`
+<details>
+  <summary><code>media-between($screen1, $screen2)</code></summary>
 
-Generate a media query using `min-width` and `max-width` to target screen sizes between the two specified:
+  Generate a media query using `min-width` and `max-width` to target screen sizes between the two specified:
 
-```scss
-@include ssbuild.media-between(sm, lg) {}
-```
+  ```scss
+  @include ssbuild.media-between(sm, lg) {}
+  ```
 
-Will result in:
+  Will result in:
 
-```css
-@media (min-width: 768px) and (max-width: 1279.5px) {}
-```
+  ```css
+  @media (min-width: 768px) and (max-width: 1279.5px) {}
+  ```
+</details>
 
 ## (Auto)Prefixer
 
@@ -732,60 +814,84 @@ Will result in:
 }
 ```
 
-#### `prefix-animation($value)`
+<details>
+  <summary><code>prefix-animation($value)</code></summary>
 
-Adds `-webkit` prefix to `animation: $value;`.
+  Adds `-webkit` prefix to `animation: $value;`.
+</details>
 
-#### `prefix-appearance($value)`
+<details>
+  <summary><code>prefix-appearance($value)</code></summary>
 
-Adds `-webkit` and `-ms` prefixes to `appearance: $value;`.
+  Adds `-webkit` and `-ms` prefixes to `appearance: $value;`.
+</details>
 
-#### `prefix-background-clip($value)`
+<details>
+  <summary><code>prefix-background-clip($value)</code></summary>
 
-Adds `-webkit` prefix to `background-clip: $value;`.
+  Adds `-webkit` prefix to `background-clip: $value;`.
+</details>
 
-#### `prefix-filter($value)`
+<details>
+  <summary><code>prefix-filter($value)</code></summary>
 
-Adds `-webkit` prefix to `filter: $value;`.
+  Adds `-webkit` prefix to `filter: $value;`.
+</details>
 
-#### `prefix-flexbox`
+<details>
+  <summary><code>prefix-flexbox</code></summary>
 
-Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: flex;`.
+  Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: flex;`.
+</details>
 
-#### `prefix-flexbox-inline`
+<details>
+  <summary><code>prefix-flexbox-inline</code></summary>
 
-Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: inline-flex;`.
+  Adds `-webkit`, `-moz`, and `-ms` prefixes to `display: inline-flex;`.
+</details>
 
-#### `prefix-flex($value)`
+<details>
+  <summary><code>prefix-flex($value)</code></summary>
 
-Adds `-webkit` and `-ms` prefixes to `flex: $value;`.
+  Adds `-webkit` and `-ms` prefixes to `flex: $value;`.
+</details>
 
-#### `prefix-grid`
+<details>
+  <summary><code>prefix-grid</code></summary>
 
-Adds `-ms` prefix to `display: grid;`.
+  Adds `-ms` prefix to `display: grid;`.
+</details>
 
-#### `prefix-keyframes($name)`
+<details>
+  <summary><code>prefix-keyframes($name)</code></summary>
 
-Adds `-webkit` prefix to `@keyframes($name) { }`. This mixin requires content:
+  Adds `-webkit` prefix to `@keyframes($name) { }`. This mixin requires content:
 
-```scss
-@include ss.keyframes(slidein) {
-  from { transform: translateX(0%); }
-  to { transform: translateX(100%); }
-}
-```
+  ```scss
+  @include ssbuild.prefix-keyframes(slidein) {
+    from { @include ssbuild.prefix-transform(translateX(0%)); }
+    to { @include ssbuild.prefix-transform(translateX(100%)); }
+  }
+  ```
+</details>
 
-#### `prefix-object-fit($value)`
+<details>
+  <summary><code>prefix-object-fit($value)</code></summary>
 
-Adds `-o` prefix to `object-fit: $value;`.
+  Adds `-o` prefix to `object-fit: $value;`.
+</details>
 
-#### `prefix-transform($value)`
+<details>
+  <summary><code>prefix-transform($value)</code></summary>
 
-Adds `-webkit` and `-ms` prefixes to `transform: $value;`
+  Adds `-webkit` and `-ms` prefixes to `transform: $value;`
+</details>
 
-#### `prefix-user-select($value)`
+<details>
+  <summary><code>prefix-user-select($value)</code></summary>
 
-Adds `-webkit`, `-moz`, and `-ms` prefixes to `user-select: $value;`.
+  Adds `-webkit`, `-moz`, and `-ms` prefixes to `user-select: $value;`.
+</details>
 
 ## Acknowledgements
 
