@@ -40,7 +40,7 @@
     - [Separator](#separator)
     - [Dark Mode](#dark-mode)
     - [Screens](#screens)
-    - [Measures](#measures)
+    - [Sizing](#sizing)
     - [Spacing](#spacing)
     - [Primary Fonts](#primary-fonts)
     - [Font Stacks](#font-stacks)
@@ -101,7 +101,7 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 Point Sass to the parent path of the ssbuild project folder using [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path), whether it's in `vendor`, `deps`, or `node_modules`, and that's it! All the utility classes will now be included in your CSS output.
 
 ```html
-<div class="m-5 p-5 bg-gray-8 measure-regular md:measure-wide">
+<div class="m-5 p-5 bg-gray-8 max-w-6 md:max-w-7">
   <h1 class="mb-4 pink-5 text-xxl text-heavy">
     Welcome to ssbuild!
   </h1>
@@ -123,8 +123,8 @@ If you find yourself frequently reusing utility classes and want to extract comm
   @extend .m-5;
   @extend .p-5;
   @extend .bg-gray-8;
-  @extend .measure-regular;
-  @extend .md\:measure-wide;
+  @extend .max-w-6;
+  @extend .md\:max-w-7;
 }
 ```
 
@@ -135,12 +135,12 @@ Alternatively, you can access style system values directly using [getters](#gett
 
 .text-container {
   background-color: ss.color(gray-8);
-  max-width: ss.measure(regular);
+  max-width: ss.size(6);
   padding: ss.space(5);
   margin: ss.space(5);
 
   @include ss.media-up-to(md) {
-    max-width: ss.measure(wide);
+    max-width: ss.size(7);
   }
 }
 ```
@@ -168,7 +168,7 @@ _Note that all custom values will **override the defaults** unless they are conf
 - [$separator](#separator)
 - [$dark-mode](#dark-mode)
 - [$screens](#screens)
-- [$measures](#measures)
+- [$sizing](#sizing)
 - [$spacing](#spacing)
 - [$primary-fonts](#primary-fonts)
 - [$font-stacks](#font-stacks)
@@ -249,24 +249,29 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
 
 Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`.
 
-### Measures
+### Sizing
 
 <details>
   <summary><b>Specs</b></summary>
 
-  > type: `map`  
-  > getter: `measure($name)`  
+  > type: `list`  
+  > getter: `size($index)`  
   > default:
   > ```sass
-  > (
-  >   narrow: 20em,
-  >   regular: 30em,
-  >   wide: 34em,
-  > )
+  > [
+  >   1rem
+  >   2rem
+  >   4rem
+  >   8rem
+  >   16rem
+  >   32rem
+  >   48rem
+  >   64rem
+  > ]
   > ```
 </details>
 
-Named width values used for paragraphs and other sized containers. These classes are prefixed with `.measure-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
+Named width values used for paragraphs and other sized containers. These classes are prefixed with `.max-w-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
 
 ### Spacing
 
@@ -645,20 +650,22 @@ This can be used to append custom values onto config maps and lists while retain
 
 ```sass
 $extend: (
-  measures: (
-    gaping: 60em,
+  screens: (
+    xxl: 2304px,
   ),
 )
 ```
 
-Will result in these measures:
+Will result in these screens:
 
 ```sass
 (
-  narrow: 20em,
-  regular: 30em,
-  wide: 34em,
-  gaping: 60em,
+  xs: 640px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1280px,
+  xl: 1792px,
+  xxl: 2304px,
 )
 ```
 
@@ -669,7 +676,7 @@ _Note that key names nested within `$extend` are **not** prefixed with `$`._
 These functions are useful for getting style system values inside [custom classes](#custom-classes).
 
 - `screen($name)` to get values from [$screens](#screens)
-- `measure($name)` to get values from [$measures](#measures)
+- `size($name)` to get values from [$sizing](#sizing)
 - `space($index)` to get values from [$spacing](#spacing)
 - `font($name)` to get values from [$font-stacks](#font-stacks)
 - `font-weight($name)` to get values from [$font-weights](#font-weights)

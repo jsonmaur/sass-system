@@ -1,0 +1,8 @@
+@mixin render($pre, $app) {
+  .#{$pre}min-w-0#{$app} { min-width: 0rem; }
+  .#{$pre}min-w-full#{$app} { min-width: 100%; }
+  .#{$pre}min-w-screen#{$app} { min-width: 100vw; }
+  .#{$pre}min-w-min#{$app} { min-width: min-content; }
+  .#{$pre}min-w-max#{$app} { min-width: max-content; }
+  .#{$pre}min-w-fit#{$app} { min-width: fit-content; }
+}

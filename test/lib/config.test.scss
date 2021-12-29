@@ -9,8 +9,8 @@
   @return true;
 }
 
-@function test-measure() {
-  @if config.measure(wide) != 34em {
+@function test-size() {
+  @if config.size(7) != 48rem {
     @return false;
   }
 

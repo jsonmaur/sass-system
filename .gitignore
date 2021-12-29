@@ -12,5 +12,5 @@
 # The directory we write compiled artifacts to
 /_build/
 
-# The example file sometimes used for manual testing
-example.scss
+# The example files sometimes used for manual testing
+example.*

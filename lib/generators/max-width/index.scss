@@ -1,13 +1,20 @@
+@use "sass:list";
 @use "../../config";
 
 @mixin render($pre, $app) {
-  .#{$pre}mw-0#{$app} { max-width: none; }
-  .#{$pre}mw-full#{$app} { max-width: 100%; }
-  .#{$pre}mw-min#{$app} { max-width: min-content; }
-  .#{$pre}mw-max#{$app} { max-width: max-content; }
-  .#{$pre}mw-fit#{$app} { max-width: fit-content; }
+  .#{$pre}max-w-0#{$app} { max-width: 0rem; }
+  .#{$pre}max-w-full#{$app} { max-width: 100%; }
+  .#{$pre}max-w-screen#{$app} { max-width: 100vw; }
+  .#{$pre}max-w-min#{$app} { max-width: min-content; }
+  .#{$pre}max-w-max#{$app} { max-width: max-content; }
+  .#{$pre}max-w-fit#{$app} { max-width: fit-content; }
 
-  @each $key, $value in config.$measures {
-    .#{$pre}measure-#{$key}#{$app} { max-width: $value; }
+  @each $key, $value in config.$screens {
+    .#{$pre}max-w-#{$key}#{$app} { max-width: $value; }
+  }
+
+  @for $i from 1 through list.length(config.$sizing) {
+    $value: list.nth(config.$sizing, $i);
+    .#{$pre}max-w-#{$i}#{$app} { max-width: $value; }
   }
 }

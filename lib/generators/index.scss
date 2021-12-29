@@ -14,6 +14,7 @@
 @use "line-height";
 @use "margin";
 @use "max-width";
+@use "min-width";
 @use "opacity";
 @use "padding";
 @use "text-align";
@@ -52,6 +53,7 @@ $-generators: [];
   @include with("line-height") { @include line-height.render($pre, $app); }
   @include with("margin") { @include margin.render($pre, $app); }
   @include with("max-width") { @include max-width.render($pre, $app); }
+  @include with("min-width") { @include min-width.render($pre, $app); }
   @include with("opacity") { @include opacity.render($pre, $app); }
   @include with("padding") { @include padding.render($pre, $app); }
   @include with("text-align") { @include text-align.render($pre, $app); }

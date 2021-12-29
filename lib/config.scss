@@ -66,22 +66,27 @@ $screens: map.merge(
 }
 
 //
-// Named width values used for paragraph and other containers.
+// Sizing values used for width and height. Classes correspond with index in list.
 //
 
-$measures: map.merge(
-  (
-    narrow: 20em, // ~45 characters
-    regular: 30em, // ~66 characters
-    wide: 34em, // ~80 characters
-  ),
-  map.get($extend, "measures") or ()
+$sizing: helpers.list-merge(
+  [
+    1rem
+    2rem
+    4rem
+    8rem
+    16rem
+    32rem
+    48rem
+    64rem
+  ],
+  map.get($extend, "sizing") or ()
 ) !default;
 
-@if helpers.check-type(map, $measures, "$measures") {}
+@if helpers.check-type(list, $sizing, "$sizing") {}
 
-@function measure($name) {
-  @return map.get($measures, $name);
+@function size($index) {
+  @return list.nth($sizing, $index);
 }
 
 //

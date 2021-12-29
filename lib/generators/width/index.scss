@@ -1,3 +1,7 @@
+@use "sass:list";
+@use "sass:math";
+@use "../../config";
+
 @mixin render($pre, $app) {
   .#{$pre}w-0#{$app} { width: 0px; }
   .#{$pre}w-px#{$app} { width: 1px; }
@@ -6,4 +10,41 @@
   .#{$pre}w-min#{$app} { width: min-content; }
   .#{$pre}w-max#{$app} { width: max-content; }
   .#{$pre}w-fit#{$app} { width: fit-content; }
+  .#{$pre}w-auto#{$app} { width: auto; }
+
+  @each $key, $value in config.$screens {
+    .#{$pre}w-#{$key}#{$app} { width: $value; }
+  }
+
+  @for $i from 1 through list.length(config.$sizing) {
+    $value: list.nth(config.$sizing, $i);
+    .#{$pre}w-#{$i}#{$app} { width: $value; }
+  }
+
+  .#{$pre}w-1\/2#{$app} { width: math.percentage(math.div(1, 2)); }
+  .#{$pre}w-1\/3#{$app} { width: math.percentage(math.div(1, 3)); }
+  .#{$pre}w-2\/3#{$app} { width: math.percentage(math.div(2, 3)); }
+  .#{$pre}w-1\/4#{$app} { width: math.percentage(math.div(1, 4)); }
+  .#{$pre}w-2\/4#{$app} { width: math.percentage(math.div(2, 4)); }
+  .#{$pre}w-3\/4#{$app} { width: math.percentage(math.div(3, 4)); }
+  .#{$pre}w-1\/5#{$app} { width: math.percentage(math.div(1, 5)); }
+  .#{$pre}w-2\/5#{$app} { width: math.percentage(math.div(2, 5)); }
+  .#{$pre}w-3\/5#{$app} { width: math.percentage(math.div(3, 5)); }
+  .#{$pre}w-4\/5#{$app} { width: math.percentage(math.div(4, 5)); }
+  .#{$pre}w-1\/6#{$app} { width: math.percentage(math.div(1, 6)); }
+  .#{$pre}w-2\/6#{$app} { width: math.percentage(math.div(2, 6)); }
+  .#{$pre}w-3\/6#{$app} { width: math.percentage(math.div(3, 6)); }
+  .#{$pre}w-4\/6#{$app} { width: math.percentage(math.div(4, 6)); }
+  .#{$pre}w-5\/6#{$app} { width: math.percentage(math.div(5, 6)); }
+  .#{$pre}w-1\/12#{$app} { width: math.percentage(math.div(1, 12)); }
+  .#{$pre}w-2\/12#{$app} { width: math.percentage(math.div(2, 12)); }
+  .#{$pre}w-3\/12#{$app} { width: math.percentage(math.div(3, 12)); }
+  .#{$pre}w-4\/12#{$app} { width: math.percentage(math.div(4, 12)); }
+  .#{$pre}w-5\/12#{$app} { width: math.percentage(math.div(5, 12)); }
+  .#{$pre}w-6\/12#{$app} { width: math.percentage(math.div(6, 12)); }
+  .#{$pre}w-7\/12#{$app} { width: math.percentage(math.div(7, 12)); }
+  .#{$pre}w-8\/12#{$app} { width: math.percentage(math.div(8, 12)); }
+  .#{$pre}w-9\/12#{$app} { width: math.percentage(math.div(9, 12)); }
+  .#{$pre}w-10\/12#{$app} { width: math.percentage(math.div(10, 12)); }
+  .#{$pre}w-11\/12#{$app} { width: math.percentage(math.div(11, 12)); }
 }
