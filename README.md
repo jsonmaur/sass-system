@@ -51,7 +51,7 @@
     - [Text Indent](#text-indent)
     - [Box Shadows](#box-shadows)
     - [Colors](#colors)
-    - [Auto Colors](#auto-colors)
+    - [Brand Colors](#brand-colors)
     - [Selectors](#selectors)
     - [Generators](#generators)
     - [Extend](#extend)
@@ -154,7 +154,7 @@ Alternatively, you can access style system values directly using [getters](#gett
     monospace: "Fira Mono",
   ),
   $extend: (
-    colors: (
+    brand-colors: (
       off-black: #202020,
     ),
   ),
@@ -179,7 +179,7 @@ _Note that all custom values will **override the defaults** unless they are conf
 - [$text-indent](#text-indent)
 - [$box-shadows](#box-shadows)
 - [$colors](#colors)
-- [$auto-colors](#auto-colors)
+- [$brand-colors](#brand-colors)
 - [$selectors](#selectors)
 - [$generators](#generators)
 - [$extend](#extend)
@@ -498,24 +498,6 @@ Named values used for box shadow. These classes are prefixed with `.shadow-*`. S
   <summary><b>Specs</b></summary>
 
   > type: `map`  
-  > getter: `color($name)`  
-  > default:
-  > ```sass
-  > (
-  >   black: #000000,
-  >   white: #ffffff,
-  > )
-  > ```
-</details>
-
-Named values for color and background color. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
-
-### Auto Colors
-
-<details>
-  <summary><b>Specs</b></summary>
-
-  > type: `map`  
   > getter: `color($name-$index)`  
   > default:
   > ```sass
@@ -536,6 +518,24 @@ Named values for color and background color. These classes **do not** have a pre
 </details>
 
 Named values for colors that get auto-generated variations. 4 darker variations and 4 lighter variations will be generated for each color, for a total of 9 colors per key. These classes are prefixed with the color name. The base color will exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for lighter variations. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
+
+### Brand Colors
+
+<details>
+  <summary><b>Specs</b></summary>
+
+  > type: `map`  
+  > getter: `color($name)`  
+  > default:
+  > ```sass
+  > (
+  >   black: #000000,
+  >   white: #ffffff,
+  > )
+  > ```
+</details>
+
+Named values for brand colors that don't have auto-generated variations. These classes **do not** have a prefix, e.g. `black` creates a `.black` class. See the [color generator](lib/generators/color#readme) and [background-color generator](lib/generators/background-color#readme) for more info.
 
 ### Selectors
 
@@ -684,8 +684,8 @@ These functions are useful for getting style system values inside [custom classe
 - `font-lead($name)` to get values from [$font-leading](#font-leading)
 - `font-track($name)` to get values from [$font-tracking](#font-tracking)
 - `box-shadow($name)` to get values from [$box-shadows](#box-shadows)
-- `color($name)` to get values from [$colors](#colors)
-- `color($name-$index)` to get values from [$auto-colors](#auto-colors)
+- `color($name-$index)` to get values from [$colors](#colors)
+- `color($name)` to get values from [$brand-colors](#brand-colors)
 
 For example:
 

@@ -2,7 +2,7 @@
 @use "../../config";
 
 @mixin render($pre, $app) {
-  @each $key, $value in list.join(config.$colors, config.$auto-colors) {
+  @each $key, $value in list.join(config.$colors, config.$brand-colors) {
     .#{$pre}bg-#{"" + $key}#{$app} { background-color: $value; }
   }
 }

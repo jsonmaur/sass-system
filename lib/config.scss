@@ -303,28 +303,13 @@ $box-shadows: map.merge(
 }
 
 //
-// Named values for color. The color classes are not prefixed with anything, so be careful while
-// naming to avoid conflicts with other generated classes. e.g. `black` creates a `.black` class.
-//
-
-$colors: map.merge(
-  (
-    black: #000000,
-    white: #ffffff,
-  ),
-  map.get($extend, "colors") or ()
-) !default;
-
-@if helpers.check-type(map, $colors, "$colors") {}
-
-//
 // Named values for colors that have auto-generated variations. By default, it will generate 4
 // darker variations and 4 lighter variations of each color for a total of 9. The base color will
 // exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for
 // lighter variations.
 //
 
-$auto-colors: helpers.color-variants(
+$colors: helpers.color-variants(
   map.merge(
     (
       gray: #adb5bd,
@@ -339,14 +324,30 @@ $auto-colors: helpers.color-variants(
       indigo: #6610f2,
       blue: #0d6efd,
     ),
-    map.get($extend, "auto-colors") or ()
+    map.get($extend, "colors") or ()
   )
 ) !default;
 
-@if helpers.check-type(map, $auto-colors, "$auto-colors") {}
+@if helpers.check-type(map, $colors, "$colors") {}
+
+//
+// Named values for brand colors that don't have auto-generated variations. The color classes are
+// not prefixed with anything, so be careful while naming to avoid conflicts with other generated
+// classes. e.g. `black` creates a `.black` class.
+//
+
+$brand-colors: map.merge(
+  (
+    black: #000000,
+    white: #ffffff,
+  ),
+  map.get($extend, "brand-colors") or ()
+) !default;
+
+@if helpers.check-type(map, $brand-colors, "$brand-colors") {}
 
 @function color($name) {
-  @return map.get(map.merge($colors, $auto-colors), $name);
+  @return map.get(map.merge($colors, $brand-colors), $name);
 }
 
 //

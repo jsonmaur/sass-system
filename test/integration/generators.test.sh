@@ -15,8 +15,8 @@ testGenerator() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$generators: (
     base: [background-color color],
     hover: [background-color],
@@ -61,8 +61,8 @@ testGeneratorDark() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$generators: (
     base: [background-color],
     dark: (
@@ -98,8 +98,8 @@ testGeneratorResponsive() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -134,8 +134,8 @@ testGeneratorResponsiveDark() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -183,8 +183,8 @@ testGeneratorResponsiveScreen() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$screens: (
     sm: 400px,
     md: 600px,
@@ -222,8 +222,8 @@ testGeneratorCustomSelector() {
   INPUT=$(cat <<EOF
 @use "../index" with (
   \$normalize: false,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$selectors: (
     foo bar: ":foo:bar",
   ),
@@ -298,8 +298,8 @@ testGeneratorExtend() {
 @use "sass:map";
 @use "../index" with (
   \$normalize: false,
-  \$auto-colors: (),
-  \$colors: (black: black),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$generators: (
     base: [background-color],
     dark: (

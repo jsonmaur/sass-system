@@ -8,8 +8,8 @@ testDarkModeMedia() {
 @use "../index" with (
   \$normalize: false,
   \$dark-mode: media,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$generators: (
     dark: (
       base: [background-color],
@@ -46,8 +46,8 @@ testDarkModeClass() {
 @use "../index" with (
   \$normalize: false,
   \$dark-mode: class,
-  \$colors: (black: black),
-  \$auto-colors: (),
+  \$colors: (),
+  \$brand-colors: (black: black),
   \$generators: (
     dark: (
       base: [background-color],

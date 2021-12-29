@@ -4,7 +4,7 @@
 @mixin render($pre, $app) {
   .#{$pre}current-color#{$app} { color: currentColor; }
 
-  @each $key, $value in list.join(config.$colors, config.$auto-colors) {
+  @each $key, $value in list.join(config.$colors, config.$brand-colors) {
     .#{$pre}#{"" + $key}#{$app} { color: $value; }
   }
 }

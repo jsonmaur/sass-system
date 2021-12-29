@@ -74,19 +74,19 @@
 }
 
 @function test-color() {
-  @if config.color(black) != #000000 {
+  @if config.color(gray-5) != #adb5bd {
+    @return false;
+  }
+
+  @if config.color(gray-8) != #e6e9eb {
     @return false;
   }
 
   @return true;
 }
 
-@function test-auto-color() {
-  @if config.color(gray-5) != #adb5bd {
-    @return false;
-  }
-
-  @if config.color(gray-8) != #e6e9eb {
+@function test-brand-color() {
+  @if config.color(black) != #000000 {
     @return false;
   }
 
