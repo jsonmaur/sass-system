@@ -78,13 +78,13 @@ ssbuild was inspired by similar utility-first CSS frameworks such as TailwindCSS
 
 ## Installation
 
-If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML.
+If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ssbuild/core@0.0/index.min.css" />
 ```
 
-If you want to customize your build, you'll need to install ssbuild into your project using one of these methods.
+If you want to customize your build, you'll need to install ssbuild into your project using one of these methods:
 
 - [Download the latest release](https://github.com/maurandco/ssbuild/releases)
 - Install with [hex](https://hex.pm) (Elixir): _not supported yet_
@@ -95,10 +95,10 @@ If you want to customize your build, you'll need to install ssbuild into your pr
 ## Usage
 
 ```scss
-@use "@ssbuild/core";
+@use "path/to/ssbuild";
 ```
 
-Point Sass to the parent path of the ssbuild project folder using [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path), whether it's in `vendor`, `deps`, or `node_modules`, and that's it! All the utility classes will now be included in your CSS output.
+Use [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path) to include the vendor directory for your package management (could be `vendor`, `deps`, `node_modules`, etc.). Then point Sass to the ssbuild directory relative to the vendor directory. That's it! All the utility classes will now be included in your CSS output.
 
 ```html
 <div class="m-5 p-5 bg-gray-8 max-w-6 md:max-w-7">
@@ -116,7 +116,7 @@ Point Sass to the parent path of the ssbuild project folder using [--load-path](
 
 ### Custom Classes
 
-If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can use the [@extend](https://sass-lang.com/documentation/at-rules/extend) syntax.
+If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can use the [@extend](https://sass-lang.com/documentation/at-rules/extend) syntax:
 
 ```scss
 .text-container {
@@ -128,10 +128,10 @@ If you find yourself frequently reusing utility classes and want to extract comm
 }
 ```
 
-Alternatively, you can access style system values directly using [getters](#getters).
+But due to the way `@extend` works, this can create an obscene amount of class names if used too often. A better solution is to access style system values directly using [getters](#getters):
 
 ```scss
-@use "ssbuild" as ss;
+@use "path/to/ssbuild" as ss;
 
 .text-container {
   background-color: ss.color(gray-8);
@@ -148,7 +148,7 @@ Alternatively, you can access style system values directly using [getters](#gett
 ## Configuration
 
 ```sass
-@use "@ssbuild/core" with (
+@use "path/to/ssbuild" with (
   $primary-fonts: (
     sans-serif: "Fira Sans",
     monospace: "Fira Mono",
@@ -187,7 +187,7 @@ _Note that all custom values will **override the defaults** unless they are conf
 ### Normalize
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `boolean`  
   > default: `true`
@@ -198,7 +198,7 @@ Whether to import [modern-normalize](https://github.com/sindresorhus/modern-norm
 ### Class Prefix
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `string`  
   > default: none
@@ -209,7 +209,7 @@ Used to prefix a value to every generated class name. This is turned off by defa
 ### Separator
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `string`  
   > default: `\\:`
@@ -220,7 +220,7 @@ Used to separate base class names from variants such as dark selectors, pseudo s
 ### Dark Mode
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `string`  
   > default: `media`
@@ -231,7 +231,7 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
 ### Screens
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `screen($name)`  
@@ -252,7 +252,7 @@ Named screen size values which are used to generate responsive classes within me
 ### Sizing
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `list`  
   > getter: `size($index)`  
@@ -271,12 +271,12 @@ Named screen size values which are used to generate responsive classes within me
   > ```
 </details>
 
-Named width values used for paragraphs and other sized containers. These classes are prefixed with `.max-w-*`. See the [max-width generator](lib/generators/max-width#readme) for more info.
+Named width values used for paragraphs and other sized containers. These classes are prefixed with `.w-*`, `.max-w-*`, `.h-*`, and `.max-h-*`. See the [width generator](lib/generators/width#readme), [max-width generator](lib/generators/max-width#readme), [height generator](lib/generators/height#readme), and [max-height generator](lib/generators/max-height#readme) for more info.
 
 ### Spacing
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `list`  
   > getter: `space($index)`  
@@ -300,7 +300,7 @@ Spacing values used for margin and padding. Class names correspond with the list
 ### Primary Fonts
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > default:
@@ -318,7 +318,7 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
 ### Font Stacks
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `font($name)`  
@@ -376,7 +376,7 @@ Named list values for font family stacks. Rather than redefining entire font sta
 ### Font Weights
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `font-weight($name)`  
@@ -401,7 +401,7 @@ Named values used for font weight. These classes are prefixed with `.text-*`, so
 ### Font Sizes
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `font-size($name)`  
@@ -425,7 +425,7 @@ Named values used for font size. These classes are prefixed with `.text-*`, so m
 ### Font Leading
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `font-lead($name)`  
@@ -444,7 +444,7 @@ Named values used for font leading (line height). These classes are prefixed wit
 ### Font Tracking
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `font-track($name)`  
@@ -463,7 +463,7 @@ Named values used for font tracking (letter spacing). These classes are prefixed
 ### Text Indent
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `number`  
   > default: `1em`
@@ -474,7 +474,7 @@ Value used for the text indentation class. See the [text-indent generator](lib/g
 ### Box Shadows
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `box-shadow($name)`  
@@ -495,7 +495,7 @@ Named values used for box shadow. These classes are prefixed with `.shadow-*`. S
 ### Colors
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `color($name-$index)`  
@@ -522,7 +522,7 @@ Named values for colors that get auto-generated variations. 4 darker variations 
 ### Brand Colors
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > getter: `color($name)`  
@@ -540,7 +540,7 @@ Named values for brand colors that don't have auto-generated variations. These c
 ### Selectors
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > default:
@@ -603,7 +603,7 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
 ### Generators
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > default:
@@ -640,7 +640,7 @@ See [selectors](#selectors) for a list of available selectors. `dark` can be set
 ### Extend
 
 <details>
-  <summary><b>Specs</b></summary>
+  <summary><i>specs</i></summary>
 
   > type: `map`  
   > default: none
