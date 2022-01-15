@@ -1,5 +1,5 @@
 .EXPORT_ALL_VARIABLES:
-.PHONY: help dev build test test-unit test-integration release release-npm
+.PHONY: help dev build test test-unit test-integration release
 
 help: #: show this help menu
 	@grep "#:" Makefile* | grep -v "@grep" | sed "s/\([A-Za-z_ -]*\):.*#\(.*\)/$$(tput setaf 3)\1$$(tput sgr0)\2/g"
@@ -18,7 +18,7 @@ test-unit: #: run the unit tests
 test-integration: #: run the integration tests
 	@cd test && ./test-integration.sh
 
-release: build #: create a new tagged release
+release: build #: build the final output and create a new tagged release
 	@git tag v$(version)
 	@git archive \
 		--format tar.gz \

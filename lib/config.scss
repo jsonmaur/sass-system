@@ -337,32 +337,32 @@ $box-shadows: map.merge(
 //
 // Named values for colors that have auto-generated variations. By default, it will generate 4
 // darker variations and 4 lighter variations of each color for a total of 9. The base color will
-// exist as `.[name]-5` with `.[name]-[1-4]` for darker variations and `.[name]-[6-9]` for
-// lighter variations.
+// exist as `.[name]-5` with `.[name]-[1-4]` for lighter variations and `.[name]-[6-9]` for
+// darker variations.
 //
 
-$colors: helpers.color-variants(
-  map.merge(
-    (
-      gray: #adb5bd,
-      cyan: #0dcaf0,
-      teal: #20c997,
-      green: #198754,
-      yellow: #ffc107,
-      orange: #fd7e14,
-      red: #dc3545,
-      pink: #d63384,
-      purple: #6f42c1,
-      indigo: #6610f2,
-      blue: #0d6efd,
-    ),
-    map.get($extend, "colors") or ()
-  )
+$colors: map.merge(
+  (
+    gray: #adb5bd,
+    cyan: #0dcaf0,
+    teal: #20c997,
+    green: #198754,
+    yellow: #ffc107,
+    orange: #fd7e14,
+    red: #dc3545,
+    pink: #d63384,
+    purple: #6f42c1,
+    indigo: #6610f2,
+    blue: #0d6efd,
+  ),
+  map.get($extend, "colors") or ()
 ) !default;
 
 @if not helpers.check-type($colors, map, color) {
   @error "Expected $colors to be a map of colors";
 }
+
+$colors: helpers.color-variants($colors);
 
 //
 // Named values for brand colors that don't have auto-generated variations. The color classes are

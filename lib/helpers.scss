@@ -186,7 +186,7 @@
 }
 
 //
-// Generate darker and ligher colors for each color in a map. 4 variants of each for a total of 9.
+// Generate lighter and darker colors for each color in a map. 4 variants of each for a total of 9.
 //
 @function color-variants($colors) {
   @if not check-type($colors, map, color) {
@@ -197,26 +197,26 @@
     $variants: empty-map();
     $name-base: #{$key}-5;
 
-    @for $i from 1 through 4 { // 80%, 60%, 40%, 20%
+    @for $i from 1 through 4 { // 90%, 70%, 50%, 30%
       $name: #{$key}-#{$i};
-      $mixed: color.mix(black, $value, $weight: 100 - ($i * 20%));
+      $mixed: color.mix(white, $value, $weight: 90 - (($i - 1) * 20%));
       $variants: map.set($variants, $name, $mixed);
 
       @if $mixed == $value {
-        @warn "Color `#{$value}` is too dark, unable to generate darker shades. `.#{$name}` will be the same as `.#{$name-base}`.";
+        @warn "Color `#{$value}` is too light, unable to generate lighter tints. `.#{$name}` will be the same as `.#{$name-base}`.";
       }
     }
 
     // add original color with suffix
     $variants: map.set($variants, $name-base, $value);
 
-    @for $i from 6 through 9 { // 30%, 50%, 70%, 90%
+    @for $i from 6 through 9 { // 20%, 40%, 60%, 80%
       $name: #{$key}-#{$i};
-      $mixed: color.mix(white, $value, $weight: 30 + (($i - 6) * 20%));
+      $mixed: color.mix(black, $value, $weight: 20 + ($i - 6) * 20%);
       $variants: map.set($variants, $name, $mixed);
 
       @if $mixed == $value {
-        @warn "Color `#{$value}` is too light, unable to generate lighter tints. `.#{$name}` will be the same as `.#{$name-base}`.";
+        @warn "Color `#{$value}` is too dark, unable to generate darker shades. `.#{$name}` will be the same as `.#{$name-base}`.";
       }
     }
 
