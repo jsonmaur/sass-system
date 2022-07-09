@@ -1,0 +1,14 @@
+@use "../../config";
+@use "../../forward/media";
+
+@mixin render($pre, $app) {
+  .#{$pre}container#{$app} {
+    width: 100%;
+
+    @each $key, $value in config.$screens {
+      @include media.media-up-to($key) {
+        max-width: $value;
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+@mixin render($pre, $app) {
+  .#{$pre}aspect-auto#{$app} { aspect-ratio: auto; }
+  .#{$pre}aspect-square#{$app} { aspect-ratio: 1 / 1; }
+  .#{$pre}aspect-video#{$app} { aspect-ratio: 16 / 9; }
+}
