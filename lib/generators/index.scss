@@ -1,10 +1,12 @@
 @use "sass:list";
 @use "../config";
 
+@use "aspect-ratio";
 @use "background-color";
 @use "box-shadow";
 @use "box-sizing";
 @use "color";
+@use "container";
 @use "font-family";
 @use "font-size";
 @use "font-style";
@@ -43,10 +45,12 @@ $-generators: [];
 @mixin render($generators, $pre: null, $app: null) {
   $-generators: $generators !global;
 
+  @include with("aspect-ratio") { @include aspect-ratio.render($pre, $app); }
   @include with("background-color") { @include background-color.render($pre, $app); }
   @include with("box-shadow") { @include box-shadow.render($pre, $app); }
   @include with("box-sizing") { @include box-sizing.render($pre, $app); }
   @include with("color") { @include color.render($pre, $app); }
+  @include with("container") { @include container.render($pre, $app); }
   @include with("font-family") { @include font-family.render($pre, $app); }
   @include with("font-size") { @include font-size.render($pre, $app); }
   @include with("font-style") { @include font-style.render($pre, $app); }

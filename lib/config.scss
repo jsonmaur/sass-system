@@ -468,10 +468,12 @@ $selectors: map.merge(
 $generators: helpers.map-list-merge(
   (
     base: [
+      aspect-ratio
       background-color
       box-shadow
       box-sizing
       color
+      container
       font-family
       font-size
       font-style

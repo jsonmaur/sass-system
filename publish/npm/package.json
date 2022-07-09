@@ -1,5 +1,5 @@
 {
-  "name": "@ssbuild/core",
+  "name": "@maurandco/ssbuild",
   "version": "0.0.3",
   "description": "A style system generator and utility-first CSS framework built in Sass.",
   "main": "index.scss",
@@ -13,9 +13,13 @@
   "bugs": {
     "url": "https://github.com/maurandco/ssbuild/issues"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "css",
     "sass",
+    "scss",
     "responsive",
     "framework",
     "functional",
