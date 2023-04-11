@@ -4,13 +4,11 @@
 # The directory Sass uses for caching
 /.sass-cache/
 
-# Ignore all generated map files
+# Ignore all the generated files
+*.css
 *.css.map
 *.sass.map
 *.scss.map
 
-# The directory we write compiled artifacts to
-/_build/
-
-# The example files sometimes used for manual testing
+# The example files used for manual testing
 example.*

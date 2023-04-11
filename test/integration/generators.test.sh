@@ -83,7 +83,6 @@ EOF
   .dark\:bg-black {
     background-color: black;
   }
-
   .dark\:hover\:bg-black:hover {
     background-color: black;
   }
@@ -361,8 +360,8 @@ EOF
 .test-container {
   max-width: 32rem;
   background-color: black;
-  padding: 4rem;
-  margin: 4rem;
+  padding: 1.5rem;
+  margin: 1.5rem;
 }
 @media (min-width: 1024px) {
   .test-container {

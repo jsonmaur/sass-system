@@ -8,6 +8,41 @@
 @use "normalize";
 
 //
+// Loops through each generator list and renders classes for each generator with optional class
+// prefixes. For example, calling `@include generator-content([], "foo", "bar")` will result in
+// classnames such as `.foo\:bar\:classname:selector {}`.
+//
+@mixin generator-content($generators, $prefixes...) {
+  $reserved: list.join([dark responsive], map.keys(config.$screens));
+
+  @each $key, $value in $generators {
+    @if not list.index($reserved, $key) {
+      @if not list.index(map.keys(config.$selectors), $key) {
+        @error "`#{$key}` is not a supported selector for $generators";
+      } @else if meta.type-of($value) == list {
+        @if $key == base {
+          $prepend: helpers.combine($prefixes, $separator: config.$separator);
+
+          @include generators.render($value, $prepend);
+        } @else {
+          $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
+          $append: map.get(config.$selectors, $key);
+
+          @if meta.type-of($key) == list {
+            $k: helpers.combine($key, $separator: config.$separator, $trailing: false);
+            $prepend: helpers.combine(list.append($prefixes, $k), $separator: config.$separator);
+          }
+
+          @include generators.render($value, $prepend, $append);
+        }
+      } @else {
+        @error "`#{$value}` is not a supported value for $generators";
+      }
+    }
+  }
+}
+
+//
 // Renders content within a dark mode media query or class depending on which is enabled.
 //
 @mixin dark-content($generators) {
@@ -49,41 +84,6 @@
 }
 
 //
-// Loops through each generator list and renders classes for each generator with optional class
-// prefixes. For example, calling `@include generator-content([], "foo", "bar")` will result in
-// classnames such as `.foo\:bar\:classname:selector {}`.
-//
-@mixin generator-content($generators, $prefixes...) {
-  $reserved: list.join([dark responsive], map.keys(config.$screens));
-
-  @each $key, $value in $generators {
-    @if not list.index($reserved, $key) {
-      @if not list.index(map.keys(config.$selectors), $key) {
-        @error "`#{$key}` is not a supported selector for $generators";
-      } @else if meta.type-of($value) == list {
-        @if $key == base {
-          $prepend: helpers.combine($prefixes, $separator: config.$separator);
-
-          @include generators.render($value, $prepend);
-        } @else {
-          $prepend: helpers.combine(list.append($prefixes, $key), $separator: config.$separator);
-          $append: map.get(config.$selectors, $key);
-
-          @if meta.type-of($key) == list {
-            $k: helpers.combine($key, $separator: config.$separator, $trailing: false);
-            $prepend: helpers.combine(list.append($prefixes, $k), $separator: config.$separator);
-          }
-
-          @include generators.render($value, $prepend, $append);
-        }
-      } @else {
-        @error "`#{$value}` is not a supported value for $generators";
-      }
-    }
-  }
-}
-
-//
 // Kick things off
 //
 @mixin render {
@@ -93,6 +93,7 @@
   }
 
   @include generator-content(config.$generators);
+
   @include dark-content(config.$generators) using ($-generators) {
     @include generator-content($-generators, dark);
   }

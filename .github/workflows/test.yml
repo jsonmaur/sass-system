@@ -1,22 +1,23 @@
 name: Test
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+
+on: [push, pull_request]
+
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [1.45.0, 1.57.0, 1.61.0]
+
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Install sass
+
+      - name: Install Sass
         run: |
-          curl -LO https://github.com/sass/dart-sass/releases/download/1.45.0/dart-sass-1.45.0-linux-x64.tar.gz
-          tar -xzf dart-sass-1.45.0-linux-x64.tar.gz
+          curl -LO https://github.com/sass/dart-sass/releases/download/${{ matrix.version }}/dart-sass-${{ matrix.version }}-linux-x64.tar.gz
+          tar -xzf dart-sass-${{ matrix.version }}-linux-x64.tar.gz
           echo "$PWD/dart-sass" >> $GITHUB_PATH
-      - name: Run tests
-        run: make test
+
+      - run: make test

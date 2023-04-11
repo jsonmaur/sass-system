@@ -1,20 +1,13 @@
 {
-  "name": "@maurandco/ssbuild",
-  "version": "0.0.3",
+  "name": "syss",
+  "version": "0.1.0",
   "description": "A style system generator and utility-first CSS framework built in Sass.",
-  "main": "index.scss",
   "license": "MIT",
   "author": "Maur & Co.",
-  "homepage": "https://github.com/maurandco/ssbuild#readme",
+  "homepage": "https://github.com/maurandco/syss#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maurandco/ssbuild.git"
-  },
-  "bugs": {
-    "url": "https://github.com/maurandco/ssbuild/issues"
-  },
-  "publishConfig": {
-    "access": "public"
+    "url": "git+https://github.com/maurandco/syss.git"
   },
   "keywords": [
     "css",
@@ -29,5 +22,17 @@
     "design",
     "style",
     "system"
-  ]
+  ],
+  "main": "index.min.css",
+  "files": [
+    "lib/",
+    "index.min.css",
+    "index.min.css.map",
+    "index.scss",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "prepare": "make build"
+  }
 }
