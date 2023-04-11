@@ -1,6 +1,6 @@
 # Text Transform
 
-`.capitalize`
-`.lowercase`
-`.uppercase`
-`.no-case`
+`.capitalize`  
+`.lowercase`  
+`.uppercase`  
+`.no-case`  

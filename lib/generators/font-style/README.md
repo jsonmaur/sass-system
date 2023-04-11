@@ -1,4 +1,4 @@
 # Font Style
 
-`.italic`
-`.no-italic`
+`.italic`  
+`.no-italic`  

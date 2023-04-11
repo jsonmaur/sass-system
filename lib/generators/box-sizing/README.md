@@ -1,4 +1,4 @@
 # Box Sizing
 
-`.border-box`
-`.content-box`
+`.border-box`  
+`.content-box`  

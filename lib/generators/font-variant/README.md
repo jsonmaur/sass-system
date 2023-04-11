@@ -1,4 +1,4 @@
 # Font Variant
 
-`.small-caps`
-`.no-caps`
+`.small-caps`  
+`.no-caps`  

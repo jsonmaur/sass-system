@@ -1,5 +1,5 @@
 # Text Decoration
 
-`.strike`
-`.underline`
-`.no-underline`
+`.strike`  
+`.underline`  
+`.no-underline`  

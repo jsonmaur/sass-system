@@ -631,7 +631,7 @@ For example:
 ```scss
 .foobar {
   color: ss.color(gray-8);
-  padding: ss.space(4);
+  padding: ss.space(6);
 }
 ```
 
@@ -650,10 +650,10 @@ These mixins are useful for defining custom breakpoints using the sizes from [$s
 
 ```scss
 .foobar {
-  padding: ss.space(4);
+  padding: ss.space(6);
 
   @include ss.media-up-to(md) {
-    padding: ss.space(5);
+    padding: ss.space(8);
   }
 }
 ```
@@ -667,7 +667,7 @@ Will result in:
 
 @media (min-width: 1024px) {
   .foobar {
-    padding: 4rem;
+    padding: 3rem;
   }
 }
 ```
