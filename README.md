@@ -1,16 +1,18 @@
-<a aria-label="test status" href="https://github.com/maurandco/syss/actions/workflows/test.yml">
-  <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/syss/Test?label=tests&style=flat-square" />
+# Sass System
+
+<a aria-label="test status" href="https://github.com/maurandco/sass-system/actions/workflows/test.yml">
+  <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/sass-system/Test?label=tests&style=flat-square" />
 </a>
 
-<a aria-label="version status" href="https://github.com/maurandco/syss/releases">
-  <img alt="version" src="https://img.shields.io/github/v/release/maurandco/syss?display_name=tag&style=flat-square&color=B85A8A" />
+<a aria-label="version status" href="https://github.com/maurandco/sass-system/releases">
+  <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sass-system?display_name=tag&style=flat-square&color=B85A8A" />
 </a>
 
 **⚠️ This project is still under active development. Check back soon for a stable release!**
 
-Syss is a style system generator and utility-first CSS framework built entirely in Sass.
+A style system generator and utility-first CSS framework built entirely in Sass.
 
-It was inspired by similar utility-first CSS frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
+This was inspired by similar utility-first CSS frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
 
 <details>
   <summary><b>Table of contents</b></summary>
@@ -61,26 +63,26 @@ It was inspired by similar utility-first CSS frameworks such as Tailwind and Tac
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/syss@0.1" />
+<link rel="stylesheet" href="https://unpkg.com/sass-system@0.1" />
 ```
 
-If you want to customize your build, you'll need to install syss into your project using one of these methods:
+If you want to customize your build, you'll need to install sass-system into your project using one of these methods:
 
-- [Download the latest release](https://github.com/maurandco/syss/releases)
-- Install with [npm](https://www.npmjs.com): `npm install syss`
+- [Download the latest release](https://github.com/maurandco/sass-system/releases)
+- Install with [npm](https://www.npmjs.com): `npm install sass-system`
 
 ## Usage
 
 ```scss
-@use "path/to/syss";
+@use "path/to/sass-system";
 ```
 
-Use [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path) to include the vendor directory for your package management (could be `vendor`, `node_modules`, etc.). That's it! All the utility classes will now be included in your CSS output.
+That's it! Use [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path) to include the vendor directory for your package management (could be `vendor`, `node_modules`, etc.), and all the utility classes will now be included in your CSS output.
 
 ```html
 <div class="m-5 p-5 bg-gray-8 max-w-6 md:max-w-7">
   <h1 class="mb-4 pink-5 text-xxl text-heavy">
-    Welcome to Syss!
+    Welcome to Sass System!
   </h1>
 
   <p class="text-sm text-light lead-copy">
@@ -93,27 +95,27 @@ Use [--load-path](https://sass-lang.com/documentation/cli/dart-sass#load-path) t
 
 ### Custom Classes
 
-If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can access style system values directly using Syss [getters](#getters):
+If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can access style system values directly using [getters](#getters):
 
 ```scss
-@use "path/to/syss";
+@use "path/to/sass-system" as ss;
 
 .text-container {
-  background: syss.color(gray-8);
-  padding: syss.space(5);
+  background: ss.color(gray-8);
+  padding: ss.space(5);
 
-  @include syss.media-up-to(md) {
-    padding: syss.space(6);
+  @include ss.media-up-to(md) {
+    padding: ss.space(6);
   }
 }
 ```
 
 ## Custom Configuration
 
-If you want to customize the default Syss values, you can pass custom configuration using [`with`](https://sass-lang.com/documentation/at-rules/use#configuration). Note that all custom values will **override the defaults** unless they are configured within the [$extend](#extend) map.
+If you want to customize the default values, you can pass custom configuration using [`with`](https://sass-lang.com/documentation/at-rules/use#configuration). Note that all custom values will **override the defaults** unless they are configured within the [$extend](#extend) map.
 
 ```sass
-@use "path/to/syss" with (
+@use "path/to/sass-system" with (
   $primary-fonts: (
     sans-serif: "Fira Sans",
     monospace: "Fira Mono"
@@ -654,8 +656,8 @@ For example:
 
 ```scss
 .foobar {
-  color: syss.color(gray-8);
-  padding: syss.space(4);
+  color: ss.color(gray-8);
+  padding: ss.space(4);
 }
 ```
 
@@ -674,10 +676,10 @@ These mixins are useful for defining custom breakpoints using the sizes from [$s
 
 ```scss
 .foobar {
-  padding: syss.space(4);
+  padding: ss.space(4);
 
-  @include syss.media-up-to(md) {
-    padding: syss.space(5);
+  @include ss.media-up-to(md) {
+    padding: ss.space(5);
   }
 }
 ```
@@ -702,7 +704,7 @@ Will result in:
   Generates a media query using `min-width` (the given screen size or _larger_):
 
   ```scss
-  @include syss.media-up-to(md) {}
+  @include ss.media-up-to(md) {}
   ```
 
   Will result in:
@@ -718,7 +720,7 @@ Will result in:
   Generates a media query using `max-width` (the given screen size or _smaller_) with 0.5px subtracted from the screen size:
 
   ```scss
-  @include syss.media-down-to(md) {}
+  @include ss.media-down-to(md) {}
   ```
 
   Will result in:
@@ -734,7 +736,7 @@ Will result in:
   Generates a media query using `min-width` and `max-width` to target a single screen size:
 
   ```scss
-  @include syss.media-only(md) {}
+  @include ss.media-only(md) {}
   ```
 
   Will result in:
@@ -750,7 +752,7 @@ Will result in:
   Generate a media query using `min-width` and `max-width` to target screen sizes between the two specified:
 
   ```scss
-  @include syss.media-between(sm, lg) {}
+  @include ss.media-between(sm, lg) {}
   ```
 
   Will result in:
