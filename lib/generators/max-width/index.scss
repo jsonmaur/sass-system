@@ -12,9 +12,4 @@
   @each $key, $value in config.$screens {
     .#{$pre}max-w-#{$key}#{$app} { max-width: $value; }
   }
-
-  @for $i from 1 through list.length(config.$sizing) {
-    $value: list.nth(config.$sizing, $i);
-    .#{$pre}max-w-#{$i}#{$app} { max-width: $value; }
-  }
 }

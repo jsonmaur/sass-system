@@ -77,32 +77,6 @@ $screens: map.merge(
 }
 
 //
-// Sizing values used for width and height. Classes correspond with index in list.
-//
-
-$sizing: helpers.list-merge(
-  [
-    1rem
-    2rem
-    4rem
-    8rem
-    16rem
-    32rem
-    48rem
-    64rem
-  ],
-  map.get($extend, "sizing") or ()
-) !default;
-
-@if not helpers.check-type($sizing, list, number) {
-  @error "Expected $sizing to be a list of numbers";
-}
-
-@function size($index) {
-  @return list.nth($sizing, $index);
-}
-
-//
 // Spacing values used for margin and padding. Classes correspond with index in list.
 //
 

@@ -9,14 +9,6 @@
   @return true;
 }
 
-@function test-size() {
-  @if config.size(7) != 48rem {
-    @return false;
-  }
-
-  @return true;
-}
-
 @function test-space() {
   @if config.space(6) != 2rem {
     @return false;

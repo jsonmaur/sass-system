@@ -1,8 +1,6 @@
 // This must be the first file to be forwarded, since some of the other helper files include the
 // config too. If it's not first in line, then SSS can't be configured using `with ()`.
 @forward "lib/config";
-
-@forward "lib/forward/autoprefixer";
 @forward "lib/forward/functions";
 @forward "lib/forward/media";
 

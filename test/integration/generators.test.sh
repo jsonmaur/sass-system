@@ -322,13 +322,13 @@ testGeneratorExtend() {
 }
 
 .test-container {
-  max-width: index.size(6);
   background-color: index.color(black);
   padding: index.space(5);
   margin: index.space(5);
 
   @include index.media-up-to(md) {
-    max-width: index.size(7);
+    padding: index.space(6);
+    margin: index.space(6);
   }
 }
 EOF
@@ -358,14 +358,14 @@ EOF
 }
 
 .test-container {
-  max-width: 32rem;
   background-color: black;
   padding: 1.5rem;
   margin: 1.5rem;
 }
 @media (min-width: 1024px) {
   .test-container {
-    max-width: 48rem;
+    padding: 2rem;
+    margin: 2rem;
   }
 }
 EOF
