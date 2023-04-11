@@ -5,7 +5,6 @@
 - [box-shadow](box-shadow#readme)
 - [box-sizing](box-sizing#readme)
 - [color](color#readme)
-- [container](container#readme)
 - [font-family](font-family#readme)
 - [font-size](font-size#readme)
 - [font-style](font-style#readme)

@@ -6,7 +6,6 @@
 @use "box-shadow";
 @use "box-sizing";
 @use "color";
-@use "container";
 @use "font-family";
 @use "font-size";
 @use "font-style";
@@ -50,7 +49,6 @@ $-generators: [];
   @include with("box-shadow") { @include box-shadow.render($pre, $app); }
   @include with("box-sizing") { @include box-sizing.render($pre, $app); }
   @include with("color") { @include color.render($pre, $app); }
-  @include with("container") { @include container.render($pre, $app); }
   @include with("font-family") { @include font-family.render($pre, $app); }
   @include with("font-size") { @include font-size.render($pre, $app); }
   @include with("font-style") { @include font-style.render($pre, $app); }

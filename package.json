@@ -28,9 +28,7 @@
     "lib/",
     "index.min.css",
     "index.min.css.map",
-    "index.scss",
-    "LICENSE",
-    "README.md"
+    "index.scss"
   ],
   "scripts": {
     "prepare": "make build"

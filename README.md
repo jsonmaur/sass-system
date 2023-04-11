@@ -1,14 +1,12 @@
 # Sass System
 
 <a aria-label="test status" href="https://github.com/maurandco/sass-system/actions/workflows/test.yml">
-  <img alt="test" src="https://img.shields.io/github/workflow/status/maurandco/sass-system/Test?label=tests&style=flat-square" />
+  <img alt="test" src="https://img.shields.io/github/actions/workflow/status/maurandco/sass-system/test.yml?label=tests&style=plastic" />
 </a>
 
 <a aria-label="version status" href="https://github.com/maurandco/sass-system/releases">
-  <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sass-system?display_name=tag&style=flat-square&color=B85A8A" />
+  <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sass-system?display_name=tag&style=plastic&color=B85A8A" />
 </a>
-
-**⚠️ This project is still under active development. Check back soon for a stable release!**
 
 A style system generator and utility-first CSS framework built entirely in Sass.
 
@@ -63,7 +61,7 @@ This was inspired by similar utility-first CSS frameworks such as Tailwind and T
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/sass-system@0.1" />
+<link rel="stylesheet" href="https://unpkg.com/sass-system@0.1.0/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install sass-system into your project using one of these methods:
@@ -100,7 +98,7 @@ If you find yourself frequently reusing utility classes and want to extract comm
 ```scss
 @use "path/to/sass-system" as ss;
 
-.text-container {
+.my-custom-class {
   background: ss.color(gray-8);
   padding: ss.space(5);
 
@@ -213,30 +211,6 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
 </details>
 
 Named screen size values which are used to generate responsive classes within media queries such as `.md\:bg-black`. These key names cannot be used for screen sizes due to conflicts with [width](lib/generators/width#readme) classes: `0`, `px`, `full`, `screen`, `min`, `max`, `fit`, `auto`
-
-### Sizing
-
-<details>
-  <summary><i>specs</i></summary>
-
-  > type: `list`  
-  > getter: `size($index)`  
-  > default:
-  > ```sass
-  > [
-  >   1rem
-  >   2rem
-  >   4rem
-  >   8rem
-  >   16rem
-  >   32rem
-  >   48rem
-  >   64rem
-  > ]
-  > ```
-</details>
-
-Named width values used for paragraphs and other sized containers. These classes are prefixed with `.w-*`, `.max-w-*`, `.h-*`, and `.max-h-*`. See the [width generator](lib/generators/width#readme), [max-width generator](lib/generators/max-width#readme), [height generator](lib/generators/height#readme), and [max-height generator](lib/generators/max-height#readme) for more info.
 
 ### Spacing
 
@@ -575,9 +549,9 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
   > ```sass
   > (
   >   base: [
-  >     background-color box-shadow box-sizing color font-family font-size font-style font-variant
-  >     font-weight height letter-spacing line-height margin max-height max-width min-height
-  >     min-width opacity padding text-align text-decoration text-indent text-overflow
+  >     aspect-ratio background-color box-shadow box-sizing color font-family font-size font-style
+  >     font-variant font-weight height letter-spacing line-height margin max-height max-width
+  >     min-height min-width opacity padding text-align text-decoration text-indent text-overflow
   >     text-transform vertical-align white-space width
   >   ],
   >   hover: [],

@@ -451,7 +451,6 @@ $generators: helpers.map-list-merge(
       box-shadow
       box-sizing
       color
-      container
       font-family
       font-size
       font-style
@@ -499,11 +498,13 @@ $generators: helpers.map-list-merge(
 //
 
 $-base-conflict: helpers.key-conflict($font-stacks, $brand-colors);
+
 @if $-base-conflict {
   @error "Found conflicting keys in $font-stacks and $brand-colors: `#{$-base-conflict}`";
 }
 
 $-text-conflict: helpers.key-conflict($font-weights, $font-sizes);
+
 @if $-text-conflict {
   @error "Found conflicting keys in $font-weights and $font-sizes: `#{$-text-conflict}`";
 }
@@ -518,6 +519,7 @@ $-screen-reserved-conflict: helpers.key-conflict($screens, (
   fit: null,
   auto: null
 ));
+
 @if $-screen-reserved-conflict {
   @error "The following key cannot be used for $screens:: `#{$-screen-reserved-conflict}`";
 }
