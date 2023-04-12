@@ -52,7 +52,7 @@ This was inspired by similar utility-first CSS frameworks such as Tailwind and T
 If you don't need any customization and want to start using the utility classes right away, you can link directly to the default build in your HTML:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/sass-system@0.1.0/index.min.css" />
+<link rel="stylesheet" href="https://unpkg.com/sass-system@0.1.1/index.min.css" />
 ```
 
 If you want to customize your build, you'll need to install sass-system into your project using one of these methods:

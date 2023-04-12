@@ -1,6 +1,6 @@
 # Changelog
 
-## v0.1.0
+## v0.1.1
 
 - Renamed package to `sass-system`
 - Minimum dart-sass version is now 1.55.0
