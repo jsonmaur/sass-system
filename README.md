@@ -1,13 +1,5 @@
 # Sass System
 
-<a aria-label="test status" href="https://github.com/maurandco/sass-system/actions/workflows/test.yml">
-  <img alt="test" src="https://img.shields.io/github/actions/workflow/status/maurandco/sass-system/test.yml?label=tests&style=plastic" />
-</a>
-
-<a aria-label="version status" href="https://github.com/maurandco/sass-system/releases">
-  <img alt="version" src="https://img.shields.io/github/v/release/maurandco/sass-system?display_name=tag&style=plastic&color=B85A8A" />
-</a>
-
 A style system generator and utility-first CSS framework built entirely in Sass.
 
 This was inspired by similar utility-first CSS frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
@@ -25,7 +17,6 @@ This was inspired by similar utility-first CSS frameworks such as Tailwind and T
     - [Separator](#separator)
     - [Dark Mode](#dark-mode)
     - [Screens](#screens)
-    - [Sizing](#sizing)
     - [Spacing](#spacing)
     - [Primary Fonts](#primary-fonts)
     - [Font Stacks](#font-stacks)
@@ -131,7 +122,6 @@ If you want to customize the default values, you can pass custom configuration u
 - [$separator](#separator)
 - [$dark-mode](#dark-mode)
 - [$screens](#screens)
-- [$sizing](#sizing)
 - [$spacing](#spacing)
 - [$primary-fonts](#primary-fonts)
 - [$font-stacks](#font-stacks)
@@ -621,7 +611,6 @@ _Note that key names nested within `$extend` are **not** prefixed with `$`._
 These functions are useful for getting style system values inside [custom classes](#custom-classes).
 
 - `screen($name)` to get values from [$screens](#screens)
-- `size($name)` to get values from [$sizing](#sizing)
 - `space($index)` to get values from [$spacing](#spacing)
 - `font($name)` to get values from [$font-stacks](#font-stacks)
 - `font-weight($name)` to get values from [$font-weights](#font-weights)
