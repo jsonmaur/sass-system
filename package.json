@@ -1,7 +1,7 @@
 {
   "name": "sass-system",
   "version": "0.1.0",
-  "description": "A style system generator and utility-first CSS framework built in Sass.",
+  "description": "A style system generator and utility-first CSS framework",
   "license": "MIT",
   "author": "Maur & Co.",
   "homepage": "https://github.com/maurandco/sass-system#readme",

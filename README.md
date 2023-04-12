@@ -205,7 +205,7 @@ Enables dark mode classes using media queries or a parent class. Setting to `med
   >   sm: 768px,
   >   md: 1024px,
   >   lg: 1280px,
-  >   xl: 1792px,
+  >   xl: 1792px
   > )
   > ```
 </details>
@@ -225,11 +225,15 @@ Named screen size values which are used to generate responsive classes within me
   >   .25rem,
   >   .5rem,
   >   1rem,
+  >   1.25rem,
+  >   1.5rem,
   >   2rem,
+  >   2.5rem,
+  >   3rem,
   >   4rem,
-  >   8rem,
-  >   16rem,
-  >   32rem,
+  >   6rem,
+  >   10rem,
+  >   18rem
   > ]
   > ```
 </details>
@@ -247,7 +251,7 @@ Spacing values used for margin and padding. Class names correspond with the list
   > (
   >   serif: null,
   >   sans-serif: null,
-  >   monospace: null,
+  >   monospace: null
   > )
   > ```
 </details>
@@ -274,7 +278,7 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
   >     "Apple Color Emoji",
   >     "Segoe UI Emoji",
   >     "Segoe UI Symbol",
-  >     "Noto Color Emoji",
+  >     "Noto Color Emoji"
   >   ],
   >   sans-serif: [
   >     ui-sans-serif,
@@ -290,7 +294,7 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
   >     "Apple Color Emoji",
   >     "Segoe UI Emoji",
   >     "Segoe UI Symbol",
-  >     "Noto Color Emoji",
+  >     "Noto Color Emoji"
   >   ],
   >   monospace: [
   >     ui-monospace,
@@ -304,8 +308,8 @@ A primary font can be set for each type of font stack, such as `monospace: "Fira
   >     "Apple Color Emoji",
   >     "Segoe UI Emoji",
   >     "Segoe UI Symbol",
-  >     "Noto Color Emoji",
-  >   ],
+  >     "Noto Color Emoji"
+  >   ]
   > )
   > ```
 </details>
@@ -330,7 +334,7 @@ Named list values for font family stacks. Rather than redefining entire font sta
   >   semi-bold: 600,
   >   bold: 700,
   >   extra-bold: 800,
-  >   heavy: 900,
+  >   heavy: 900
   > )
   > ```
 </details>
@@ -354,7 +358,7 @@ Named values used for font weight. These classes are prefixed with `.text-*`, so
   >   lg: 1.5rem,
   >   xl: 2.25rem,
   >   xxl: 3rem,
-  >   jumbo: 6rem,
+  >   jumbo: 6rem
   > )
   > ```
 </details>
@@ -371,9 +375,11 @@ Named values used for font size. These classes are prefixed with `.text-*`, so m
   > default:
   > ```sass
   > (
+  >   tight: .9em,
   >   solid: 1em,
   >   title: 1.25em,
   >   copy: 1.5em,
+  >   wide: 2em
   > )
   > ```
 </details>
@@ -392,7 +398,7 @@ Named values used for font leading (line height). These classes are prefixed wit
   > (
   >   tight: -.05em,
   >   open: .1em,
-  >   mega: .25em,
+  >   mega: .25em
   > )
   > ```
 </details>
@@ -424,7 +430,7 @@ Value used for the text indentation class. See the [text-indent generator](lib/g
   >   mid: (0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)),
   >   high: (0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)),
   >   mega: 0 25px 50px -12px rgb(0 0 0 / 0.25),
-  >   inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05),
+  >   inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05)
   > )
   > ```
 </details>
@@ -451,7 +457,7 @@ Named values used for box shadow. These classes are prefixed with `.shadow-*`. S
   >   pink: #d63384,
   >   purple: #6f42c1,
   >   indigo: #6610f2,
-  >   blue: #0d6efd,
+  >   blue: #0d6efd
   > )
   > ```
 </details>
@@ -469,7 +475,7 @@ Named values for colors that get auto-generated variations. 4 darker variations 
   > ```sass
   > (
   >   black: #000000,
-  >   white: #ffffff,
+  >   white: #ffffff
   > )
   > ```
 </details>
@@ -530,7 +536,7 @@ Named values for brand colors that don't have auto-generated variations. These c
   >   // nested selectors
   >   hover disabled: ":hover:disabled",
   >   hover before: ":hover::before",
-  >   hover after: ":hover::after",
+  >   hover after: ":hover::after"
   > )
   > ```
 </details>
@@ -556,14 +562,14 @@ The selector name can also be a space-separated list for nested selectors. e.g. 
   >   ],
   >   hover: [],
   >   dark: (
-  >     base: [],
+  >     base: []
   >   ),
   >   responsive: (
   >     base: [],
   >     dark: (
-  >       base: [],
-  >     ),
-  >   ),
+  >       base: []
+  >     )
+  >   )
   > )
   > ```
 </details>
@@ -590,8 +596,8 @@ This can be used to append custom values onto config maps and lists while retain
 ```sass
 $extend: (
   screens: (
-    xxl: 2304px,
-  ),
+    xxl: 2304px
+  )
 )
 ```
 
@@ -604,7 +610,7 @@ Will result in these screens:
   md: 1024px,
   lg: 1280px,
   xl: 1792px,
-  xxl: 2304px,
+  xxl: 2304px
 )
 ```
 

@@ -1,6 +1,7 @@
 # Line Height
 
+`.lead-tight`  
 `.lead-solid`  
 `.lead-title`  
 `.lead-copy`  
-`.lead-list`  
+`.lead-wide`  

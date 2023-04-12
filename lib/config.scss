@@ -242,10 +242,11 @@ $font-sizes: map.merge(
 
 $font-leading: map.merge(
   (
+    tight: .9em,
     solid: 1em,
     title: 1.25em,
     copy: 1.5em,
-    list: 2em
+    wide: 2em
   ),
   map.get($extend, "font-leading") or ()
 ) !default;

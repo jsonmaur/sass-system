@@ -9,7 +9,7 @@
 - Removed sizing config variables, classes, and functions
 - Added aspect ratio generator
 - Added 4 more config values to `space`
-- Added `list` config value to `font-leading`
+- Added `wide` config value to `font-leading`
 - Added additional CSS rules to normalize
   - Reset borders on all elements
   - Add font-smoothing to the body
