@@ -15,6 +15,7 @@
   - Add font-smoothing to the body
   - Restrict img and video tags to their parent container
   - Inherit the default fill color for svgs
+  - Set `vertical-align: top` on all textareas
   - Upgraded modern-normalize
 
 ## v0.0.2

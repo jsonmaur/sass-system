@@ -180,7 +180,7 @@ $font-stacks: map.merge(
 }
 
 @function font($name) {
-  @return map.get($font-stacks, $name);
+  @return list.join(map.get($font-stacks, $name), (), $separator: comma, $bracketed: false)
 }
 
 //
