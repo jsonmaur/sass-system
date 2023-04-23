@@ -1,13 +1,22 @@
-# Sass System
+<a href="https://github.com/jsonmaur/sass-system/actions/workflows/test.yml"><img alt="Test Status" src="https://img.shields.io/github/actions/workflow/status/jsonmaur/sass-system/test.yml?label=&style=for-the-badge&logo=github"></a> <a href="https://www.npmjs.com/package/sass-system"><img alt="NPM Version" src="https://img.shields.io/npm/v/sass-system?style=for-the-badge&label=&logo=npm&logoColor=white" /></a>
 
 A style system generator and utility-first CSS framework built entirely in Sass.
 
 This was inspired by similar utility-first CSS frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
 
+## Features
+
+- Highly customizable style system
+- Resonsive-first & utility-first classes
+- Support for dark mode utility classes
+- Beautiful presets for color, shadow, scale, and typography
+- Stacked pseudo selector classes for precision styling
+- Color scale generator for custom colors
+- Easily extended with custom Sass
+
 <details>
   <summary><b>Table of contents</b></summary>
 
-  - [Features](#features)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Custom Classes](#custom-classes)
@@ -33,19 +42,7 @@ This was inspired by similar utility-first CSS frameworks such as Tailwind and T
     - [Extend](#extend)
   - [Getters](#getters)
   - [Media Queries](#media-queries)
-  - [Acknowledgements](#acknowledgements)
 </details>
-
-## Features
-
-- Highly customizable style system.
-- Resonsive-first & utility-first classes.
-- Support for dark mode utility classes.
-- Beautiful presets for color, shadow, scale, and typography.
-- Stacked pseudo selector classes for precision styling.
-- Color scale generator for custom colors.
-- Easily extended with custom Sass.
-<!-- - 0kB gzipped and 0kB brotli'd for default build. -->
 
 ## Installation
 
