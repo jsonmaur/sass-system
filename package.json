@@ -3,11 +3,11 @@
   "version": "0.1.1",
   "description": "A style system generator and utility-first CSS framework",
   "license": "MIT",
-  "author": "Maur & Co.",
-  "homepage": "https://github.com/maurandco/sass-system#readme",
+  "author": "Jason Maurer",
+  "homepage": "https://github.com/jsonmaur/sass-system#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maurandco/sass-system.git"
+    "url": "git+https://github.com/jsonmaur/sass-system.git"
   },
   "keywords": [
     "css",

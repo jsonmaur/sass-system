@@ -1,5 +1,3 @@
-# Changelog
-
 ## v0.1.1
 
 - Renamed package to `sass-system`
@@ -18,6 +16,13 @@
   - Set `vertical-align: top` on all textareas
   - Upgraded modern-normalize
 
+## v0.0.3
+
+- Added sizing config variable
+- Added width and height generators
+- Changed `auto-colors` to `brand-colors`
+- Added sanity checks to avoid key name conflicts
+
 ## v0.0.2
 
 - Added config getter functions
@@ -25,4 +30,4 @@
 
 ## v0.0.1
 
-- Initial release
+- Initial release 🎉

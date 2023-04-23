@@ -57,7 +57,7 @@ If you don't need any customization and want to start using the utility classes 
 
 If you want to customize your build, you'll need to install sass-system into your project using one of these methods:
 
-- [Download the latest release](https://github.com/maurandco/sass-system/releases)
+- [Download the latest release](https://github.com/jsonmaur/sass-system/releases)
 - Install with [npm](https://www.npmjs.com): `npm install sass-system`
 
 ## Usage
@@ -730,7 +730,3 @@ Will result in:
   @media (min-width: 768px) and (max-width: 1279.5px) {}
   ```
 </details>
-
-## Acknowledgements
-
-Created by [Maur & Co.](https://maur.co)
