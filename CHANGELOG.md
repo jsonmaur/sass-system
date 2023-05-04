@@ -16,6 +16,10 @@
   - Set `vertical-align: top` on all textareas
   - Upgraded modern-normalize
 
+## v0.1.0
+
+- Unpublished from NPM due to naming conflict
+
 ## v0.0.3
 
 - Added sizing config variable

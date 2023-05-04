@@ -1,8 +1,16 @@
-<a href="https://github.com/jsonmaur/sass-system/actions/workflows/test.yml"><img alt="Test Status" src="https://img.shields.io/github/actions/workflow/status/jsonmaur/sass-system/test.yml?label=&style=for-the-badge&logo=github"></a> <a href="https://www.npmjs.com/package/sass-system"><img alt="NPM Version" src="https://img.shields.io/npm/v/sass-system?style=for-the-badge&label=&logo=npm&logoColor=white" /></a>
+# Sass System
 
 A style system generator and utility-first CSS framework built entirely in Sass.
 
-This was inspired by similar utility-first CSS frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
+This was inspired by similar utility-first frameworks such as Tailwind and Tachyons, but it comes with the power of a CSS preprocessor and zero dependencies other than [dart-sass](https://sass-lang.com/dart-sass)—which is fast and self-contained. As opposed to dealing with a Node build system, an "Electron for CLI's" binary, or the plethora of plugins needed for PostCSS.
+
+- [Features](#features)
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Custom Classes](#custom-classes)
+- [Configuration](#configuration)
+- [Getters](#getters)
+- [Media Queries](#media-queries)
 
 ## Features
 
@@ -13,36 +21,6 @@ This was inspired by similar utility-first CSS frameworks such as Tailwind and T
 - Stacked pseudo selector classes for precision styling
 - Color scale generator for custom colors
 - Easily extended with custom Sass
-
-<details>
-  <summary><b>Table of contents</b></summary>
-
-  - [Installation](#installation)
-  - [Usage](#usage)
-    - [Custom Classes](#custom-classes)
-  - [Configuration](#configuration)
-    - [Normalize](#normalize)
-    - [Class Prefix](#class-prefix)
-    - [Separator](#separator)
-    - [Dark Mode](#dark-mode)
-    - [Screens](#screens)
-    - [Spacing](#spacing)
-    - [Primary Fonts](#primary-fonts)
-    - [Font Stacks](#font-stacks)
-    - [Font Weights](#font-weights)
-    - [Font Sizes](#font-sizes)
-    - [Font Leading](#font-leading)
-    - [Font Tracking](#font-tracking)
-    - [Text Indent](#text-indent)
-    - [Box Shadows](#box-shadows)
-    - [Colors](#colors)
-    - [Brand Colors](#brand-colors)
-    - [Selectors](#selectors)
-    - [Generators](#generators)
-    - [Extend](#extend)
-  - [Getters](#getters)
-  - [Media Queries](#media-queries)
-</details>
 
 ## Installation
 
@@ -57,7 +35,7 @@ If you want to customize your build, you'll need to install sass-system into you
 - [Download the latest release](https://github.com/jsonmaur/sass-system/releases)
 - Install with [npm](https://www.npmjs.com): `npm install sass-system`
 
-## Usage
+## Getting Started
 
 ```scss
 @use "path/to/sass-system";
@@ -79,7 +57,7 @@ That's it! Use [--load-path](https://sass-lang.com/documentation/cli/dart-sass#l
 </div>
 ```
 
-### Custom Classes
+## Custom Classes
 
 If you find yourself frequently reusing utility classes and want to extract common components into custom classes, you can access style system values directly using [getters](#getters):
 
@@ -96,7 +74,7 @@ If you find yourself frequently reusing utility classes and want to extract comm
 }
 ```
 
-## Custom Configuration
+## Configuration
 
 If you want to customize the default values, you can pass custom configuration using [`with`](https://sass-lang.com/documentation/at-rules/use#configuration). Note that all custom values will **override the defaults** unless they are configured within the [$extend](#extend) map.
 
