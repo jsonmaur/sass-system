@@ -1,25 +1,23 @@
 name: Test
 permissions:
   contents: read
-
-on: [push, pull_request]
-
+on:
+  pull_request:
+  push:
+    branches: [master]
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         version: [1.55.0, 1.58.3, 1.61.0]
-
     steps:
       - uses: actions/checkout@v2
         with:
           submodules: recursive
-
       - name: Install Sass
         run: |
           curl -LO https://github.com/sass/dart-sass/releases/download/${{ matrix.version }}/dart-sass-${{ matrix.version }}-linux-x64.tar.gz
           tar -xzf dart-sass-${{ matrix.version }}-linux-x64.tar.gz
           echo "$PWD/dart-sass" >> $GITHUB_PATH
-
       - run: make test
